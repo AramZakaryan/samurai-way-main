@@ -1,13 +1,17 @@
 import React from "react";
 import classes from "./Posts.module.css";
 
-export const Post = () => {
+type PostPropsType = {
+    message: string
+}
+
+export const Post: React.FC<PostPropsType>= (props) => {
 
     return (
         <div className={classes.item}>
             <img
                 src={"https://static.fnac-static.com/multimedia/Images/FD/Comete/123455/CCP_IMG_1200x800/1608824.jpg"}/>
-            Post 1
+            {props.message}
             <div>
                 <span>
                     like
