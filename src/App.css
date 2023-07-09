@@ -8,14 +8,7 @@
     grid-gap: 5px;
 }
 
-.header {
-
-}
-
-.content {
-
-}
-
-.nav {
-
+.app-wrapper-content {
+    grid-area: c;
+    background-color: yellow;
 }
