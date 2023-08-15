@@ -6,7 +6,7 @@ export const Dialogs = () => {
 
     return (
         <div>
-
+kuku messages / dialogs
 
         </div>
     )
