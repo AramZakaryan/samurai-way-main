@@ -3,10 +3,13 @@ import S from "./MyPosts.module.css";
 import {Post} from "./Posts/Posts";
 
 export const MyPosts = () => {
-    let PostsData = [
+    let postsData = [
         {id: 1, message: "Hi, How are you?", likesCount: 0},
         {id: 2, message: "It's my first post", likesCount: 23}
     ]
+
+    let posts = postsData.map(pst => <Post message={pst.message}
+                               likesCount={pst.likesCount}/>)
 
     return (
         <div className={S.PostsBlock}>
@@ -21,10 +24,7 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div className={S.posts}>
-                {PostsData.map(pst => <Post message={pst.message}
-                                            likesCount={pst.likesCount}/>)}
-                {/*<Post message={"Hi, How are you?"} likesCount={0}/>*/}
-                {/*<Post message={"It's my first post"} likesCount={23}/>*/}
+                {posts}
             </div>
         </div>
     )
