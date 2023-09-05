@@ -9,8 +9,23 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
+type AppPropsType = {
+    dialogsData: {
+        name: string
+        id: number
+    }[]
+    messagesData: {
+        message: string
+    }[]
+    postsData: {
+        id:number
+        message: string
+        likesCount: number
+    }[]
+}
 
-const App: React.FC = () => {
+
+const App: React.FC<AppPropsType> = (props) => {
     let [active, setActive] = useState("profile")
     console.log(active)
     return (
@@ -19,14 +34,16 @@ const App: React.FC = () => {
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path={"/dialogs"} component={Dialogs}/>
+                    <Route path={"/profile"}>
+                        <Profile postsData={props.postsData}/>
+                    </Route>
+                    <Route path={"/dialogs"}>
+                        <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>
+                    </Route>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
 
-                    {/*<Profile/>*/}
-                    {/*<Dialogs/>*/}
 
                 </div>
             </div>
