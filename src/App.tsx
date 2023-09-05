@@ -18,7 +18,7 @@ type AppPropsType = {
         message: string
     }[]
     postsData: {
-        id:number
+        id: number
         message: string
         likesCount: number
     }[]
@@ -34,12 +34,10 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/profile"}>
-                        <Profile postsData={props.postsData}/>
-                    </Route>
-                    <Route path={"/dialogs"}>
-                        <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>
-                    </Route>
+                    <Route path={"/profile"}
+                           render={() => <Profile postsData={props.postsData}/>}/>
+                    <Route path={"/dialogs"}
+                           render={() => <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>}/>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
