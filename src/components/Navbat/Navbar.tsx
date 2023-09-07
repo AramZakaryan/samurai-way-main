@@ -3,10 +3,9 @@ import S from "./Navbar.module.css"
 import {NavLink} from "react-router-dom";
 
 
+export const Navbar: React.FC = () => {
 
-export const Navbar: React.FC =() => {
-
-    return(
+    return (
         <nav className={S.nav}>
             <div className={S.item}>
                 <NavLink to={"/profile"} activeClassName={S.activeLink}>Profile</NavLink>
@@ -22,7 +21,20 @@ export const Navbar: React.FC =() => {
             </div>
             <div className={S.item}>
                 <NavLink to={"/settings"} activeClassName={S.activeLink}>Settings</NavLink>
-                <a ></a>
+            </div>
+            <div className={S.item}>
+                <NavLink to={"/friends"} activeClassName={S.activeLink}>Friends</NavLink>
+                <div>
+                    <img className={S.avatarSmall}
+                         src={"https://static.fnac-static.com/multimedia/Images/FD/Comete/123455/CCP_IMG_1200x800/1608824.jpg"}
+                    />
+                    <img className={S.avatarSmall}
+                         src={"https://static.fnac-static.com/multimedia/Images/FD/Comete/123455/CCP_IMG_1200x800/1608824.jpg"}
+                    />
+                    <img className={S.avatarSmall}
+                         src={"https://static.fnac-static.com/multimedia/Images/FD/Comete/123455/CCP_IMG_1200x800/1608824.jpg"}
+                    />
+                </div>
             </div>
         </nav>
     )

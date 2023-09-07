@@ -2,6 +2,7 @@ import React from "react";
 import S from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Messages/Message";
+import {Sidebar} from "../Sidebar/Sidebar";
 
 type DialogsPropsType = {
     data: {
@@ -27,8 +28,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         <Message message={msg.message}/>
     )
 
-    return (
+    return (<>
+            <Sidebar/>
         <div className={S.dialogs}>
+
             <div className={S.dialogsItems}>
                 {dialogs}
             </div>
@@ -37,6 +40,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             </div>
 
         </div>
-
+        </>
     )
 }
