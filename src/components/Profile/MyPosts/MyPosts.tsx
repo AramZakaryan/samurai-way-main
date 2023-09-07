@@ -8,27 +8,32 @@ type MyPostsPropsType = {
         message: string
         likesCount: number
     }[]
+    addPost: (postMessage: string)=>void
 }
 
 export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
-    // let postsData = [
-    //     {id: 1, message: "Hi, How are you?", likesCount: 0},
-    //     {id: 2, message: "It's my first post", likesCount: 23}
-    // ]
 
     let posts = props.postsData.map(pst => <Post message={pst.message}
                                likesCount={pst.likesCount}/>)
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    const addPostHandler = ()=>{
+        if(newPostElement.current?.value){
+        props.addPost(newPostElement.current.value)
+        }
+    }
 
     return (
         <div className={S.PostsBlock}>
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add Post</button>
-                    <button>Remove</button>
+                    <button onClick={addPostHandler}>Add Post</button>
+                    {/*<button>Remove</button>*/}
                 </div>
             </div>
             <div className={S.posts}>

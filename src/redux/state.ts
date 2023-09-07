@@ -1,3 +1,4 @@
+
 export let state = {
     profilePageData: {
         postsData: [
@@ -6,18 +7,27 @@ export let state = {
         ]
     },
     dialogsPageData: {
-        dialogsData : [
+        dialogsData: [
             {id: 1, name: "Gagulik"},
             {id: 2, name: "Vazgenchik"},
             {id: 3, name: "Serobik"},
             {id: 4, name: "Ghukasik"},
         ],
-        messagesData : [
+        messagesData: [
             {id: 1, message: "Hi!"},
             {id: 2, message: "How are you?"},
             {id: 3, message: "Yo!"}
         ]
     },
-    sidebarData: {
+    sidebarData: {}
+}
+
+export const addPost = (postMessage:   string) => {
+    let postTobeAdded = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
     }
+    state.profilePageData.postsData.push(postTobeAdded)
+    console.log(state.profilePageData.postsData)
 }

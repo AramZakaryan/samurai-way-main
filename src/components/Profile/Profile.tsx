@@ -12,13 +12,14 @@ type ProfilePropsType = {
         likesCount: number
     }[]
     }
+    addPost: (postMessage: string)=>void
 }
 export const Profile: React.FC <ProfilePropsType>= (props) => {
     return (<>
         <Sidebar/>
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts postsData={props.data.postsData}/>
+            <MyPosts postsData={props.data.postsData} addPost={props.addPost}/>
             Main Content
         </div>
     </>)

@@ -28,6 +28,12 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         <Message message={msg.message}/>
     )
 
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    const addPost = ()=>{
+        console.log(newPostElement.current?.value)
+    }
+
     return (<>
             <Sidebar/>
         <div className={S.dialogs}>
@@ -37,6 +43,15 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             </div>
             <div className={S.messages}>
                 {messages}
+            </div>
+            <div>
+                <div>
+                    <textarea ref={newPostElement}></textarea>
+                </div>
+                <div>
+                    <button onClick={addPost}>Add Post</button>
+                    {/*<button>Remove</button>*/}
+                </div>
             </div>
 
         </div>

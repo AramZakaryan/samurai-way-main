@@ -32,6 +32,7 @@ type AppPropsType = {
         sidebarData: {
         }
     }
+    addPost: (postMessage:string)=>void
 }
 
 
@@ -45,7 +46,7 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
-                           render={() => <Profile data={props.state.profilePageData}/>}/>
+                           render={() => <Profile data={props.state.profilePageData} addPost={props.addPost}/>}/>
                     <Route path={"/dialogs"}
                            render={() => <Dialogs data={props.state.dialogsPageData}/>}/>
                     <Route path={"/news"} component={News}/>
