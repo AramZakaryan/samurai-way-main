@@ -1,4 +1,3 @@
-
 export let state = {
     profilePageData: {
         postsData: [
@@ -22,9 +21,9 @@ export let state = {
     sidebarData: {}
 }
 
-export const addPost = (postMessage:   string) => {
+export const addPost = (postMessage: string) => {
     let postTobeAdded = {
-        id: 5,
+        id: new Date().getTime(),
         message: postMessage,
         likesCount: 0
     }

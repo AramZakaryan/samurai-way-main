@@ -8,19 +8,21 @@ type MyPostsPropsType = {
         message: string
         likesCount: number
     }[]
-    addPost: (postMessage: string)=>void
+    addPost: (postMessage: string) => void
 }
 
-export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let posts = props.postsData.map(pst => <Post message={pst.message}
-                               likesCount={pst.likesCount}/>)
+                                                 likesCount={pst.likesCount}/>)
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let newPostElement =
+        React.createRef<HTMLTextAreaElement>()
 
-    const addPostHandler = ()=>{
-        if(newPostElement.current?.value){
+    const addPostHandler = () => {
+        if(newPostElement.current){
         props.addPost(newPostElement.current.value)
+        // newPostElement.current && props.addPost(newPostElement.current.value)
         }
     }
 
