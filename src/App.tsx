@@ -10,18 +10,25 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
 type AppPropsType = {
-    dialogsData: {
-        name: string
-        id: number
-    }[]
-    messagesData: {
-        message: string
-    }[]
-    postsData: {
-        id: number
-        message: string
-        likesCount: number
-    }[]
+    state: {
+        profilePageData: {
+            postsData: {
+                id: number
+                message: string
+                likesCount: number
+            } []
+        }
+        dialogsPageData: {
+            dialogsData: {
+                id: number
+                name: string
+            }[]
+            messagesData: {
+                id: number
+                message: string
+            } []
+        }
+    }
 }
 
 
@@ -35,9 +42,9 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
-                           render={() => <Profile postsData={props.postsData}/>}/>
+                           render={() => <Profile data={props.state.profilePageData}/>}/>
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>}/>
+                           render={() => <Dialogs data={props.state.dialogsPageData}/>}/>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
