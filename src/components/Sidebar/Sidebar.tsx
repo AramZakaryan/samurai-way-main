@@ -5,7 +5,7 @@ export const Sidebar = () => {
 
     return (
         <div>
-            kuku sidebar
+            cucu sidebar
 
         </div>
     )

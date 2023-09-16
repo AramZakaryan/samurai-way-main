@@ -5,21 +5,27 @@ import {ProfileInfo} from "./ProfilInfo/ProfileInfo";
 import {Sidebar} from "../Sidebar/Sidebar";
 
 type ProfilePropsType = {
-    data: {
-    postsData:{
-        id: number
-        message: string
-        likesCount: number
-    }[]
+    profilePageData: {
+        postsData: {
+            id: number
+            title: string
+            likesCount: number
+        }[]
+        postTextAreaEnteringValue: string
     }
-    addPost: (postMessage: string)=>void
+    addPost: (postMessage: string) => void
+    updatePostTextAreaValue: (enteringValue:string) => void
 }
-export const Profile: React.FC <ProfilePropsType>= (props) => {
+export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (<>
         <Sidebar/>
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts postsData={props.data.postsData} addPost={props.addPost}/>
+            <MyPosts profilePageData={props.profilePageData}
+                     addPost={props.addPost}
+                     updatePostTextAreaValue={props.updatePostTextAreaValue}
+
+            />
             Main Content
         </div>
     </>)
