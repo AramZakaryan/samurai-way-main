@@ -9,14 +9,10 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
-import {stateType, updateMessageTextareaValue, updatePostTextAreaValue} from "./redux/state";
+import {storeType} from "./redux/store";
 
 type AppPropsType = {
-    state: stateType
-    addPost: (postMessage: string) => void
-    updatePostTextAreaValue: (enteringValue: string) => void
-    addMessage: () => void
-    updateMessageTextareaValue: (enteringValue: string) => void
+    state: storeType
 }
 
 
@@ -30,19 +26,10 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
-                           render={() => <Profile profilePageData={props.state.profilePageData}
-                                                  addPost={props.addPost}
-                                                  updatePostTextAreaValue={props.updatePostTextAreaValue}
-                           />
-                           }
+                           render={() => <Profile profilePageData={props.state.profilePageData}/>}
                     />
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogsPageData={props.state.dialogsPageData}
-                                                  addMessage={props.addMessage}
-                                                  updateMessageTextareaValue={props.updateMessageTextareaValue}
-
-                           />
-                           }
+                           render={() => <Dialogs dialogsPageData={props.state.dialogsPageData}/>}
                     />
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
