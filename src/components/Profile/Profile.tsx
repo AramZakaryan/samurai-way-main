@@ -11,17 +11,20 @@ type ProfilePropsType = {
             title: string
             likesCount: number
         }[]
-        addPost: (postMessage: string) => void
         postTextAreaEnteringValue: string
-        updatePostTextAreaValue: (enteringValue: string) => void
     }
+    addPost: (postMessage: string) => void
+    updatePostTextAreaValue: (enteringValue: string) => void
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (<>
         <Sidebar/>
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts profilePageData={props.profilePageData}/>
+            <MyPosts profilePageData={props.profilePageData}
+                     addPost={props.addPost}
+                     updatePostTextAreaValue={props.updatePostTextAreaValue}
+            />
             Main Content
         </div>
     </>)

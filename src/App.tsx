@@ -12,7 +12,7 @@ import {Friends} from "./components/Friends/Friends";
 import {storeType} from "./redux/store";
 
 type AppPropsType = {
-    state: storeType
+    store: storeType
 }
 
 
@@ -26,16 +26,24 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
-                           render={() => <Profile profilePageData={props.state.profilePageData}/>}
+                           render={() => <Profile profilePageData={props.store._state.profilePageData}
+                                                  addPost={props.store.addPost.bind(props.store)}
+                                                  updatePostTextAreaValue={props.store.updatePostTextAreaValue.bind(props.store)}
+                           />
+                           }
                     />
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogsPageData={props.state.dialogsPageData}/>}
+                           render={() => <Dialogs dialogsPageData={props.store._state.dialogsPageData}
+                                                  addMessage={props.store.addMessage.bind(props.store)}
+                                                  updateMessageTextareaValue={props.store.updateMessageTextareaValue.bind(props.store)}
+
+                           />
+                           }
                     />
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
                     <Route path={"/friends"} component={Friends}/>
-
 
                 </div>
             </div>

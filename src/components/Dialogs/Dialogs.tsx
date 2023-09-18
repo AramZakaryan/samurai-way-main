@@ -14,10 +14,10 @@ type DialogsPropsType = {
             id: number
             title: string
         } []
-        addMessage: () => void
-        messageTextareaEnteringValue:string
-        updateMessageTextareaValue: (enteringValue: string)=>void
+        messageTextareaEnteringValue: string
     }
+    addMessage: () => void
+    updateMessageTextareaValue: (enteringValue: string) => void
 }
 
 
@@ -33,40 +33,40 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addMessageHandler = ()=>{
-        props.dialogsPageData.addMessage()
+    const addMessageHandler = () => {
+        props.addMessage()
     }
 
-    const textareaOnChangeHandler = (ev:ChangeEvent<HTMLTextAreaElement>)=>{
-        props.dialogsPageData.updateMessageTextareaValue(ev.currentTarget.value)
+    const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateMessageTextareaValue(ev.currentTarget.value)
     }
 
     return (<>
             <Sidebar/>
-        <div className={S.dialogs}>
+            <div className={S.dialogs}>
 
-            <div className={S.dialogsItems}>
-                {dialogs}
-            </div>
+                <div className={S.dialogsItems}>
+                    {dialogs}
+                </div>
 
-            <div className={S.messages}>
-                {messages}
-                <div>
+                <div className={S.messages}>
+                    {messages}
                     <div>
+                        <div>
                         <textarea ref={newPostElement}
                                   value={props.dialogsPageData.messageTextareaEnteringValue}
                                   onChange={textareaOnChangeHandler}
-                                  onKeyDown={ev=>ev.key==="Enter"&&addMessageHandler()}
+                                  onKeyDown={ev => ev.key === "Enter" && addMessageHandler()}
                         />
-                    </div>
-                    <div>
-                        <button onClick={addMessageHandler}>Add Message</button>
+                        </div>
+                        <div>
+                            <button onClick={addMessageHandler}>Add Message</button>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
-        </div>
         </>
     )
 }

@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {
-    storeType,
-    subscriber,
-} from "./redux/store"
+import {storeType} from "./redux/store"
 import {store} from "./redux/store"
 import "./forDel"
 
 
-export const rerenderEntireThree_Original = (state: storeType) => {
+export const rerenderEntireThree = (store: storeType) => {
     ReactDOM.render(
-        <App state={state}/>,
+        <App store={store}/>,
         document.getElementById('root')
     )
 }
 
-subscriber(rerenderEntireThree_Original)
+store.subscribe(rerenderEntireThree)
 
-rerenderEntireThree_Original(store) /* for First Rendering only*/
+rerenderEntireThree(store) /* for First Rendering only*/

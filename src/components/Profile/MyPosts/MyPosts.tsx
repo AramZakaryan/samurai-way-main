@@ -9,10 +9,10 @@ type MyPostsPropsType = {
             title: string
             likesCount: number
         }[]
-        addPost: (postMessage: string) => void
         postTextAreaEnteringValue: string
-        updatePostTextAreaValue: (enteringValue: string) => void
     }
+    addPost: (postMessage: string) => void
+    updatePostTextAreaValue: (enteringValue: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -24,17 +24,17 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         />
     )
 
-    let newPostElement =
+    let newPostElementRef =
         React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        if (newPostElement.current) {
-            props.profilePageData.addPost(newPostElement.current.value)
+        if (newPostElementRef.current) {
+            props.addPost(newPostElementRef.current.value)
         }
     }
 
     const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-        props.profilePageData.updatePostTextAreaValue(ev.currentTarget.value)
+        props.updatePostTextAreaValue(ev.currentTarget.value)
     }
 
 
@@ -43,10 +43,10 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}
+                    <textarea ref={newPostElementRef}
                               value={props.profilePageData.postTextAreaEnteringValue}
                               onChange={textareaOnChangeHandler}
-                              onKeyDown={ev => ev.key}
+                              onKeyDown={ev => ev.key==="Enter" && addPostHandler()}
                     />
                 </div>
                 <div>
