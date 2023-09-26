@@ -29,10 +29,9 @@ export type storeType = {
     updatePostTextAreaValue: (enteringValue: string) => void
     addMessage: () => void
     updateMessageTextareaValue: (enteringValue: string) => void
-    subscriber: (store: storeType) => void
+    _subscriber: (store: storeType) => void
     subscribe: (observer: (store: storeType) => void) => void
 }
-
 
 export let store: storeType = {
     _state: {
@@ -70,12 +69,12 @@ export let store: storeType = {
         }
         this._state.profilePageData.postsData.push(postTobeAdded)
         this._state.profilePageData.postTextAreaEnteringValue = ""
-        this.subscriber(this)
+        this._subscriber(this)
         console.log(this)
     },
     updatePostTextAreaValue(enteringValue) {
-        store._state.profilePageData.postTextAreaEnteringValue = enteringValue
-        store.subscriber(store)
+        this._state.profilePageData.postTextAreaEnteringValue = enteringValue
+        this._subscriber(this)
     },
     addMessage() {
         const messageTobeAdded = {
@@ -84,18 +83,18 @@ export let store: storeType = {
         }
         this._state.dialogsPageData.messagesData.push(messageTobeAdded)
         this._state.dialogsPageData.messageTextareaEnteringValue = ""
-        this.subscriber(this)
+        this._subscriber(this)
         console.log(this)
 
     },
     updateMessageTextareaValue(enteringValue) {
         store._state.dialogsPageData.messageTextareaEnteringValue = enteringValue
-        store.subscriber(store)
+        store._subscriber(store)
     },
-    subscriber(store) {
+    _subscriber(store) {
         /* rerenderEntireThree_Dublicate */
     },
     subscribe(observer) {
-        this.subscriber = observer
+        this._subscriber = observer
     }
 }
