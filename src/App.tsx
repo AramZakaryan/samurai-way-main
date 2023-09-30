@@ -17,8 +17,6 @@ type AppPropsType = {
 
 
 const App: React.FC<AppPropsType> = (props) => {
-    // let [active, setActive] = useState("profile")
-    // console.log(active)
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -27,15 +25,13 @@ const App: React.FC<AppPropsType> = (props) => {
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
                            render={() => <Profile profilePageData={props.store.getState().profilePageData}
-                                                  addPost={props.store.addPost.bind(props.store)}
-                                                  updatePostTextAreaValue={props.store.updatePostTextAreaValue.bind(props.store)}
+                                                  dispatch={props.store.dispatch.bind(props.store)}
                            />
                            }
                     />
                     <Route path={"/dialogs"}
                            render={() => <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
-                                                  addMessage={props.store.addMessage.bind(props.store)}
-                                                  updateMessageTextareaValue={props.store.updateMessageTextareaValue.bind(props.store)}
+                                                  dispatch={props.store.dispatch.bind(props.store)}
 
                            />
                            }

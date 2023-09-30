@@ -3,6 +3,7 @@ import S from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Messages/Message";
 import {Sidebar} from "../Sidebar/Sidebar";
+import {addMessageAC, dispatchType, updateMessageTextareaValueAC} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPageData: {
@@ -16,8 +17,7 @@ type DialogsPropsType = {
         } []
         messageTextareaEnteringValue: string
     }
-    addMessage: () => void
-    updateMessageTextareaValue: (enteringValue: string) => void
+    dispatch: dispatchType
 }
 
 
@@ -34,11 +34,11 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessageHandler = () => {
-        props.addMessage()
+        props.dispatch(addMessageAC())
     }
 
     const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateMessageTextareaValue(ev.currentTarget.value)
+        props.dispatch(updateMessageTextareaValueAC(ev.currentTarget.value))
     }
 
     return (<>
@@ -54,6 +54,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                     <div>
                         <div>
                         <textarea ref={newPostElement}
+                                  placeholder={"Enter your message here!"}
                                   value={props.dialogsPageData.messageTextareaEnteringValue}
                                   onChange={textareaOnChangeHandler}
                                   onKeyDown={ev => ev.key === "Enter" && addMessageHandler()}

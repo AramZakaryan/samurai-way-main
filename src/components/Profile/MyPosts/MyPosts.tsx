@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import S from "./MyPosts.module.css";
 import {Post} from "./Posts/Posts";
+import {addPostAC, dispatchType, updatePostTextAreaValueAC} from "../../../redux/store";
 
 type MyPostsPropsType = {
     profilePageData: {
@@ -11,9 +12,10 @@ type MyPostsPropsType = {
         }[]
         postTextAreaEnteringValue: string
     }
-    addPost: (postMessage: string) => void
-    updatePostTextAreaValue: (enteringValue: string) => void
+    dispatch: dispatchType
 }
+
+
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
@@ -29,12 +31,12 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const addPostHandler = () => {
         if (newPostElementRef.current) {
-            props.addPost(newPostElementRef.current.value)
+            props.dispatch(addPostAC())
         }
     }
 
     const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePostTextAreaValue(ev.currentTarget.value)
+        props.dispatch(updatePostTextAreaValueAC(ev.currentTarget.value))
     }
 
 
@@ -46,7 +48,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                     <textarea ref={newPostElementRef}
                               value={props.profilePageData.postTextAreaEnteringValue}
                               onChange={textareaOnChangeHandler}
-                              onKeyDown={ev => ev.key==="Enter" && addPostHandler()}
+                              onKeyDown={ev => ev.key === "Enter" && addPostHandler()}
                     />
                 </div>
                 <div>
