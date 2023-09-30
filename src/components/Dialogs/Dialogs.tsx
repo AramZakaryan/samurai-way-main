@@ -3,7 +3,8 @@ import S from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Messages/Message";
 import {Sidebar} from "../Sidebar/Sidebar";
-import {addMessageAC, dispatchType, updateMessageTextareaValueAC} from "../../redux/store";
+import {dispatchType} from "../../redux/store";
+import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = {
     dialogsPageData: {

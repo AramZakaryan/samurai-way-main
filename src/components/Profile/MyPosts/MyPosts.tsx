@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import S from "./MyPosts.module.css";
 import {Post} from "./Posts/Posts";
-import {addPostAC, dispatchType, updatePostTextAreaValueAC} from "../../../redux/store";
+import { dispatchType} from "../../../redux/store";
+import {addPostAC, updatePostTextAreaValueAC} from "../../../redux/profileReducer";
 
 type MyPostsPropsType = {
     profilePageData: {
@@ -46,6 +47,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             <div>
                 <div>
                     <textarea ref={newPostElementRef}
+                              placeholder={"Type your post here!"}
                               value={props.profilePageData.postTextAreaEnteringValue}
                               onChange={textareaOnChangeHandler}
                               onKeyDown={ev => ev.key === "Enter" && addPostHandler()}

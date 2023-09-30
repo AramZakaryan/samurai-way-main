@@ -1,27 +1,32 @@
 // TYPES
 
-import exp from "constants";
+import {addPostAC, profileReducer, updatePostTextAreaValueAC} from "./profileReducer";
+import {addMessageAC, dialogsReducer, updateMessageTextareaValueAC} from "./dialogsReducer";
+
+export type profilePageDataType = {
+    postsData: {
+        id: number
+        title: string
+        likesCount: number
+    } []
+    postTextAreaEnteringValue: string
+}
+
+export type dialogsPageDataType = {
+    dialogsData: {
+        id: number
+        name: string
+    }[]
+    messagesData: {
+        id: number
+        title: string
+    } []
+    messageTextareaEnteringValue: string
+}
 
 export type stateType = {
-    profilePageData: {
-        postsData: {
-            id: number
-            title: string
-            likesCount: number
-        } []
-        postTextAreaEnteringValue: string
-    }
-    dialogsPageData: {
-        dialogsData: {
-            id: number
-            name: string
-        }[]
-        messagesData: {
-            id: number
-            title: string
-        } []
-        messageTextareaEnteringValue: string
-    }
+    profilePageData: profilePageDataType
+    dialogsPageData: dialogsPageDataType
     sidebarData: {}
 }
 
@@ -34,28 +39,10 @@ export type storeType = {
 }
 
 export type dispatchType = (action: actionType) => void
-type actionType = {
-    type: "ADD-POST"
-        | "UPDATE-POST-TEXTAREA-VALUE"
-        | "ADD-MESSAGE"
-        | "UPDATE-MESSAGE-TEXTAREA-VALUE"
-    [key: string]: any
-}
-
-
-// ACTION CREATORS
-
-export const addPostAC = (): actionType =>
-    ({type: "ADD-POST"})
-
-export const updatePostTextAreaValueAC = (enteringValue: string): actionType =>
-    ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue})
-
-export const addMessageAC = (): actionType =>
-    ({type: "ADD-MESSAGE"})
-
-export const updateMessageTextareaValueAC = (enteringValue: string): actionType =>
-    ({type: "UPDATE-MESSAGE-TEXTAREA-VALUE", enteringValue: enteringValue})
+export type actionType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updatePostTextAreaValueAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateMessageTextareaValueAC>
 
 
 // STORE
@@ -125,37 +112,9 @@ export let store: storeType = {
         this._subscriber = observer
     },
     dispatch(action) {
-        switch (action.type) {
-            case "ADD-POST":
-                let postTobeAdded = {
-                    id: new Date().getTime(),
-                    title: this._state.profilePageData.postTextAreaEnteringValue,
-                    likesCount: 0
-                }
-                this._state.profilePageData.postsData.push(postTobeAdded)
-                this._state.profilePageData.postTextAreaEnteringValue = ""
-                this._subscriber(this)
-                break
-            case "UPDATE-POST-TEXTAREA-VALUE":
-                this._state.profilePageData.postTextAreaEnteringValue = action.enteringValue
-                this._subscriber(this)
-                break
-            case "ADD-MESSAGE":
-                const messageTobeAdded = {
-                    id: new Date().getTime(),
-                    title: this._state.dialogsPageData.messageTextareaEnteringValue
-                }
-                this._state.dialogsPageData.messagesData.push(messageTobeAdded)
-                this._state.dialogsPageData.messageTextareaEnteringValue = ""
-                this._subscriber(this)
-                break
-            case "UPDATE-MESSAGE-TEXTAREA-VALUE":
-                store._state.dialogsPageData.messageTextareaEnteringValue = action.enteringValue
-                store._subscriber(store)
-                break
-            default:
-                throw new Error("Wrong Method!")
-        }
+        this._state.profilePageData = profileReducer(this._state.profilePageData, action)
+        this._state.dialogsPageData = dialogsReducer(this._state.dialogsPageData, action)
+        store._subscriber(store)
     }
 }
 
