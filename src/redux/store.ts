@@ -24,17 +24,19 @@ export type dialogsPageDataType = {
     messageTextareaEnteringValue: string
 }
 
+export type sidebarDataType = {}
+
 export type stateType = {
     profilePageData: profilePageDataType
     dialogsPageData: dialogsPageDataType
-    sidebarData: {}
+    sidebarData: sidebarDataType
 }
 
 export type storeType = {
-    _state: stateType
+    state: stateType
     getState: () => stateType
-    _subscriber: (store: storeType) => void
-    subscribe: (observer: (store: storeType) => void) => void
+    subscriber: (state: stateType) => void
+    subscribe: (observer: (state: stateType) => void) => void
     dispatch: dispatchType
 }
 
@@ -48,7 +50,7 @@ export type actionType = ReturnType<typeof addPostAC>
 // STORE
 
 export let store: storeType = {
-    _state: {
+    state: {
         profilePageData: {
             postsData: [
                 {id: 1, title: "Hi, How are you?", likesCount: 0},
@@ -73,7 +75,7 @@ export let store: storeType = {
         sidebarData: {}
     },
     getState() {
-        return this._state
+        return this.state
     },
     // addPost(newPostTitle) {
     //     let postTobeAdded = {
@@ -105,16 +107,16 @@ export let store: storeType = {
     //     store._state.dialogsPageData.messageTextareaEnteringValue = enteringValue
     //     store._subscriber(store)
     // },
-    _subscriber(store) {
+    subscriber() {
         /* rerenderEntireThree_Dublicate */
     },
     subscribe(observer) {
-        this._subscriber = observer
+        this.subscriber = observer
     },
     dispatch(action) {
-        this._state.profilePageData = profileReducer(this._state.profilePageData, action)
-        this._state.dialogsPageData = dialogsReducer(this._state.dialogsPageData, action)
-        store._subscriber(store)
+        this.state.profilePageData = profileReducer(this.state.profilePageData, action)
+        this.state.dialogsPageData = dialogsReducer(this.state.dialogsPageData, action)
+        store.subscriber(store.getState())
     }
 }
 

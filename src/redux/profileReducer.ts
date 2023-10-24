@@ -4,7 +4,16 @@ import {
 } from "./store";
 
 
-export const profileReducer = (subState: profilePageDataType, action: actionType):profilePageDataType => {
+const initialSubState:profilePageDataType={
+    postsData: [
+    {id: 1, title: "Hi, How are you?", likesCount: 0},
+    {id: 2, title: "It's my first post", likesCount: 23}
+],
+    postTextAreaEnteringValue: ""
+}
+
+
+export const profileReducer = (subState: profilePageDataType = initialSubState, action: actionType):profilePageDataType => {
 
     switch (action.type) {
         case "ADD-POST":

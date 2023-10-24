@@ -12,7 +12,8 @@ import {Friends} from "./components/Friends/Friends";
 import {storeType} from "./redux/store";
 
 type AppPropsType = {
-    store: storeType
+    // store: storeType
+    store: any
 }
 
 
@@ -42,7 +43,7 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path={"/friends"} component={Friends}/>
 
                 </div>
-            </div>
+                </div>
         </BrowserRouter>
     );
 }

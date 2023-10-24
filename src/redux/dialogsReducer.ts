@@ -3,8 +3,23 @@ import {
     dialogsPageDataType,
 } from "./store";
 
+const initialSubState: dialogsPageDataType ={
+    dialogsData: [
+        {id: 1, name: "Gagulik"},
+        {id: 2, name: "Vazgenchik"},
+        {id: 3, name: "Serobik"},
+        {id: 4, name: "Ghukasik"},
+    ],
+    messagesData: [
+        {id: 1, title: "Hi!"},
+        {id: 2, title: "How are you?"},
+        {id: 3, title: "Yo!"}
+    ],
+    messageTextareaEnteringValue: ""
+}
 
-export const dialogsReducer = (subState:dialogsPageDataType, action:actionType):dialogsPageDataType => {
+
+export const dialogsReducer = (subState:dialogsPageDataType=initialSubState, action:actionType):dialogsPageDataType => {
 
     switch (action.type) {
         case "ADD-MESSAGE":
