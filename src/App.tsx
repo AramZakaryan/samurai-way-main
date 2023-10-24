@@ -9,11 +9,10 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
-import {storeType} from "./redux/store";
+import {storeReduxType} from "./redux/storeRedux";
 
 type AppPropsType = {
-    // store: storeType
-    store: any
+    store: storeReduxType
 }
 
 

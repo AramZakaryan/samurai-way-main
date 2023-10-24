@@ -12,4 +12,4 @@ let reducers = combineReducers({
 
 export let store = createStore(reducers)
 
-console.log("esa", store.getState())
+export type storeReduxType = typeof store
