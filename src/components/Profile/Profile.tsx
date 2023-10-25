@@ -19,11 +19,12 @@ import {storeReduxType} from "../../redux/storeRedux";
 //     dispatch: dispatchType
 // }
 
-type ProfilePropsType = {
-    store: storeReduxType
-}
+// type ProfilePropsType = {
+//     store: storeReduxType
+// }
 
-export const Profile: React.FC<ProfilePropsType> = (props) => {
+// export const Profile: React.FC<ProfilePropsType> = (props) => {
+export const Profile: React.FC = () => {
     return (<>
         <Sidebar/>
         <div className={classes.content}>
@@ -34,7 +35,9 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
             {/*<MyPostsContainer profilePageData={props.profilePageData}*/}
             {/*         dispatch={props.dispatch}*/}
             {/*/>*/}
-            <MyPostsContainer store={props.store}
+            {/*<MyPostsContainer store={props.store}*/}
+            {/*/>*/}
+            <MyPostsContainer
             />
             Main Content
         </div>

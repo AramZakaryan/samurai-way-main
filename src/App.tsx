@@ -1,23 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbat/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
-import {storeReduxType} from "./redux/storeRedux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    store: storeReduxType
-}
+// type AppPropsType = {
+//     store: storeReduxType
+// }
 
 
-const App: React.FC<AppPropsType> = (props) => {
+// const App: React.FC<AppPropsType> = (props) => {
+const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -27,16 +26,18 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path={"/profile"}
                         // render={() => <Profile profilePageData={props.store.getState().profilePageData}
                         //                        dispatch={props.store.dispatch.bind(props.store)}
-                           render={() => <Profile store={props.store}
+                           render={() => <Profile
                            />
                            }
                     />
+
                     <Route path={"/dialogs"}
                         // render={() => <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
                         //                        dispatch={props.store.dispatch.bind(props.store)}
                         //    render={() => <DialogsContainer dialogsPageData={props.store.getState().dialogsPageData}
                         //                           dispatch={props.store.dispatch.bind(props.store)}
-                           render={() => <DialogsContainer store={props.store}
+                        //    render={() => <DialogsContainer store={props.store}
+                           render={() => <DialogsContainer
                            />
                            }
                     />
@@ -48,6 +49,7 @@ const App: React.FC<AppPropsType> = (props) => {
                 </div>
             </div>
         </BrowserRouter>
+
     );
 }
 

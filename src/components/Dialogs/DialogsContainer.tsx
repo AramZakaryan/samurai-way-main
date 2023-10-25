@@ -1,7 +1,7 @@
 import React from "react";
 import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
-import {storeReduxType} from "../../redux/storeRedux";
+import {StoreContext} from "../../redux/storeContext";
 
 // type DialogsPropsType = {
 //     dialogsPageData: {
@@ -19,26 +19,39 @@ import {storeReduxType} from "../../redux/storeRedux";
 // }
 
 
-type DialogsPropsType = {
-    store: storeReduxType
-}
+// type DialogsPropsType = {
+//     store: storeReduxType
+// }
 
 
-export const DialogsContainer: React.FC<DialogsPropsType> = (props) => {
+// export const DialogsContainer: React.FC<DialogsPropsType> = (props) => {
+export const DialogsContainer: React.FC = () => {
 
-    const addMessageContainerHandler = () => {
-        props.store.dispatch(addMessageAC())
-    }
+    // const addMessageContainerHandler = () => {
+    //     props.store.dispatch(addMessageAC())
+    // }
 
-    const textareaOnChangeContainerHandler = (enteringValue: string) => {
-        props.store.dispatch(updateMessageTextareaValueAC(enteringValue))
-    }
+    // const textareaOnChangeContainerHandler = (enteringValue: string) => {
+    //     props.store.dispatch(updateMessageTextareaValueAC(enteringValue))
+    // }
 
-    return (<>
-            <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
-                     addMessage={addMessageContainerHandler}
-                     textareaOnChangeHandler={textareaOnChangeContainerHandler}
-            />
-        </>
+    return (
+        <StoreContext.Consumer>
+            {(store) => {
+                const addMessageContainerHandler = () => {
+                    store.dispatch(addMessageAC())
+                }
+                const textareaOnChangeContainerHandler = (enteringValue: string) => {
+                    store.dispatch(updateMessageTextareaValueAC(enteringValue))
+                }
+                return (<Dialogs dialogsPageData={store.getState().dialogsPageData}
+                                 addMessage={addMessageContainerHandler}
+                                 textareaOnChangeHandler={textareaOnChangeContainerHandler}
+
+                />)
+            }
+            }
+        </StoreContext.Consumer>
+
     )
 }

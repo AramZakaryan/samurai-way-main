@@ -1,24 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {stateType, storeType} from "./redux/store"
 import "./redux/storeRedux"
-// import {store} from "./redux/store"
 import {store, storeReduxType} from "./redux/storeRedux"
 import "./forDel"
-import {BrowserRouter} from "react-router-dom";
+import {Provider} from "./redux/storeContext";
 
 
-export const rerenderEntireThree = (store:storeReduxType) => {
+export const rerenderEntireThree = (store: storeReduxType) => {
     ReactDOM.render(
-        <App store={store}/>
+        // <StoreContext.Provider value={store}>
+        //     <App/>
+        // </StoreContext.Provider>
+
+        <Provider store={store}>
+            <App/>
+        </Provider>
         ,
         document.getElementById('root')
     )
 }
 
 
-store.subscribe(()=> {
+store.subscribe(() => {
     rerenderEntireThree(store)
 })
 
