@@ -1,8 +1,18 @@
 import React, {ChangeEvent} from "react";
 import S from "./MyPosts.module.css";
 import {Post} from "./Posts/Posts";
-import { dispatchType} from "../../../redux/store";
-import {addPostAC, updatePostTextAreaValueAC} from "../../../redux/profileReducer";
+
+// type MyPostsPropsType = {
+//     profilePageData: {
+//         postsData: {
+//             id: number
+//             title: string
+//             likesCount: number
+//         }[]
+//         postTextAreaEnteringValue: string
+//     }
+//     dispatch: dispatchType
+// }
 
 type MyPostsPropsType = {
     profilePageData: {
@@ -13,7 +23,8 @@ type MyPostsPropsType = {
         }[]
         postTextAreaEnteringValue: string
     }
-    dispatch: dispatchType
+    textareaOnChange:(enteringValue:string)=>void
+    addPost: ()=>void
 }
 
 
@@ -32,12 +43,12 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const addPostHandler = () => {
         if (newPostElementRef.current) {
-            props.dispatch(addPostAC())
+            props.addPost()
         }
     }
 
     const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updatePostTextAreaValueAC(ev.currentTarget.value))
+        props.textareaOnChange(ev.currentTarget.value)
     }
 
 

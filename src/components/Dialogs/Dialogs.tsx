@@ -3,8 +3,21 @@ import S from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Messages/Message";
 import {Sidebar} from "../Sidebar/Sidebar";
-import {dispatchType} from "../../redux/store";
-import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
+
+// type DialogsPropsType = {
+//     dialogsPageData: {
+//         dialogsData: {
+//             id: number
+//             name: string
+//         }[]
+//         messagesData: {
+//             id: number
+//             title: string
+//         } []
+//         messageTextareaEnteringValue: string
+//     }
+//     dispatch: dispatchType
+// }
 
 type DialogsPropsType = {
     dialogsPageData: {
@@ -18,7 +31,9 @@ type DialogsPropsType = {
         } []
         messageTextareaEnteringValue: string
     }
-    dispatch: dispatchType
+    // dispatch: dispatchType
+    addMessage:()=>void
+    textareaOnChangeHandler:(enteringValue:string)=>void
 }
 
 
@@ -35,11 +50,13 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessageHandler = () => {
-        props.dispatch(addMessageAC())
+        // props.dispatch(addMessageAC())
+        props.addMessage()
     }
 
     const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateMessageTextareaValueAC(ev.currentTarget.value))
+        // props.dispatch(updateMessageTextareaValueAC(ev.currentTarget.value))
+        props.textareaOnChangeHandler(ev.currentTarget.value)
     }
 
     return (<>

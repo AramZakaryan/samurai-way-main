@@ -10,6 +10,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
 import {storeReduxType} from "./redux/storeRedux";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: storeReduxType
@@ -24,15 +25,18 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile"}
-                           render={() => <Profile profilePageData={props.store.getState().profilePageData}
-                                                  dispatch={props.store.dispatch.bind(props.store)}
+                        // render={() => <Profile profilePageData={props.store.getState().profilePageData}
+                        //                        dispatch={props.store.dispatch.bind(props.store)}
+                           render={() => <Profile store={props.store}
                            />
                            }
                     />
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
-                                                  dispatch={props.store.dispatch.bind(props.store)}
-
+                        // render={() => <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
+                        //                        dispatch={props.store.dispatch.bind(props.store)}
+                        //    render={() => <DialogsContainer dialogsPageData={props.store.getState().dialogsPageData}
+                        //                           dispatch={props.store.dispatch.bind(props.store)}
+                           render={() => <DialogsContainer store={props.store}
                            />
                            }
                     />
@@ -42,11 +46,10 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path={"/friends"} component={Friends}/>
 
                 </div>
-                </div>
+            </div>
         </BrowserRouter>
     );
 }
-
 
 
 export default App;

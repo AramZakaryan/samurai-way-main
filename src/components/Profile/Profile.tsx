@@ -4,27 +4,37 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfilInfo/ProfileInfo";
 import {Sidebar} from "../Sidebar/Sidebar";
 import {dispatchType} from "../../redux/store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {storeReduxType} from "../../redux/storeRedux";
+
+// type ProfilePropsType = {
+//     profilePageData: {
+//         postsData: {
+//             id: number
+//             title: string
+//             likesCount: number
+//         }[]
+//         postTextAreaEnteringValue: string
+//     }
+//     dispatch: dispatchType
+// }
 
 type ProfilePropsType = {
-    profilePageData: {
-        postsData: {
-            id: number
-            title: string
-            likesCount: number
-        }[]
-        postTextAreaEnteringValue: string
-    }
-    // addPost: (postMessage: string) => void
-    // updatePostTextAreaValue: (enteringValue: string) => void
-    dispatch: dispatchType
+    store: storeReduxType
 }
+
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (<>
         <Sidebar/>
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts profilePageData={props.profilePageData}
-                     dispatch={props.dispatch}
+            {/*<MyPosts profilePageData={props.profilePageData}*/}
+            {/*         dispatch={props.dispatch}*/}
+            {/*/>*/}
+            {/*<MyPostsContainer profilePageData={props.profilePageData}*/}
+            {/*         dispatch={props.dispatch}*/}
+            {/*/>*/}
+            <MyPostsContainer store={props.store}
             />
             Main Content
         </div>
