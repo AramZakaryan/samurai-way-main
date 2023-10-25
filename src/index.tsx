@@ -23,3 +23,5 @@ store.subscribe(()=> {
 })
 
 rerenderEntireThree(store) /* for First Rendering only*/
+
+console.log(store)
