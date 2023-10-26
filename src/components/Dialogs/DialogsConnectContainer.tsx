@@ -1,8 +1,9 @@
 import React from "react";
 import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
-import {Dialogs} from "./Dialogs";
+import {Dialogs, DialogsPropsType} from "./Dialogs";
 import {connect} from "react-redux";
-import {dispatchReduxType, stateReduxType} from "../../redux/storeRedux";
+import {stateReduxType} from "../../redux/storeRedux";
+import {Dispatch} from "redux";
 
 
 // const addMessageContainerHandler = () => {
@@ -13,13 +14,18 @@ import {dispatchReduxType, stateReduxType} from "../../redux/storeRedux";
 //     props.store.dispatch(updateMessageTextareaValueAC(enteringValue))
 // }
 
-const mapStateToProps = (state: stateReduxType) => {
+type MapStateToPropsType = Pick<DialogsPropsType, "dialogsPageData">
+
+type MapDispatchToPropsType = Pick<DialogsPropsType, "addMessage" | "textareaOnChangeHandler">
+
+
+const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
         dialogsPageData: state.dialogsPageData
     }
 }
 
-const mapDispatchToProps = (dispatch:dispatchReduxType) => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addMessage: () => {
             dispatch(addMessageAC())
@@ -52,3 +58,5 @@ export const DialogsConnectContainer = connect(mapStateToProps, mapDispatchToPro
 //
 // )
 // }
+
+

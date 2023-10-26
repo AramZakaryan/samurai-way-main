@@ -14,7 +14,9 @@ import {Post} from "./Posts/Posts";
 //     dispatch: dispatchType
 // }
 
-type MyPostsPropsType = {
+
+
+export type MyPostsPropsType = {
     profilePageData: {
         postsData: {
             id: number

@@ -19,7 +19,7 @@ import {Sidebar} from "../Sidebar/Sidebar";
 //     dispatch: dispatchType
 // }
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     dialogsPageData: {
         dialogsData: {
             id: number
@@ -31,7 +31,6 @@ type DialogsPropsType = {
         } []
         messageTextareaEnteringValue: string
     }
-    // dispatch: dispatchType
     addMessage:()=>void
     textareaOnChangeHandler:(enteringValue:string)=>void
 }

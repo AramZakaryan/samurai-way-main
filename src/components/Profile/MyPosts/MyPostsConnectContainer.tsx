@@ -1,16 +1,24 @@
 import React from "react";
 import {addPostAC, updatePostTextAreaValueAC} from "../../../redux/profileReducer";
-import {MyPosts} from "./MyPosts";
+import {MyPosts, MyPostsPropsType} from "./MyPosts";
 import {connect} from "react-redux";
-import {dispatchReduxType, stateReduxType} from "../../../redux/storeRedux";
+import {stateReduxType} from "../../../redux/storeRedux";
+import { Dispatch } from "redux";
 
-const mapStateToProps = (state: stateReduxType) => {
+type MapStateToPropsType = Pick<MyPostsPropsType, "profilePageData">
+
+type MapDispatchToPropsType = Pick<MyPostsPropsType, "addPost" | "textareaOnChange">
+
+
+const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
         profilePageData: state.profilePageData
     }
+
 }
 
-const mapDispatchToProps = (dispatch: dispatchReduxType) => {
+// const mapDispatchToProps = (dispatch: dispatchReduxType): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         textareaOnChange: (enteringValue: string) => {
             dispatch(updatePostTextAreaValueAC(enteringValue))

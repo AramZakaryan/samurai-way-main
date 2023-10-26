@@ -19,4 +19,4 @@ export type storeReduxType = typeof store
 // Alternative Solution
 export type stateReduxType = ReturnType<typeof rootReducer>
 
-export type dispatchReduxType = typeof store.dispatch
+// export type dispatchReduxType = typeof store.dispatch
