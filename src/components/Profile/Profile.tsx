@@ -4,8 +4,9 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfilInfo/ProfileInfo";
 import {Sidebar} from "../Sidebar/Sidebar";
 import {dispatchType} from "../../redux/store";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+// import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {storeReduxType} from "../../redux/storeRedux";
+import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer";
 
 // type ProfilePropsType = {
 //     profilePageData: {
@@ -37,8 +38,7 @@ export const Profile: React.FC = () => {
             {/*/>*/}
             {/*<MyPostsContainer store={props.store}*/}
             {/*/>*/}
-            <MyPostsContainer
-            />
+            <MyPostsConnectContainer/>
             Main Content
         </div>
     </>)
