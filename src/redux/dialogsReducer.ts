@@ -3,7 +3,7 @@ import {
     dialogsPageDataType,
 } from "./store";
 
-const initialSubState: dialogsPageDataType ={
+const initialSubState: dialogsPageDataType = {
     dialogsData: [
         {id: 1, name: "Gagulik"},
         {id: 2, name: "Vazgenchik"},
@@ -19,7 +19,7 @@ const initialSubState: dialogsPageDataType ={
 }
 
 
-export const dialogsReducer = (subState:dialogsPageDataType=initialSubState, action:actionType):dialogsPageDataType => {
+export const dialogsReducer = (subState: dialogsPageDataType = initialSubState, action: actionType): dialogsPageDataType => {
 
     switch (action.type) {
         case "ADD-MESSAGE":
@@ -27,12 +27,22 @@ export const dialogsReducer = (subState:dialogsPageDataType=initialSubState, act
                 id: new Date().getTime(),
                 title: subState.messageTextareaEnteringValue
             }
-            subState.messagesData.push(messageTobeAdded)
-            subState.messageTextareaEnteringValue = ""
-            break
+            return {
+                ...subState,
+                messagesData: [...subState.messagesData,
+                    messageTobeAdded],
+                messageTextareaEnteringValue: ""
+            }
+        // subState.messagesData.push(messageTobeAdded)
+        // subState.messageTextareaEnteringValue = ""
+        // break
         case "UPDATE-MESSAGE-TEXTAREA-VALUE":
-            subState.messageTextareaEnteringValue = action.enteringValue
-            break
+            return {
+                ...subState,
+                messageTextareaEnteringValue: action.enteringValue
+            }
+        // subState.messageTextareaEnteringValue = action.enteringValue
+        // break
     }
 
     return subState

@@ -7,7 +7,7 @@ import "./forDel"
 import {Provider} from "react-redux";
 
 
-export const rerenderEntireThree = (store: storeReduxType) => {
+// export const rerenderEntireThree = (store: storeReduxType) => {
     ReactDOM.render(
         // <StoreContext.Provider value={store}>
         //     <App/>
@@ -18,13 +18,13 @@ export const rerenderEntireThree = (store: storeReduxType) => {
         ,
         document.getElementById('root')
     )
-}
+// }
 
 
-store.subscribe(() => {
-    rerenderEntireThree(store)
-})
+// store.subscribe(() => {
+//     rerenderEntireThree(store)
+// })
 
-rerenderEntireThree(store) /* for First Rendering only*/
+// rerenderEntireThree(store) /* for First Rendering only*/
 
 console.log(store)
