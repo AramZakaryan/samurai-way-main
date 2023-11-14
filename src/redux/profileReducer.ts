@@ -16,23 +16,26 @@ const initialSubState: profilePageDataType = {
 export const profileReducer = (subState: profilePageDataType = initialSubState, action: actionType): profilePageDataType => {
     switch (action.type) {
         case "ADD-POST":
-            let postTobeAdded = {
-                id: new Date().getTime(),
-                title: subState.postTextAreaEnteringValue,
-                likesCount: 0
-            }
             return {
                 ...subState,
                 postsData: [...subState.postsData,
-                    postTobeAdded]
-                , postTextAreaEnteringValue: ""
+                    {           // post to be added
+                        id: new Date().getTime(),
+                        title: subState.postTextAreaEnteringValue,
+                        likesCount: 0
+                    }
+                ],
+                postTextAreaEnteringValue: ""
             }
         case "UPDATE-POST-TEXTAREA-VALUE":
-            return {...subState,
-                postTextAreaEnteringValue:action.enteringValue
+            return {
+                ...subState,
+                postTextAreaEnteringValue: action.enteringValue
             }
+        default: {
+            return subState
+        }
     }
-    return subState
 }
 
 

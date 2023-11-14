@@ -23,29 +23,26 @@ export const dialogsReducer = (subState: dialogsPageDataType = initialSubState, 
 
     switch (action.type) {
         case "ADD-MESSAGE":
-            const messageTobeAdded = {
-                id: new Date().getTime(),
-                title: subState.messageTextareaEnteringValue
-            }
             return {
                 ...subState,
                 messagesData: [...subState.messagesData,
-                    messageTobeAdded],
-                messageTextareaEnteringValue: ""
+                    {           // message to be added
+                        id: new Date().getTime(),
+                        title: subState.messageTextareaEnteringValue
+                    }
+                ]
+                , messageTextareaEnteringValue: ""
             }
-        // subState.messagesData.push(messageTobeAdded)
-        // subState.messageTextareaEnteringValue = ""
-        // break
         case "UPDATE-MESSAGE-TEXTAREA-VALUE":
             return {
                 ...subState,
                 messageTextareaEnteringValue: action.enteringValue
             }
-        // subState.messageTextareaEnteringValue = action.enteringValue
-        // break
+        default: {
+            return subState
+        }
     }
 
-    return subState
 
 }
 
