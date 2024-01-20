@@ -27,4 +27,4 @@ import {Provider} from "react-redux";
 
 // rerenderEntireThree(store) /* for First Rendering only*/
 
-console.log(store)
+// console.log(store)
