@@ -6,8 +6,7 @@ export const Music = () => {
 
     return (
         <div>
-kuku music
-
+            coucou music
         </div>
     )
 }

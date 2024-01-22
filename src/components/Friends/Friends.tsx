@@ -5,7 +5,7 @@ export const Friends = () => {
 
     return (
         <div>
-            kuku friends
+            coucou friends
 
         </div>
     )

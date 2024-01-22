@@ -6,7 +6,7 @@ export const Settings = () => {
 
     return (
         <div>
-kuku settings
+            coucou settings
 
         </div>
     )
