@@ -6,8 +6,7 @@ export const News = () => {
 
     return (
         <div>
-kuku news
-
+            coucou news
         </div>
     )
 }
