@@ -8,15 +8,10 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
-// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContainer";
-
-// type AppPropsType = {
-//     store: storeReduxType
-// }
+// import {UsersConnectContainer} from "./components/Users/UsersConnectContainer";
 
 
-// const App: React.FC<AppPropsType> = (props) => {
 const App: React.FC = () => {
     return (
         <BrowserRouter>
@@ -24,33 +19,16 @@ const App: React.FC = () => {
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/profile"}
-                        // render={() => <Profile profilePageData={props.store.getState().profilePageData}
-                        //                        dispatch={props.store.dispatch.bind(props.store)}
-                           render={() => <Profile
-                           />
-                           }
-                    />
-
-                    <Route path={"/dialogs"}
-                        // render={() => <Dialogs dialogsPageData={props.store.getState().dialogsPageData}
-                        //                        dispatch={props.store.dispatch.bind(props.store)}
-                        //    render={() => <DialogsContainer dialogsPageData={props.store.getState().dialogsPageData}
-                        //                           dispatch={props.store.dispatch.bind(props.store)}
-                        //    render={() => <DialogsContainer store={props.store}
-                           render={() => <DialogsConnectContainer
-                           />
-                           }
-                    />
+                    <Route path={"/profile"} render={() => <Profile/>}/>
+                    <Route path={"/dialogs"} render={() => <DialogsConnectContainer/>}/>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
                     <Route path={"/friends"} component={Friends}/>
-
+                    {/*<Route path={"/users"} render={()=><UsersConnectContainer/>}/>*/}
                 </div>
             </div>
         </BrowserRouter>
-
     );
 }
 

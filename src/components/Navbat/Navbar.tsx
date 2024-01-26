@@ -7,7 +7,6 @@ export const Navbar: React.FC = () => {
 
     return (
         <nav className={S.nav}>
-
             <div className={S.item}>
                 <NavLink to={"/profile"} activeClassName={S.activeLink}>Profile</NavLink>
             </div>
@@ -36,6 +35,9 @@ export const Navbar: React.FC = () => {
                          src={"https://static.fnac-static.com/multimedia/Images/FD/Comete/123455/CCP_IMG_1200x800/1608824.jpg"}
                     />
                 </div>
+            </div>
+            <div className={S.item}>
+                <NavLink to={"/users"} activeClassName={S.activeLink}>Users</NavLink>
             </div>
         </nav>
     )
