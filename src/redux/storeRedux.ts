@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import {combineReducers} from "redux";
 import {createStore} from "redux";
 import {dialogsReducer} from "./dialogsReducer";
@@ -20,3 +22,5 @@ export type storeReduxType = typeof store
 export type stateReduxType = ReturnType<typeof rootReducer>
 
 // export type dispatchReduxType = typeof store.dispatch
+
+

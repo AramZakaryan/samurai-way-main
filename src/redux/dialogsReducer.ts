@@ -48,10 +48,6 @@ export const dialogsReducer = (subState: dialogsPageDataType = initialSubState, 
 }
 
 
-function copyState(state) {
-    return {...state}
-}
-
 
 
 // ACTION CREATORS
