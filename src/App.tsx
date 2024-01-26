@@ -9,7 +9,8 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends} from "./components/Friends/Friends";
 import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContainer";
-// import {UsersConnectContainer} from "./components/Users/UsersConnectContainer";
+// import {Users} from "./components/Users/Users";
+import {UsersConnectContainer} from "./components/Users/UsersConnectContainer";
 
 
 const App: React.FC = () => {
@@ -25,7 +26,16 @@ const App: React.FC = () => {
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
                     <Route path={"/friends"} component={Friends}/>
-                    {/*<Route path={"/users"} render={()=><UsersConnectContainer/>}/>*/}
+                    {/*<Route path={"/users"} render={() =>*/}
+                    {/*    <Users setNewUsers={() => {*/}
+                    {/*    }}*/}
+                    {/*           follow={() => {*/}
+                    {/*           }}*/}
+                    {/*           unfollow={() => {*/}
+                    {/*           }}*/}
+                    {/*           usersData={[]}*/}
+                    {/*    />}/>*/}
+                    <Route path={"/users"} render={()=><UsersConnectContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

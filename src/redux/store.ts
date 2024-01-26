@@ -25,17 +25,19 @@ export type dialogsPageDataType = {
     messageTextareaEnteringValue: string
 }
 
-export type usersDataType = {
-    usersData: {
-        id: number
-        followed: boolean
-        fullName: string
-        status: string
-        location: {
-            city: string
-            country: string
-        }
-    }[]
+export type usersPageDataType = {
+        usersData: {
+            id: number
+            photoUrl: string
+            followed: boolean
+            fullName: string
+            status: string
+            location: {
+                city: string
+                country: string
+            }
+        }[]
+
 }
 
 export type sidebarDataType = {}
