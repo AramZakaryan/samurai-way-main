@@ -27,17 +27,20 @@ export type dialogsPageDataType = {
 
 export type usersPageDataType = {
         usersData: {
+            name: string
             id: number
-            photoUrl: string
-            followed: boolean
-            fullName: string
-            status: string
-            location: {
-                city: string
-                country: string
+            uniqueUrlName: string | null
+            photos: {
+                small: string | null
+                large: string | null
             }
+            status: string
+            followed: boolean
+            // location: {
+            //     city: string
+            //     country: string
+            // }
         }[]
-
 }
 
 export type sidebarDataType = {}

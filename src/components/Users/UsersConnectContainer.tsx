@@ -19,23 +19,28 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        setNewUsers: (newUsers: {
-            id: number
-            photoUrl: string
-            followed: boolean
-            fullName: string
-            status: string
-            location: {
-                city: string
-                country: string
-            }
-        }[])=>{
+        setNewUsers: (newUsers:
+                          {
+                              name: string
+                              id: number
+                              uniqueUrlName: string | null
+                              photos: {
+                                  small: string | null
+                                  large: string | null
+                              }
+                              status: string
+                              followed: boolean
+                              // location: {
+                              //     city: string
+                              //     country: string
+                              // }
+                          }[]) => {
             dispatch(setNewUsersAC(newUsers))
         },
-        follow: (userID:number) => {
+        follow: (userID: number) => {
             dispatch(followAC(userID))
         },
-        unfollow: (userID:number) => {
+        unfollow: (userID: number) => {
             dispatch(unfollowAC(userID))
         }
     }

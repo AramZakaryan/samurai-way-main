@@ -1,34 +1,42 @@
 import React from "react";
 import S from "./Users.module.css"
-import {followAC, setNewUsersAC, unfollowAC} from "../../redux/usersReducer";
-import {usersPageDataType} from "../../redux/store";
 import axios from "axios";
-import {log} from "util";
+import nomiage from "../../assets/images/noimage.png"
+
+
 
 export type UsersPropsType = {
     usersPageData: {
         usersData: {
+            name: string
             id: number
-            photoUrl: string
-            followed: boolean
-            fullName: string
-            status: string
-            location: {
-                city: string
-                country: string
+            uniqueUrlName: string | null
+            photos: {
+                small: string | null
+                large: string | null
             }
+            status: string
+            followed: boolean
+            // location: {
+            //     city: string
+            //     country: string
+            // }
         }[]
     }
     setNewUsers: (newUsers: {
+        name: string
         id: number
-        photoUrl: string
-        followed: boolean
-        fullName: string
-        status: string
-        location: {
-            city: string
-            country: string
+        uniqueUrlName: string | null
+        photos: {
+            small: string | null
+            large: string | null
         }
+        status: string
+        followed: boolean
+        // location: {
+        //     city: string
+        //     country: string
+        // }
     }[]) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
@@ -68,7 +76,9 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     // )
 
     axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(data=>console.log(data.data.items))
+        // .then(response => console.log(response.data.items))
+        .then(response => setTimeout(()=>props.setNewUsers(response.data.items),2000))
+        // .then(response=> props.setNewUsers(response.data.items))
 
 
     return (
@@ -79,7 +89,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoUrl} className={S.userPhoto}/>
+                            <img src={u.photos.small??nomiage} className={S.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
@@ -89,13 +99,13 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                     </span>
                     <span>
                         <span>
-                            <div> {u.fullName}</div>
+                            <div> {u.name}</div>
                             <div>{u.status}</div>
                         </span>
-                        <span>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
-                        </span>
+                        {/*<span>*/}
+                        {/*    <div>{u.location.city}</div>*/}
+                        {/*    <div>{u.location.country}</div>*/}
+                        {/*</span>*/}
 
                     </span>
                 </div>)}
