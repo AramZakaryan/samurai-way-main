@@ -2,6 +2,8 @@ import React from "react";
 import S from "./Users.module.css"
 import {followAC, setNewUsersAC, unfollowAC} from "../../redux/usersReducer";
 import {usersPageDataType} from "../../redux/store";
+import axios from "axios";
+import {log} from "util";
 
 export type UsersPropsType = {
     usersPageData: {
@@ -35,35 +37,38 @@ export type UsersPropsType = {
 export const Users: React.FC<UsersPropsType> = (props) => {
 
 
-    // check if usersData is empty then set new users
-    !props.usersPageData.usersData.length && props.setNewUsers(
-        [
-            {
-                id: 1,
-                photoUrl: "https://i.imgur.com/xwQu3JU.jpeg",
-                followed: false,
-                fullName: "Dmitry",
-                status: "I'm a boss.",
-                location: {city: "Minsk", country: "Belorus"}
-            },
-            {
-                id: 2,
-                photoUrl: "https://preview.redd.it/brad-pitt-as-the-joker-on-a-movie-poster-for-an-upcoming-v0-n6t2q6nn8e0c1.jpg?width=768&format=pjpg&auto=webp&s=8cdb44bcf07549acb626fbd0de666037cfae0178",
-                followed: true,
-                fullName: "Sasha",
-                status: "I'm a boss too.",
-                location: {city: "Moscow", country: "Russia"}
-            },
-            {
-                id: 3,
-                photoUrl: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/a-romantic-portrait-of-joker-liliana-pop-schroffel.jpg",
-                followed: false,
-                fullName: "Andrew",
-                status: "I'm a boss too.",
-                location: {city: "Kiev", country: "Ukraine"}
-            }
-        ]
-    )
+    // // check if usersData is empty then set new users
+    // !props.usersPageData.usersData.length && props.setNewUsers(
+    //     [
+    //         {
+    //             id: 1,
+    //             photoUrl: "https://i.imgur.com/xwQu3JU.jpeg",
+    //             followed: false,
+    //             fullName: "Dmitry",
+    //             status: "I'm a boss.",
+    //             location: {city: "Minsk", country: "Belorus"}
+    //         },
+    //         {
+    //             id: 2,
+    //             photoUrl: "https://preview.redd.it/brad-pitt-as-the-joker-on-a-movie-poster-for-an-upcoming-v0-n6t2q6nn8e0c1.jpg?width=768&format=pjpg&auto=webp&s=8cdb44bcf07549acb626fbd0de666037cfae0178",
+    //             followed: true,
+    //             fullName: "Sasha",
+    //             status: "I'm a boss too.",
+    //             location: {city: "Moscow", country: "Russia"}
+    //         },
+    //         {
+    //             id: 3,
+    //             photoUrl: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/a-romantic-portrait-of-joker-liliana-pop-schroffel.jpg",
+    //             followed: false,
+    //             fullName: "Andrew",
+    //             status: "I'm a boss too.",
+    //             location: {city: "Kiev", country: "Ukraine"}
+    //         }
+    //     ]
+    // )
+
+    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        .then(data=>console.log(data.data.items))
 
 
     return (
