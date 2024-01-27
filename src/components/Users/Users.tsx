@@ -4,7 +4,6 @@ import axios from "axios";
 import nomiage from "../../assets/images/noimage.png"
 
 
-
 export type UsersPropsType = {
     usersPageData: {
         usersData: {
@@ -44,52 +43,23 @@ export type UsersPropsType = {
 
 export const Users: React.FC<UsersPropsType> = (props) => {
 
-
-    // // check if usersData is empty then set new users
-    // !props.usersPageData.usersData.length && props.setNewUsers(
-    //     [
-    //         {
-    //             id: 1,
-    //             photoUrl: "https://i.imgur.com/xwQu3JU.jpeg",
-    //             followed: false,
-    //             fullName: "Dmitry",
-    //             status: "I'm a boss.",
-    //             location: {city: "Minsk", country: "Belorus"}
-    //         },
-    //         {
-    //             id: 2,
-    //             photoUrl: "https://preview.redd.it/brad-pitt-as-the-joker-on-a-movie-poster-for-an-upcoming-v0-n6t2q6nn8e0c1.jpg?width=768&format=pjpg&auto=webp&s=8cdb44bcf07549acb626fbd0de666037cfae0178",
-    //             followed: true,
-    //             fullName: "Sasha",
-    //             status: "I'm a boss too.",
-    //             location: {city: "Moscow", country: "Russia"}
-    //         },
-    //         {
-    //             id: 3,
-    //             photoUrl: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/a-romantic-portrait-of-joker-liliana-pop-schroffel.jpg",
-    //             followed: false,
-    //             fullName: "Andrew",
-    //             status: "I'm a boss too.",
-    //             location: {city: "Kiev", country: "Ukraine"}
-    //         }
-    //     ]
-    // )
-
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+    const getUsers = () => axios.get("https://social-network.samuraijs.com/api/1.0/users")
         // .then(response => console.log(response.data.items))
-        .then(response => setTimeout(()=>props.setNewUsers(response.data.items),2000))
-        // .then(response=> props.setNewUsers(response.data.items))
+        // .then(response => setTimeout(() => props.setNewUsers(response.data.items), 2000))
+        .then(response => props.setNewUsers(response.data.items))
 
 
     return (
         <div>
-            coucou users
+            <div>coucou users   </div>
+
+            <button onClick={getUsers}>Get Users</button>
 
             {props.usersPageData.usersData.map(u =>
                 <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small??nomiage} className={S.userPhoto}/>
+                            <img src={u.photos.small ?? nomiage} className={S.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
