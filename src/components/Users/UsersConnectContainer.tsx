@@ -1,6 +1,6 @@
 import React from "react";
 import {Users, UsersPropsType} from "./Users";
-import {UsersClass} from "./UsersClass";
+// import {UsersClass} from "./UsersClass";
 import {stateReduxType} from "../../redux/storeRedux";
 import {Dispatch} from "redux";
 import {followAC, setNewUsersAC, unfollowAC} from "../../redux/usersReducer";
@@ -47,7 +47,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass) // (Users)
+export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps) (Users)
+// export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass) // (Users)
 
 
 
