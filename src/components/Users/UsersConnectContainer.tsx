@@ -1,21 +1,21 @@
 import React from "react";
-import {Users, UsersPropsType} from "./Users";
-// import {UsersClass} from "./UsersClass";
+// import {Users, UsersPropsType} from "./Users";
+import {UsersClassPropsType} from "./UsersClass";
 import {stateReduxType} from "../../redux/storeRedux";
 import {Dispatch} from "redux";
-import {followAC, setNewUsersAC, unfollowAC} from "../../redux/usersReducer";
+import {followAC, setNewUsersAC, setSelecetedPageAC, setTotalUserCountAC, unfollowAC} from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import {UsersClass} from "./UsersClass";
 
 
-type MapStateToPropsType = Pick<UsersPropsType, "usersPageData">
+type MapStateToPropsType = Pick<UsersClassPropsType, "usersPageData">
 
-type MapDispatchToPropsType = Pick<UsersPropsType, "setNewUsers" | "follow" | "unfollow">
+type MapDispatchToPropsType = Pick<UsersClassPropsType, "setNewUsers" | "follow" | "unfollow" | "setSelectedPage" | "setTotalUserCount">
 
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
-        usersPageData: state.usersPageData
+        usersPageData: state.usersPageData,
     }
 }
 
@@ -44,6 +44,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         unfollow: (userID: number) => {
             dispatch(unfollowAC(userID))
+        },
+        setSelectedPage: (selectedPageNumber: number) => {
+            dispatch(setSelecetedPageAC(selectedPageNumber))
+        },
+        setTotalUserCount: (totalUserCount: number) => {
+            dispatch(setTotalUserCountAC(totalUserCount))
         }
     }
 }

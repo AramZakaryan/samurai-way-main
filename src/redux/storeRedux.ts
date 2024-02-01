@@ -13,9 +13,9 @@ let rootReducer = combineReducers({
     usersPageData: usersReducer
 })
 
-export let store = createStore(rootReducer)
+export let storeRedux = createStore(rootReducer)
 
-export type storeReduxType = typeof store
+export type storeReduxType = typeof storeRedux
 
 // My Solution
 // export type stateReduxType = ReturnType<typeof store.getState>
@@ -26,6 +26,6 @@ export type stateReduxType = ReturnType<typeof rootReducer>
 
 
 // @ts-ignore
-window.store= store
+window.store= storeRedux
 
 

@@ -2,7 +2,7 @@
 
 import {addPostAC, profileReducer, updatePostTextAreaValueAC} from "./profileReducer";
 import {addMessageAC, dialogsReducer, updateMessageTextareaValueAC} from "./dialogsReducer";
-import {followAC, setNewUsersAC, unfollowAC} from "./usersReducer";
+import {followAC, setNewUsersAC, setSelecetedPageAC, setTotalUserCountAC, unfollowAC} from "./usersReducer";
 
 export type profilePageDataType = {
     postsData: {
@@ -41,6 +41,9 @@ export type usersPageDataType = {
             //     country: string
             // }
         }[]
+    pageSize: number
+    totalUserCount: number
+    selectedPage: number
 }
 
 export type sidebarDataType = {}
@@ -67,6 +70,8 @@ export type actionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setNewUsersAC>
+    | ReturnType<typeof setSelecetedPageAC>
+    | ReturnType<typeof setTotalUserCountAC>
 
 
 // STORE

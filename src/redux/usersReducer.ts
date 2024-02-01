@@ -2,9 +2,13 @@ import {
     actionType, usersPageDataType,
 } from "./store";
 
+// ACTION NAMES
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_NEW_USERS = "SET_NEW_USERS"
+const SET_SELECTED_PAGE = "SET_SELECTED_PAGE"
+const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
 
 
 const initialSubState: usersPageDataType = {
@@ -33,7 +37,11 @@ const initialSubState: usersPageDataType = {
         //     status: "I'm a boss too.",
         //     location: {city: "Kiev", country: "Ukraine"}
         // }
-    ]
+    ],
+    pageSize: 4,
+    totalUserCount: 0,
+    selectedPage: 1
+
 }
 
 
@@ -42,7 +50,7 @@ export const usersReducer = (subState: usersPageDataType = initialSubState, acti
         case SET_NEW_USERS: {
             return {
                 ...subState,
-                usersData:action.newUsers
+                usersData: action.newUsers
             }
         }
         case FOLLOW: {
@@ -58,8 +66,6 @@ export const usersReducer = (subState: usersPageDataType = initialSubState, acti
                 )
             }
         }
-
-
         case UNFOLLOW: {
             return {
                 ...subState,
@@ -72,6 +78,18 @@ export const usersReducer = (subState: usersPageDataType = initialSubState, acti
                         : u
                 )
 
+            }
+        }
+        case SET_SELECTED_PAGE: {
+            return {
+                ...subState,
+                selectedPage: action.selectedPageNumber
+            }
+        }
+        case SET_TOTAL_USER_COUNT: {
+            return {
+                ...subState,
+                totalUserCount: action.totalUserCount
             }
         }
         default: {
@@ -93,3 +111,8 @@ export const followAC = (userId: number) =>
 export const unfollowAC = (userId: number) =>
     ({type: UNFOLLOW, userId}) as const
 
+export const setSelecetedPageAC = (selectedPageNumber: number) =>
+    ({type: SET_SELECTED_PAGE, selectedPageNumber}) as const
+
+export const setTotalUserCountAC = (totalUserCount: number) =>
+    ({type: SET_TOTAL_USER_COUNT, totalUserCount}) as const

@@ -17,6 +17,7 @@ export type UsersPropsType = {
             status: string
             followed: boolean
         }[]
+        pageSize: number
     }
     setNewUsers: (newUsers: {
         name: string
