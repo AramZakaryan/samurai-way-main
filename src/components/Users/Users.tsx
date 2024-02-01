@@ -16,10 +16,6 @@ export type UsersPropsType = {
             }
             status: string
             followed: boolean
-            // location: {
-            //     city: string
-            //     country: string
-            // }
         }[]
     }
     setNewUsers: (newUsers: {
@@ -32,10 +28,6 @@ export type UsersPropsType = {
         }
         status: string
         followed: boolean
-        // location: {
-        //     city: string
-        //     country: string
-        // }
     }[]) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
