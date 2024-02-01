@@ -1,16 +1,94 @@
 import React from "react";
-// import {Users, UsersPropsType} from "./Users";
-import {UsersClassPropsType} from "./UsersClassAPI";
 import {stateReduxType} from "../../redux/storeRedux";
 import {Dispatch} from "redux";
 import {followAC, setNewUsersAC, setSelecetedPageAC, setTotalUserCountAC, unfollowAC} from "../../redux/usersReducer";
 import {connect} from "react-redux";
-import {UsersClassAPI} from "./UsersClassAPI";
+import axios from "axios";
+import {UsersFuncPresent} from "./UsersFuncPresent";
 
 
-type MapStateToPropsType = Pick<UsersClassPropsType, "usersPageData">
+export type UsersClassContainerPropsType = {
+    usersPageData: {
+        usersData: {
+            name: string
+            id: number
+            uniqueUrlName: string | null
+            photos: {
+                small: string | null
+                large: string | null
+            }
+            status: string
+            followed: boolean
+        }[]
+        pageSize: number
+        totalUserCount: number
+        selectedPage: number
+    }
+    setNewUsers: (newUsers: {
+        name: string
+        id: number
+        uniqueUrlName: string | null
+        photos: {
+            small: string | null
+            large: string | null
+        }
+        status: string
+        followed: boolean
+    }[]) => void
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    setSelectedPage: (selectedPageNumber: number) => void
+    setTotalUserCount: (totalUserCount: number) => void
+}
 
-type MapDispatchToPropsType = Pick<UsersClassPropsType, "setNewUsers" | "follow" | "unfollow" | "setSelectedPage" | "setTotalUserCount">
+export class UsersClassContainer extends React.Component<UsersClassContainerPropsType, any> {
+    constructor(props: UsersClassContainerPropsType) {
+        super(props)
+
+
+        // getUsers = () => axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        //     .then(response => this.props.setNewUsers(response.data.items))
+
+        // axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        //     .then(response => this.props.setNewUsers(response.data.items))
+
+    }
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.usersPageData.selectedPage}&count=${this.props.usersPageData.pageSize}`)
+            .then(response => {
+                this.props.setNewUsers(response.data.items)
+                this.props.setTotalUserCount(response.data.totalCount)
+            })
+    }
+
+    setSelectedPageHandler = (p: number) => {
+        this.props.setSelectedPage(p)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${p}&count=${this.props.usersPageData.pageSize}`)
+            .then(response => {
+                    this.props.setNewUsers(response.data.items)
+                    this.props.setTotalUserCount(response.data.totalCount)
+                }
+            )
+    }
+
+    render() {
+        return (<>
+            <UsersFuncPresent usersPageData={this.props.usersPageData}
+                // setNewUsers={this.props.setNewUsers}
+                              follow={this.props.follow}
+                              unfollow={this.props.unfollow}
+                              setSelectedPage={this.setSelectedPageHandler}
+                // setTotalUserCount={this.props.setTotalUserCount}
+            />
+        </>)
+    }
+}
+
+
+type MapStateToPropsType = Pick<UsersClassContainerPropsType, "usersPageData">
+
+type MapDispatchToPropsType = Pick<UsersClassContainerPropsType, "setNewUsers" | "follow" | "unfollow" | "setSelectedPage" | "setTotalUserCount">
 
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
@@ -18,6 +96,7 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
         usersPageData: state.usersPageData,
     }
 }
+
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
@@ -54,8 +133,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-// export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps) (Users)
-export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassAPI)
+
+export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassContainer)
 
 
 
