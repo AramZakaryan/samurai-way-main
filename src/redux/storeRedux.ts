@@ -1,10 +1,16 @@
 
-import {combineReducers} from "redux";
+import {combineReducers, compose} from "redux";
 import {createStore} from "redux";
 import {dialogsReducer} from "./dialogsReducer";
 import {profileReducer} from "./profileReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
+
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
 
 let rootReducer = combineReducers({
     profilePageData: profileReducer,
@@ -13,7 +19,8 @@ let rootReducer = combineReducers({
     usersPageData: usersReducer
 })
 
-export let storeRedux = createStore(rootReducer)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export let storeRedux = createStore(rootReducer, composeEnhancers())
 
 export type storeReduxType = typeof storeRedux
 

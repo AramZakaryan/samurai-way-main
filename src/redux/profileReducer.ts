@@ -9,6 +9,7 @@ const initialSubState: profilePageDataType = {
         {id: 1, title: "Hi, How are you?", likesCount: 0},
         {id: 2, title: "It's my first post", likesCount: 23}
     ],
+    userProfile: null,
     postTextAreaEnteringValue: ""
 }
 
@@ -32,6 +33,11 @@ export const profileReducer = (subState: profilePageDataType = initialSubState, 
                 ...subState,
                 postTextAreaEnteringValue: action.enteringValue
             }
+        case "SET_USER_PROFILE":
+            return {
+                ...subState,
+                userProfile:action.userProfile
+            }
         default: {
             return subState
         }
@@ -41,8 +47,33 @@ export const profileReducer = (subState: profilePageDataType = initialSubState, 
 
 // ACTION CREATORS
 
-export const addPostAC = () =>
+export const addPost = () =>
     ({type: "ADD-POST"}) as const
 
-export const updatePostTextAreaValueAC = (enteringValue: string) =>
+export const updatePostTextAreaValue = (enteringValue: string) =>
     ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue}) as const
+
+export type UserProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string
+    userId: number
+    photos: {
+        small: string | null
+        large: string | null
+    }
+}
+
+export const setUserProfile = (userProfile: UserProfileType) =>
+    ({type: "SET_USER_PROFILE", userProfile}) as const

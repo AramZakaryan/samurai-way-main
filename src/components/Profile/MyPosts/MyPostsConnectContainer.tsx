@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, updatePostTextAreaValueAC} from "../../../redux/profileReducer";
+import {addPost, updatePostTextAreaValue} from "../../../redux/profileReducer";
 import {MyPosts, MyPostsPropsType} from "./MyPosts";
 import {connect} from "react-redux";
 import {stateReduxType} from "../../../redux/storeRedux";
@@ -21,10 +21,10 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         textareaOnChange: (enteringValue: string) => {
-            dispatch(updatePostTextAreaValueAC(enteringValue))
+            dispatch(updatePostTextAreaValue(enteringValue))
         },
         addPost: () => {
-            dispatch(addPostAC())
+            dispatch(addPost())
         }
     }
 }

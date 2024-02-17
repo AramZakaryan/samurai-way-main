@@ -1,6 +1,6 @@
 // TYPES
 
-import {addPostAC, profileReducer, updatePostTextAreaValueAC} from "./profileReducer";
+import {addPost, profileReducer, setUserProfile, updatePostTextAreaValue} from "./profileReducer";
 import {addMessageAC, dialogsReducer, updateMessageTextareaValueAC} from "./dialogsReducer";
 import {
     follow,
@@ -17,6 +17,7 @@ export type profilePageDataType = {
         title: string
         likesCount: number
     } []
+    userProfile:any
     postTextAreaEnteringValue: string
 }
 
@@ -71,8 +72,8 @@ export type storeType = {
 }
 
 export type dispatchType = (action: actionType) => void
-export type actionType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof updatePostTextAreaValueAC>
+export type actionType = ReturnType<typeof addPost>
+    | ReturnType<typeof updatePostTextAreaValue>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateMessageTextareaValueAC>
     | ReturnType<typeof follow>
@@ -81,6 +82,7 @@ export type actionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setSelectedPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 
 // STORE
@@ -92,6 +94,7 @@ export let store: storeType = {
                 {id: 1, title: "Hi, How are you?", likesCount: 0},
                 {id: 2, title: "It's my first post", likesCount: 23}
             ],
+            userProfile:null,
             postTextAreaEnteringValue: ""
         },
         dialogsPageData: {
