@@ -5,7 +5,7 @@ import {Sidebar} from "../Sidebar/Sidebar";
 import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer";
 import {UserProfileType} from "../../redux/profileReducer";
 
-type ProfilePresentationalPropsType = UserProfileType
+type ProfilePresentationalPropsType = { userProfile: UserProfileType }
 
 export const ProfilePresentational: React.FC <ProfilePresentationalPropsType>= (props) => {
     return (<>

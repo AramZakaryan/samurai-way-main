@@ -34,20 +34,21 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 
     render() {
         return (<>
-            <ProfilePresentational {...this.props.profilePageData.userProfile}/>
+            <ProfilePresentational userProfile={this.props.profilePageData.userProfile}/>
         </>)
     }
 
 }
 
 type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData">
+type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
 
 
 const mapStateToProps = (state: stateReduxType):MapStateToPropsType => {
     return {profilePageData:state.profilePageData}
 }
 
-const mapDispatchToProps= {
+const mapDispatchToProps:MapDispatchToPropsType= {
     setUserProfile
 }
 

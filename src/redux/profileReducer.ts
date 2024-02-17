@@ -53,7 +53,7 @@ export const addPost = () =>
 export const updatePostTextAreaValue = (enteringValue: string) =>
     ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue}) as const
 
-export type UserProfileType = {
+export type UserProfileType = null | {
     aboutMe: string
     contacts: {
         facebook: string | null
