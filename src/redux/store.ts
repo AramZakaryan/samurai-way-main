@@ -2,7 +2,14 @@
 
 import {addPostAC, profileReducer, updatePostTextAreaValueAC} from "./profileReducer";
 import {addMessageAC, dialogsReducer, updateMessageTextareaValueAC} from "./dialogsReducer";
-import {followAC, setNewUsersAC, setSelecetedPageAC, setTotalUserCountAC, unfollowAC} from "./usersReducer";
+import {
+    follow,
+    setNewUsers,
+    setSelectedPage,
+    setTotalUserCount,
+    toggleIsFetching,
+    unfollow
+} from "./usersReducer";
 
 export type profilePageDataType = {
     postsData: {
@@ -44,6 +51,7 @@ export type usersPageDataType = {
     pageSize: number
     totalUserCount: number
     selectedPage: number
+    isFetching: boolean
 }
 
 export type sidebarDataType = {}
@@ -67,11 +75,12 @@ export type actionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof updatePostTextAreaValueAC>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateMessageTextareaValueAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setNewUsersAC>
-    | ReturnType<typeof setSelecetedPageAC>
-    | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setNewUsers>
+    | ReturnType<typeof setSelectedPage>
+    | ReturnType<typeof setTotalUserCount>
+    | ReturnType<typeof toggleIsFetching>
 
 
 // STORE

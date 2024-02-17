@@ -1,7 +1,7 @@
 import React from "react";
 import S from "./Users.module.css"
 import axios from "axios";
-import nomiage from "../../assets/images/noimage.png"
+import noimage from "../../assets/images/noimage.png"
 
 
 export type UsersPropsType = {
@@ -52,7 +52,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small ?? nomiage} className={S.userPhoto}/>
+                            <img src={u.photos.small ?? noimage} className={S.userPhoto}/>
                         </div>
                         <div>
                             {u.followed

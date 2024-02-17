@@ -11,6 +11,7 @@ import {Friends} from "./components/Friends/Friends";
 import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContainer";
 // import {Users} from "./components/Users/Users";
 import {UsersConnectContainer} from "./components/Users/UsersConnectContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 
 const App: React.FC = () => {
@@ -20,7 +21,8 @@ const App: React.FC = () => {
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/profile"} render={() => <Profile/>}/>
+                    {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}
+                    <Route path={"/profile"} render={() => <ProfileContainer/>}/>
                     <Route path={"/dialogs"} render={() => <DialogsConnectContainer/>}/>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>

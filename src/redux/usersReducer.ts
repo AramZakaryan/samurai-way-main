@@ -9,6 +9,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_NEW_USERS = "SET_NEW_USERS"
 const SET_SELECTED_PAGE = "SET_SELECTED_PAGE"
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 
 const initialSubState: usersPageDataType = {
@@ -40,8 +41,8 @@ const initialSubState: usersPageDataType = {
     ],
     pageSize: 4,
     totalUserCount: 0,
-    selectedPage: 1
-
+    selectedPage: 1,
+    isFetching: false
 }
 
 
@@ -92,6 +93,12 @@ export const usersReducer = (subState: usersPageDataType = initialSubState, acti
                 totalUserCount: action.totalUserCount
             }
         }
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...subState,
+                isFetching: action.isFetching
+            }
+        }
         default: {
             return subState
         }
@@ -100,19 +107,21 @@ export const usersReducer = (subState: usersPageDataType = initialSubState, acti
 }
 
 
-// ACTION CREATORS
+// ACTION CREATORS   !!! without "AC"
 
-export const setNewUsersAC = (newUsers: any) => /////////////////////////any
+export const setNewUsers = (newUsers: any) => /////////////////////////any
     ({type: SET_NEW_USERS, newUsers}) as const
 
-export const followAC = (userId: number) =>
+export const follow = (userId: number) =>
     ({type: FOLLOW, userId}) as const
 
-export const unfollowAC = (userId: number) =>
+export const unfollow = (userId: number) =>
     ({type: UNFOLLOW, userId}) as const
 
-export const setSelecetedPageAC = (selectedPageNumber: number) =>
+export const setSelectedPage = (selectedPageNumber: number) =>
     ({type: SET_SELECTED_PAGE, selectedPageNumber}) as const
 
-export const setTotalUserCountAC = (totalUserCount: number) =>
+export const setTotalUserCount = (totalUserCount: number) =>
     ({type: SET_TOTAL_USER_COUNT, totalUserCount}) as const
+export const toggleIsFetching = (isFetching: boolean) =>
+    ({type: TOGGLE_IS_FETCHING, isFetching}) as const

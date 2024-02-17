@@ -1,6 +1,7 @@
 import S from "./Users.module.css";
 import nomiage from "../../assets/images/noimage.png";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
 type UsersFuncPresentType = {
@@ -64,7 +65,9 @@ export function UsersFuncPresent(props: UsersFuncPresentType) {
                 <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={"/profile/"+u.id}>
                             <img src={u.photos.small ?? nomiage} className={S.userPhoto}/>
+                                </NavLink>
                         </div>
                         <div>
                             {u.followed
