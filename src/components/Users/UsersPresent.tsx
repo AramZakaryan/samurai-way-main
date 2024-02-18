@@ -39,7 +39,7 @@ type UsersFuncPresentType = {
 
 }
 
-export function UsersFuncPresent(props: UsersFuncPresentType) {
+export function UsersPresent(props: UsersFuncPresentType) {
 
     let pageCount = Math.ceil(props.usersPageData.totalUserCount / props.usersPageData.pageSize)
     let pages = []

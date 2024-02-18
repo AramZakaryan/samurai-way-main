@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
+import {HeaderPresent} from "./components/Header/HeaderPresent";
 import {Navbar} from "./components/Navbat/Navbar";
 import {ProfilePresentational} from "./components/Profile/ProfilePresentational";
 import {BrowserRouter, Route} from "react-router-dom";
@@ -12,13 +12,14 @@ import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContai
 // import {Users} from "./components/Users/Users";
 import {UsersConnectContainer} from "./components/Users/UsersContainer";
 import {ProfileClassContainer, ProfileConnectContainer} from "./components/Profile/ProfileContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 
 const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}

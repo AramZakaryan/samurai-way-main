@@ -9,3 +9,8 @@
     height: 30px;
     margin: 10px;
 }
+
+.loginBlock {
+    float: right;
+    margin: 15px;
+}

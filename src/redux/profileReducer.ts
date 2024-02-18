@@ -1,10 +1,7 @@
-import {
-    actionType,
-    profilePageDataType,
-} from "./store";
+import {ActionType, ProfilePageDataType} from "./types";
 
 
-const initialSubState: profilePageDataType = {
+const initialSubState: ProfilePageDataType = {
     postsData: [
         {id: 1, title: "Hi, How are you?", likesCount: 0},
         {id: 2, title: "It's my first post", likesCount: 23}
@@ -14,7 +11,7 @@ const initialSubState: profilePageDataType = {
 }
 
 
-export const profileReducer = (subState: profilePageDataType = initialSubState, action: actionType): profilePageDataType => {
+export const profileReducer = (subState: ProfilePageDataType = initialSubState, action: ActionType): ProfilePageDataType => {
     switch (action.type) {
         case "ADD-POST":
             return {

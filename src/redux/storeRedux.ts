@@ -5,6 +5,7 @@ import {dialogsReducer} from "./dialogsReducer";
 import {profileReducer} from "./profileReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
+import {authReducer} from "./authReducer";
 
 declare global {
     interface Window {
@@ -16,7 +17,8 @@ let rootReducer = combineReducers({
     profilePageData: profileReducer,
     dialogsPageData: dialogsReducer,
     sidebarData: sidebarReducer,
-    usersPageData: usersReducer
+    usersPageData: usersReducer,
+    authPartData: authReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

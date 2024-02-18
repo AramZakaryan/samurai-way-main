@@ -11,7 +11,7 @@ import {
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import axios from "axios";
-import {UsersFuncPresent} from "./UsersFuncPresent";
+import {UsersPresent} from "./UsersPresent";
 import isFetchingSpinner from "../../assets/images/isFetchingSpinner.svg"
 import {Preloader} from "../common/Preloader/Preloader";
 
@@ -92,11 +92,11 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
         return (<>
             {this.props.usersPageData.isFetching
                 ? <Preloader/>
-                : <UsersFuncPresent usersPageData={this.props.usersPageData}
+                : <UsersPresent usersPageData={this.props.usersPageData}
                     // setNewUsers={this.props.setNewUsers}
-                                    follow={this.props.follow}
-                                    unfollow={this.props.unfollow}
-                                    setSelectedPage={this.setSelectedPageHandler}
+                                follow={this.props.follow}
+                                unfollow={this.props.unfollow}
+                                setSelectedPage={this.setSelectedPageHandler}
                     // setTotalUserCount={this.props.setTotalUserCount}
                 />
             }

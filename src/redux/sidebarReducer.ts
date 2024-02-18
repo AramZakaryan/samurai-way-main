@@ -1,13 +1,10 @@
-import {
-    actionType,
-    sidebarDataType,
-} from "./store";
+import {ActionType, SidebarDataType} from "./types";
 
 
-const initialSubState:sidebarDataType={}
+const initialSubState:SidebarDataType={}
 
 
-export const sidebarReducer = (subState: sidebarDataType = initialSubState, action: actionType):sidebarDataType => {
+export const sidebarReducer = (subState: SidebarDataType = initialSubState, action: ActionType):SidebarDataType => {
 
 
     return subState

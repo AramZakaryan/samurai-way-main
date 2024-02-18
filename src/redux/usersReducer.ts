@@ -1,6 +1,4 @@
-import {
-    actionType, usersPageDataType,
-} from "./store";
+import {ActionType, UsersPageDataType} from "./types";
 
 // ACTION NAMES
 
@@ -12,7 +10,7 @@ const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 
-const initialSubState: usersPageDataType = {
+const initialSubState: UsersPageDataType = {
     usersData: [
         // {
         //     id: 1,
@@ -46,7 +44,7 @@ const initialSubState: usersPageDataType = {
 }
 
 
-export const usersReducer = (subState: usersPageDataType = initialSubState, action: actionType): usersPageDataType => {
+export const usersReducer = (subState: UsersPageDataType = initialSubState, action: ActionType): UsersPageDataType => {
     switch (action.type) {
         case SET_NEW_USERS: {
             return {
