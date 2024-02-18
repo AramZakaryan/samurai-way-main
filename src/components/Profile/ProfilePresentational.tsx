@@ -8,6 +8,7 @@ import {UserProfileType} from "../../redux/profileReducer";
 type ProfilePresentationalPropsType = { userProfile: UserProfileType }
 
 export const ProfilePresentational: React.FC <ProfilePresentationalPropsType>= (props) => {
+
     return (<>
         <Sidebar/>
         <div className={classes.content}>

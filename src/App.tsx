@@ -28,15 +28,6 @@ const App: React.FC = () => {
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
                     <Route path={"/friends"} component={Friends}/>
-                    {/*<Route path={"/users"} render={() =>*/}
-                    {/*    <Users setNewUsers={() => {*/}
-                    {/*    }}*/}
-                    {/*           follow={() => {*/}
-                    {/*           }}*/}
-                    {/*           unfollow={() => {*/}
-                    {/*           }}*/}
-                    {/*           usersData={[]}*/}
-                    {/*    />}/>*/}
                     <Route path={"/users"} render={()=><UsersConnectContainer/>}/>
                 </div>
             </div>
