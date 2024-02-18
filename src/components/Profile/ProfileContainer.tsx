@@ -19,8 +19,8 @@ type ProfileClassContainerPropsType = {
         userProfile: UserProfileType
         postTextAreaEnteringValue: string
     }
-    setUserProfile: (userProfile: UserProfileType)=>void
-}
+    setUserProfile: (userProfile: UserProfileType) => void
+} & RouteComponentProps<{ userId: string }>
 
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
@@ -30,12 +30,13 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     componentDidMount() {
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/10`)
+        let userId=this.props.match.params.userId
+        if(!userId){userId="2"}
+        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => this.props.setUserProfile(response.data))
     }
 
     render() {
-        console.log(this.props)
         return (<>
             <ProfilePresentational userProfile={this.props.profilePageData.userProfile}/>
         </>)
@@ -47,14 +48,14 @@ type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData
 type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
 
 
-const mapStateToProps = (state: stateReduxType):MapStateToPropsType => {
-    return {profilePageData:state.profilePageData}
+const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
+    return {profilePageData: state.profilePageData}
 }
 
-const mapDispatchToProps:MapDispatchToPropsType= {
+const mapDispatchToProps: MapDispatchToPropsType = {
     setUserProfile
 }
 
-let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }> & ProfileClassContainerPropsType,any>(ProfileClassContainer)
+let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(ProfileClassContainer)
 
 export const ProfileConnectContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileWithRouterComponent)
