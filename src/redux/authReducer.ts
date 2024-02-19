@@ -14,7 +14,8 @@ const initialSubState: AuthPartDataType = {
     authData: {
         userId: null,
         login: null, // = user name
-        email: null
+        email: null,
+        isAuth: false
     }
 }
 
@@ -22,9 +23,11 @@ const initialSubState: AuthPartDataType = {
 export const authReducer = (subState: AuthPartDataType = initialSubState, action: ActionType): AuthPartDataType => {
     switch (action.type) {
         case SET_USER_DATA: {
+            // Transformation of "id" to "userId"
+            const {id: userId, login, email} = action.authDataFromApi
             return {
                 ...subState,
-                authData: action.userData
+                authData: {userId, login, email, isAuth:true}
             }
         }
 
@@ -38,5 +41,11 @@ export const authReducer = (subState: AuthPartDataType = initialSubState, action
 
 // ACTION CREATORS   !!! without "AC"
 
-export const setUserData = (userData: AuthPartDataType["authData"]) =>
-    ({type: SET_USER_DATA, userData}) as const
+export type AuthDataFromApiType = {
+    id: number | null // !!! fromApi: "id"; in the state: "userId"
+    login: string | null // = user name
+    email: string | null
+}
+
+export const setUserData = (authDataFromApi: AuthDataFromApiType) =>
+    ({type: SET_USER_DATA, authDataFromApi}) as const

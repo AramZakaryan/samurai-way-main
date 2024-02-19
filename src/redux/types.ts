@@ -73,5 +73,6 @@ export type AuthPartDataType = {
         userId: number | null
         login: string | null // = user name
         email: string | null
+        isAuth: boolean
     }
 }

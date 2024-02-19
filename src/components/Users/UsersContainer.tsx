@@ -165,7 +165,7 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 //     toggleIsFetching: toggleIsFetching
 // }
 
-const mapDispatchToProps = {
+const mapDispatchToProps: MapDispatchToPropsType = {
     setNewUsers,
     follow,
     unfollow,

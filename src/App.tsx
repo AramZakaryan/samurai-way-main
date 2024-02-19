@@ -12,14 +12,14 @@ import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContai
 // import {Users} from "./components/Users/Users";
 import {UsersConnectContainer} from "./components/Users/UsersContainer";
 import {ProfileClassContainer, ProfileConnectContainer} from "./components/Profile/ProfileContainer";
-import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {HeaderClassContainer, HeaderConnectContainer} from "./components/Header/HeaderContainer";
 
 
 const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
-                <HeaderContainer/>
+                <HeaderConnectContainer/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}
