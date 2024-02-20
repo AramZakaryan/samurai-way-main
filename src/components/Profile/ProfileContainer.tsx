@@ -22,6 +22,30 @@ type ProfileClassContainerPropsType = {
     setUserProfile: (userProfile: UserProfileType) => void
 } & RouteComponentProps<{ userId: string }>
 
+// type UserResponseFromApiType = {
+//     aboutMe: null | string
+//     contacts: {
+//         facebook: null | string
+//         website: null | string
+//         vk: null | string
+//         twitter: null | string
+//         instagram: null | string
+//         youtube: null | string
+//         github: null | string
+//         mainLink: null | string
+//     }
+//     lookingForAJob: boolean
+//     lookingForAJobDescription: null | string
+//     fullName: null | string
+//     userId: number
+//     photos: {
+//         small: null | string
+//         large: null | string
+//     }
+// }
+
+type UserResponseFromApiType = UserProfileType
+
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
 
@@ -30,9 +54,11 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     componentDidMount() {
-        let userId=this.props.match.params.userId
-        if(!userId){userId="30080"}
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = "30080"
+        }
+        axios.get<UserResponseFromApiType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => this.props.setUserProfile(response.data))
     }
 

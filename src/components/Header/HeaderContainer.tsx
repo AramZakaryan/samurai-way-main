@@ -19,6 +19,16 @@ type HeaderClassContainerType = {
     setUserData: (authDataFromApi: AuthDataFromApiType) => void
 }
 
+type AuthResponseFromApiType = {
+    data: {
+        "id": number
+        login: string
+        email: string
+    },
+    messages: string[],
+    fieldsErrors: string[],
+    resultCode: number
+}
 
 export class HeaderClassContainer extends React.Component <HeaderClassContainerType, any> {
 
@@ -27,7 +37,7 @@ export class HeaderClassContainer extends React.Component <HeaderClassContainerT
     }
 
     componentDidMount() {
-        axios("https://social-network.samuraijs.com/api/1.0//auth/me", {withCredentials: true})
+        axios.get<AuthResponseFromApiType>("https://social-network.samuraijs.com/api/1.0//auth/me", {withCredentials: true})
             .then(res => {
                 res.data.resultCode === 0 // checking: 0 means user exists
                 &&

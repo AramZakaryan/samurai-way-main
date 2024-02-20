@@ -42,7 +42,7 @@ export type UsersClassContainerPropsType = {
             small: string | null
             large: string | null
         }
-        status: string
+        status: string | null
         followed: boolean
     }[]) => void
     follow: (userID: number) => void
@@ -51,6 +51,23 @@ export type UsersClassContainerPropsType = {
     setTotalUserCount: (totalUserCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
+
+type UsersOfSelectedPageFromApiType = {
+    items: {
+        name: string
+        id: number
+        uniqueUrlName: null | string
+        photos: {
+            small: null | string
+            large: null | string
+        }
+        status: null | string
+        followed: boolean
+    }[]
+    totalCount: number
+    error: null | string
+}
+
 
 export class UsersClassContainer extends React.Component<UsersClassContainerPropsType, any> {
     constructor(props: UsersClassContainerPropsType) {
@@ -67,7 +84,8 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.usersPageData.selectedPage}&count=${this.props.usersPageData.pageSize}`)
+        axios.get<UsersOfSelectedPageFromApiType>(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.usersPageData.selectedPage}&count=${this.props.usersPageData.pageSize}`
+            , {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setNewUsers(response.data.items)
@@ -79,7 +97,8 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
     setSelectedPageHandler = (p: number) => {
         this.props.toggleIsFetching(true)
         this.props.setSelectedPage(p)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${p}&count=${this.props.usersPageData.pageSize}`)
+        axios.get<UsersOfSelectedPageFromApiType>(`https://social-network.samuraijs.com/api/1.0/users/?page=${p}&count=${this.props.usersPageData.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                     this.props.toggleIsFetching(false)
                     this.props.setNewUsers(response.data.items)
