@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {stateReduxType, storeReduxType} from "../../redux/storeRedux";
 import {AuthPartDataType} from "../../redux/types";
 import {AuthDataFromApiType, setUserData} from "../../redux/authReducer";
+import {api} from "../../api/api";
 
 type HeaderClassContainerType = {
     authPartData: {
@@ -19,16 +20,6 @@ type HeaderClassContainerType = {
     setUserData: (authDataFromApi: AuthDataFromApiType) => void
 }
 
-type AuthResponseFromApiType = {
-    data: {
-        "id": number
-        login: string
-        email: string
-    },
-    messages: string[],
-    fieldsErrors: string[],
-    resultCode: number
-}
 
 export class HeaderClassContainer extends React.Component <HeaderClassContainerType, any> {
 
@@ -37,11 +28,11 @@ export class HeaderClassContainer extends React.Component <HeaderClassContainerT
     }
 
     componentDidMount() {
-        axios.get<AuthResponseFromApiType>("https://social-network.samuraijs.com/api/1.0//auth/me", {withCredentials: true})
-            .then(res => {
-                res.data.resultCode === 0 // checking: 0 means user exists
+        api.auth()
+            .then(data => {
+                data.resultCode === 0 // checking: 0 means user exists
                 &&
-                this.props.setUserData(res.data.data)
+                this.props.setUserData(data.data)
             })
     }
 

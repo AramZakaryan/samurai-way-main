@@ -7,6 +7,7 @@ import {stateReduxType} from "../../redux/storeRedux";
 import {setUserProfile, UserProfileType} from "../../redux/profileReducer";
 import {UsersClassContainerPropsType} from "../Users/UsersContainer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {api} from "../../api/api";
 
 
 type ProfileClassContainerPropsType = {
@@ -44,8 +45,6 @@ type ProfileClassContainerPropsType = {
 //     }
 // }
 
-type UserResponseFromApiType = UserProfileType
-
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
 
@@ -54,12 +53,12 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     componentDidMount() {
-        let userId = this.props.match.params.userId
+        let userId = +this.props.match.params.userId
         if (!userId) {
-            userId = "30080"
+            userId = 30080 // for showing my user if no other user was selected
         }
-        axios.get<UserResponseFromApiType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => this.props.setUserProfile(response.data))
+        api.getUser(userId)
+            .then(data => this.props.setUserProfile(data))
     }
 
     render() {
@@ -70,7 +69,9 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 
 }
 
+
 type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData">
+
 type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
 
 

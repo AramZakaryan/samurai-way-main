@@ -14,6 +14,7 @@ import axios from "axios";
 import {UsersPresent} from "./UsersPresent";
 import isFetchingSpinner from "../../assets/images/isFetchingSpinner.svg"
 import {Preloader} from "../common/Preloader/Preloader";
+import {api} from "../../api/api";
 
 
 export type UsersClassContainerPropsType = {
@@ -52,57 +53,31 @@ export type UsersClassContainerPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-type UsersOfSelectedPageFromApiType = {
-    items: {
-        name: string
-        id: number
-        uniqueUrlName: null | string
-        photos: {
-            small: null | string
-            large: null | string
-        }
-        status: null | string
-        followed: boolean
-    }[]
-    totalCount: number
-    error: null | string
-}
-
 
 export class UsersClassContainer extends React.Component<UsersClassContainerPropsType, any> {
     constructor(props: UsersClassContainerPropsType) {
         super(props)
-
-
-        // getUsers = () => axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        //     .then(response => this.props.setNewUsers(response.data.items))
-
-        // axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        //     .then(response => this.props.setNewUsers(response.data.items))
-
     }
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get<UsersOfSelectedPageFromApiType>(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.usersPageData.selectedPage}&count=${this.props.usersPageData.pageSize}`
-            , {withCredentials: true})
-            .then(response => {
+            api.getUsers(this.props.usersPageData.selectedPage,this.props.usersPageData.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setNewUsers(response.data.items)
-                this.props.setTotalUserCount(response.data.totalCount)
+                this.props.setNewUsers(data.items)
+                this.props.setTotalUserCount(data.totalCount)
             })
 
     }
 
-    setSelectedPageHandler = (p: number) => {
+    setSelectedPageHandler = (selectedPageNumber: number) => {
         this.props.toggleIsFetching(true)
-        this.props.setSelectedPage(p)
-        axios.get<UsersOfSelectedPageFromApiType>(`https://social-network.samuraijs.com/api/1.0/users/?page=${p}&count=${this.props.usersPageData.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
+        this.props.setSelectedPage(selectedPageNumber)
+            api.getUsers(selectedPageNumber,this.props.usersPageData.pageSize)
+            .then(data => {
                     this.props.toggleIsFetching(false)
-                    this.props.setNewUsers(response.data.items)
-                    this.props.setTotalUserCount(response.data.totalCount)
+                    this.props.setNewUsers(data.items)
+                    this.props.setTotalUserCount(data.totalCount)
                 }
             )
     }
@@ -112,11 +87,9 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
             {this.props.usersPageData.isFetching
                 ? <Preloader/>
                 : <UsersPresent usersPageData={this.props.usersPageData}
-                    // setNewUsers={this.props.setNewUsers}
                                 follow={this.props.follow}
                                 unfollow={this.props.unfollow}
                                 setSelectedPage={this.setSelectedPageHandler}
-                    // setTotalUserCount={this.props.setTotalUserCount}
                 />
             }
         </>)
