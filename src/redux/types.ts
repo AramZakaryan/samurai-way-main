@@ -64,16 +64,12 @@ export type UsersPageDataType = {
         }
         status: string
         followed: boolean
-        // location: {
-        //     city: string
-        //     country: string
-        // }
     }[]
     pageSize: number
     totalUserCount: number
     selectedPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    allFollowingInProgress: number[]
 }
 
 export type SidebarDataType = {}

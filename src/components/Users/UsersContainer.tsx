@@ -34,7 +34,7 @@ export type UsersClassContainerPropsType = {
         totalUserCount: number
         selectedPage: number
         isFetching: boolean
-        followingInProgress: boolean
+        allFollowingInProgress: number[]
     }
     setNewUsers: (newUsers: {
         name: string
@@ -56,7 +56,7 @@ export type UsersClassContainerPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
     /** P.S.(Aram) function for activating / disactivating button
      */
-    toggleIsFollowingInProgress: (followingInProgress: boolean) => void
+    toggleIsFollowingInProgress: (userID: number, followingInProgress: boolean) => void
 }
 
 

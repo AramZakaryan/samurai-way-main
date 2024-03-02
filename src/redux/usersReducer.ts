@@ -42,7 +42,7 @@ const initialSubState: UsersPageDataType = {
     totalUserCount: 0,
     selectedPage: 1,
     isFetching: false, // for showing Spinner
-    followingInProgress: false // for disactivating "Follow" button
+    allFollowingInProgress: [] // for disactivating "Follow" button
 }
 
 
@@ -100,8 +100,16 @@ export const usersReducer = (subState: UsersPageDataType = initialSubState, acti
             }
         }
         case TOGGLE_IS_FOLLOWING_IN_PROGRESS: {
-            return {...subState,
-            followingInProgress: action.followingInProgress}
+            return {
+                ...subState,
+                allFollowingInProgress:
+                    action.followingInProgress
+                        ? [
+                            ...subState.allFollowingInProgress,
+                            action.userId
+                        ]
+                        : subState.allFollowingInProgress.filter(el => el !== action.userId)
+            }
         }
         default: {
             return subState
@@ -144,10 +152,9 @@ export const setTotalUserCount = (totalUserCount: number) =>
 export const toggleIsFetching = (isFetching: boolean) =>
     ({type: TOGGLE_IS_FETCHING, isFetching}) as const
 
-// followingInProgress: false // for disactivating "Follow" button
-
 /** P.S.(Aram) toggleIsFollowingInProgress ACTION CREATOR.
  *  This is for disactivating "Follow" button.
  */
-export const toggleIsFollowingInProgress = (followingInProgress: boolean) =>
-    ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, followingInProgress}) as const
+export const toggleIsFollowingInProgress = (userId: number, followingInProgress: boolean) =>
+    ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, userId, followingInProgress}) as const
+
