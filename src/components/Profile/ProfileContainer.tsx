@@ -14,10 +14,14 @@ type ProfileClassContainerPropsType = {
 } & RouteComponentProps<{ userId: string }> //////////////////////////// !!!
 
 
+
+    type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" | "isAuth">
+
+
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
 
-    constructor(props: ProfileClassContainerPropsType) {
-        super(props);
+        constructor(props: ProfileClassContainerPropsType) {
+                super(props);
     }
 
     componentDidMount() {
@@ -33,9 +37,7 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     render() {
-        if (!this.props.isAuth) {
-            return <Redirect to={"/login"}/>
-        }
+
         return (<>
             <ProfilePresentational userProfile={this.props.profilePageData.userProfile}/>
         </>)
@@ -44,10 +46,16 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 }
 
 
-let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(ProfileClassContainer)
+const AuthRedirectHOC = (props:any) => {
+    if (!props.isAuth) {
+        return <Redirect to={"/login"}/>
+    }
+    return <ProfileClassContainer {...props}/>
+}
 
 
-type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" | "isAuth">
+let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(AuthRedirectHOC)
+
 
 type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
