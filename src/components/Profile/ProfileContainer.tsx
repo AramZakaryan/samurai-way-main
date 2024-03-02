@@ -3,12 +3,13 @@ import {ProfilePresentational} from "./ProfilePresentational";
 import {connect} from "react-redux";
 import {stateReduxType} from "../../redux/storeRedux";
 import {setUserProfile} from "../../redux/profileReducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilePageDataType} from "../../redux/types";
 
 
 type ProfileClassContainerPropsType = {
     profilePageData: ProfilePageDataType
+    isAuth: boolean
     setUserProfile: (userId: number) => void
 } & RouteComponentProps<{ userId: string }> //////////////////////////// !!!
 
@@ -32,6 +33,9 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     render() {
+        if (!this.props.isAuth) {
+            return <Redirect to={"/login"}/>
+        }
         return (<>
             <ProfilePresentational userProfile={this.props.profilePageData.userProfile}/>
         </>)
@@ -40,19 +44,22 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 }
 
 
-type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData">
+let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(ProfileClassContainer)
+
+
+type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" | "isAuth">
 
 type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
-
-
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
-    return {profilePageData: state.profilePageData}
+    return {
+        profilePageData: state.profilePageData,
+        isAuth: state.authPartData.authData.isAuth
+    }
+
 }
 
 const mapDispatchToProps: MapDispatchToPropsType = {
     setUserProfile
 }
-
-let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(ProfileClassContainer)
 
 export const ProfileConnectContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileWithRouterComponent)

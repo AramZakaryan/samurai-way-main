@@ -3,40 +3,19 @@ import S from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Messages/Message";
 import {Sidebar} from "../Sidebar/Sidebar";
+import {DialogsPageDataType} from "../../redux/types";
+import {Redirect} from "react-router-dom";
 
-// type DialogsPropsType = {
-//     dialogsPageData: {
-//         dialogsData: {
-//             id: number
-//             name: string
-//         }[]
-//         messagesData: {
-//             id: number
-//             title: string
-//         } []
-//         messageTextareaEnteringValue: string
-//     }
-//     dispatch: dispatchType
-// }
 
-export type DialogsPropsType = {
-    dialogsPageData: {
-        dialogsData: {
-            id: number
-            name: string
-        }[]
-        messagesData: {
-            id: number
-            title: string
-        } []
-        messageTextareaEnteringValue: string
-    }
-    addMessage:()=>void
-    textareaOnChangeHandler:(enteringValue:string)=>void
+export type DialogsPresentationalPropsType = {
+    dialogsPageData: DialogsPageDataType
+    isAuth: boolean
+    addMessage: () => void
+    textareaOnChangeHandler: (enteringValue: string) => void
 }
 
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (props) => {
 
     let dialogs = props.dialogsPageData.dialogsData.map(el =>
         <DialogItem key={el.id} name={el.name} id={el.id}/>
@@ -58,8 +37,13 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.textareaOnChangeHandler(ev.currentTarget.value)
     }
 
+    if (!props.isAuth) {
+        return <Redirect to={"/login"}/>
+    }
+
     return (<>
             <Sidebar/>
+            {/*<div>isAuth: {props.isAuth ? "Yes" : "No"}</div>*/}
             <div className={S.dialogs}>
 
                 <div className={S.dialogsItems}>

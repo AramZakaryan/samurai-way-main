@@ -1,57 +1,35 @@
-import React from "react";
-// import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
-// import {Dialogs} from "./Dialogs";
-// import {StoreContext} from "../../redux/storeContext";
-//
-// // type DialogsPropsType = {
-// //     dialogsPageData: {
-// //         dialogsData: {
-// //             id: number
-// //             name: string
-// //         }[]
-// //         messagesData: {
-// //             id: number
-// //             title: string
-// //         } []
-// //         messageTextareaEnteringValue: string
-// //     }
-// //     dispatch: dispatchType
-// // }
-//
-//
-// // type DialogsPropsType = {
-// //     store: storeReduxType
-// // }
-//
-//
-// // export const DialogsContainer: React.FC<DialogsPropsType> = (props) => {
-// export const DialogsContainer: React.FC = () => {
-//
-//     // const addMessageContainerHandler = () => {
-//     //     props.store.dispatch(addMessageAC())
-//     // }
-//
-//     // const textareaOnChangeContainerHandler = (enteringValue: string) => {
-//     //     props.store.dispatch(updateMessageTextareaValueAC(enteringValue))
-//     // }
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {(store) => {
-//                 const addMessageContainerHandler = () => {
-//                     store.dispatch(addMessageAC())
-//                 }
-//                 const textareaOnChangeContainerHandler = (enteringValue: string) => {
-//                     store.dispatch(updateMessageTextareaValueAC(enteringValue))
-//                 }
-//                 return (<Dialogs dialogsPageData={store.getState().dialogsPageData}
-//                                  addMessage={addMessageContainerHandler}
-//                                  textareaOnChangeHandler={textareaOnChangeContainerHandler}
-//
-//                 />)
-//             }
-//             }
-//         </StoreContext.Consumer>
-//
-//     )
-// }
+import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
+import {DialogsPresentational, DialogsPresentationalPropsType} from "./DialogsPresentational";
+import {connect} from "react-redux";
+import {stateReduxType} from "../../redux/storeRedux";
+import {Dispatch} from "redux";
+
+
+
+type MapStateToPropsType = Pick<DialogsPresentationalPropsType, "dialogsPageData" | "isAuth">
+
+type MapDispatchToPropsType = Pick<DialogsPresentationalPropsType, "addMessage" | "textareaOnChangeHandler">
+
+
+const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
+    return {
+        dialogsPageData: state.dialogsPageData,
+        isAuth: state.authPartData.authData.isAuth
+    }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        addMessage: () => {
+            dispatch(addMessageAC())
+        },
+        textareaOnChangeHandler: (enteringValue: string) => {
+            dispatch(updateMessageTextareaValueAC(enteringValue))
+        }
+    }
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsPresentational)
+
+
+

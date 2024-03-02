@@ -4,10 +4,13 @@ import {ProfileInfo} from "./ProfilInfo/ProfileInfo";
 import {Sidebar} from "../Sidebar/Sidebar";
 import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer";
 import {getUserApiType, ProfilePageDataType} from "../../redux/types";
+import {Redirect} from "react-router-dom";
 
-type ProfilePresentationalPropsType = { userProfile: getUserApiType }
+type ProfilePresentationalPropsType = {
+    userProfile: getUserApiType
+}
 
-export const ProfilePresentational: React.FC <ProfilePresentationalPropsType>= (props) => {
+export const ProfilePresentational: React.FC<ProfilePresentationalPropsType> = (props) => {
 
     return (<>
         <Sidebar/>
