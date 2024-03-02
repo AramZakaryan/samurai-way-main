@@ -1,11 +1,11 @@
-
-import {combineReducers, compose} from "redux";
+import {applyMiddleware, combineReducers, compose} from "redux";
 import {createStore} from "redux";
 import {dialogsReducer} from "./dialogsReducer";
 import {profileReducer} from "./profileReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
+import thunkMiddleware from "redux-thunk"; ///// by default ot was "thunk"
 
 declare global {
     interface Window {
@@ -22,7 +22,7 @@ let rootReducer = combineReducers({
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export let storeRedux = createStore(rootReducer, composeEnhancers())
+export let storeRedux = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 export type storeReduxType = typeof storeRedux
 
@@ -35,6 +35,6 @@ export type stateReduxType = ReturnType<typeof rootReducer>
 
 
 // @ts-ignore
-window.store= storeRedux
+window.store = storeRedux
 
 

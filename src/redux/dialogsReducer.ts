@@ -1,4 +1,4 @@
-import {ActionType, DialogsPageDataType} from "./types";
+import {AllActionsType, DialogsActionsType, DialogsPageDataType} from "./types";
 
 const initialSubState: DialogsPageDataType = {
     dialogsData: [
@@ -16,7 +16,7 @@ const initialSubState: DialogsPageDataType = {
 }
 
 
-export const dialogsReducer = (subState: DialogsPageDataType = initialSubState, action: ActionType): DialogsPageDataType => {
+export const dialogsReducer = (subState: DialogsPageDataType = initialSubState, action: DialogsActionsType): DialogsPageDataType => {
 
     switch (action.type) {
         case "ADD-MESSAGE":

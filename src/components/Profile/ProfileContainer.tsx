@@ -1,49 +1,16 @@
-import React, {ComponentClass, ComponentType} from "react";
+import React from "react";
 import {ProfilePresentational} from "./ProfilePresentational";
-import axios from "axios";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {stateReduxType} from "../../redux/storeRedux";
-import {setUserProfile, UserProfileType} from "../../redux/profileReducer";
-import {UsersClassContainerPropsType} from "../Users/UsersContainer";
+import {setUserProfile} from "../../redux/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {api} from "../../api/api";
+import {ProfilePageDataType} from "../../redux/types";
 
 
 type ProfileClassContainerPropsType = {
-    profilePageData: {
-        postsData: {
-            id: number
-            title: string
-            likesCount: number
-        } []
-        userProfile: UserProfileType
-        postTextAreaEnteringValue: string
-    }
-    setUserProfile: (userProfile: UserProfileType) => void
+    profilePageData: ProfilePageDataType
+    setUserProfile: (userId: number) => void
 } & RouteComponentProps<{ userId: string }> //////////////////////////// !!!
-
-// type UserResponseFromApiType = {
-//     aboutMe: null | string
-//     contacts: {
-//         facebook: null | string
-//         website: null | string
-//         vk: null | string
-//         twitter: null | string
-//         instagram: null | string
-//         youtube: null | string
-//         github: null | string
-//         mainLink: null | string
-//     }
-//     lookingForAJob: boolean
-//     lookingForAJobDescription: null | string
-//     fullName: null | string
-//     userId: number
-//     photos: {
-//         small: null | string
-//         large: null | string
-//     }
-// }
 
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
@@ -60,8 +27,7 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
             userId = 30080 // for showing my user if no other user was selected
         }
 
-        api.getUser(userId)
-            .then(data => this.props.setUserProfile(data))
+        this.props.setUserProfile(userId)
 
     }
 

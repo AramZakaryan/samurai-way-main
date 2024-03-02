@@ -1,4 +1,6 @@
-import {ActionType, ProfilePageDataType} from "./types";
+import {AllActionsType, getUserApiType, ProfileActionsType, ProfilePageDataType} from "./types";
+import {userApi} from "../api/userApi";
+import {Dispatch} from "redux";
 
 
 const initialSubState: ProfilePageDataType = {
@@ -11,7 +13,7 @@ const initialSubState: ProfilePageDataType = {
 }
 
 
-export const profileReducer = (subState: ProfilePageDataType = initialSubState, action: ActionType): ProfilePageDataType => {
+export const profileReducer = (subState: ProfilePageDataType = initialSubState, action: ProfileActionsType): ProfilePageDataType => {
     switch (action.type) {
         case "ADD-POST":
             return {
@@ -33,7 +35,7 @@ export const profileReducer = (subState: ProfilePageDataType = initialSubState, 
         case "SET_USER_PROFILE":
             return {
                 ...subState,
-                userProfile:action.userProfile
+                userProfile: action.userProfile
             }
         default: {
             return subState
@@ -44,33 +46,27 @@ export const profileReducer = (subState: ProfilePageDataType = initialSubState, 
 
 // ACTION CREATORS
 
-export const addPost = () =>
-    ({type: "ADD-POST"}) as const
+/** P.S.(Aram) addPost ACTION CREATOR
+ */
+export const addPostAC = () =>
+    ({type: "ADD-POST"} as const)
 
-export const updatePostTextAreaValue = (enteringValue: string) =>
-    ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue}) as const
+/** P.S.(Aram) updatePostTextAreaValue ACTION CREATOR
+ */
+export const updatePostTextAreaValueAC = (enteringValue: string) =>
+    ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue} as const)
 
-export type UserProfileType = null | {
-    aboutMe: string
-    contacts: {
-        facebook: string | null
-        website: string | null
-        vk: string | null
-        twitter: string | null
-        instagram: string | null
-        youtube: string | null
-        github: string | null
-        mainLink: string | null
-    },
-    lookingForAJob: boolean
-    lookingForAJobDescription: string | null
-    fullName: string
-    userId: number
-    photos: {
-        small: string | null
-        large: string | null
-    }
+/** P.S.(Aram) setUserProfile ACTION CREATOR
+ */
+export const setUserProfileAC = (userProfile: getUserApiType) =>
+    ({type: "SET_USER_PROFILE", userProfile} as const)
+
+
+// THUNK CREATORS
+
+/** P.S.(Aram) setUserProfile THUNK CREATOR
+ */
+export const setUserProfile = (userId: number) => (dispatch:Dispatch) =>{
+    userApi.getUser(userId)
+        .then(data => dispatch(setUserProfileAC(data)))
 }
-
-export const setUserProfile = (userProfile: UserProfileType) => ///////////// setUserProfile ACTION CREATOR
-    ({type: "SET_USER_PROFILE", userProfile}) as const

@@ -1,17 +1,11 @@
 import React from "react";
 import S from "./Header.module.css"
 import {NavLink} from "react-router-dom";
+import {AuthPartDataType} from "../../redux/types";
 
 
 type HeaderPresentPropsType = {
-    authPartData: {
-        authData: {
-            userId: number | null
-            login: string | null // = user name
-            email: string | null
-            isAuth: boolean
-        }
-    }
+    authPartData: AuthPartDataType
 }
 
 export const HeaderPresent: React.FC<HeaderPresentPropsType> = (props) => {

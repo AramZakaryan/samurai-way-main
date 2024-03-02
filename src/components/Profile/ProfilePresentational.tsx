@@ -3,9 +3,9 @@ import classes from "./Profile.module.css"
 import {ProfileInfo} from "./ProfilInfo/ProfileInfo";
 import {Sidebar} from "../Sidebar/Sidebar";
 import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer";
-import {UserProfileType} from "../../redux/profileReducer";
+import {getUserApiType, ProfilePageDataType} from "../../redux/types";
 
-type ProfilePresentationalPropsType = { userProfile: UserProfileType }
+type ProfilePresentationalPropsType = { userProfile: getUserApiType }
 
 export const ProfilePresentational: React.FC <ProfilePresentationalPropsType>= (props) => {
 

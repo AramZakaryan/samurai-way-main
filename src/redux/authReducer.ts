@@ -1,4 +1,6 @@
-import {ActionType, AuthPartDataType, UsersPageDataType} from "./types";
+import {AllActionsType, AuthActionsType, AuthApiType, AuthPartDataType, UsersPageDataType} from "./types";
+import {userApi, authApi} from "../api/userApi";
+import {Dispatch} from "redux";
 
 // ACTION NAMES
 
@@ -20,14 +22,14 @@ const initialSubState: AuthPartDataType = {
 }
 
 
-export const authReducer = (subState: AuthPartDataType = initialSubState, action: ActionType): AuthPartDataType => {
+export const authReducer = (subState: AuthPartDataType = initialSubState, action: AuthActionsType): AuthPartDataType => {
     switch (action.type) {
         case SET_USER_DATA: {
             // Transformation of "id" to "userId"
             const {id: userId, login, email} = action.authDataFromApi
             return {
                 ...subState,
-                authData: {userId, login, email, isAuth:true}
+                authData: {userId, login, email, isAuth: true}
             }
         }
 
@@ -39,13 +41,23 @@ export const authReducer = (subState: AuthPartDataType = initialSubState, action
 }
 
 
-// ACTION CREATORS   !!! without "AC"
+// ACTION CREATORS
 
-export type AuthDataFromApiType = {
-    id: number | null // !!! fromApi: "id"; in the state: "userId"
-    login: string | null // = user name
-    email: string | null
-}
-
-export const setUserData = (authDataFromApi: AuthDataFromApiType) =>
+/** P.S.(Aram) setUserData ACTION CREATOR
+ */
+export const setUserDataAC = (authDataFromApi: AuthApiType["data"]) =>
     ({type: SET_USER_DATA, authDataFromApi}) as const
+
+
+// THUNK CREATORS
+
+/** P.S.(Aram) setUserData THUNK CREATOR
+ */
+export const setUserData = () => (dispatch: Dispatch) => {
+    authApi.auth()
+        .then(data => {
+            data.resultCode === 0 // checking: 0 means user exists
+            &&
+            dispatch(setUserDataAC(data.data))
+        })
+}
