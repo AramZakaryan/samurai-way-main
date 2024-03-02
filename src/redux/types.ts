@@ -1,6 +1,14 @@
 import {addPost, setUserProfile, updatePostTextAreaValue} from "./profileReducer";
 import {addMessageAC, updateMessageTextareaValueAC} from "./dialogsReducer";
-import {follow, setNewUsers, setSelectedPage, setTotalUserCount, toggleIsFetching, unfollow} from "./usersReducer";
+import {
+    follow,
+    setNewUsers,
+    setSelectedPage,
+    setTotalUserCount,
+    toggleIsFetching,
+    toggleIsFollowingInProgress,
+    unfollow
+} from "./usersReducer";
 import {setUserData} from "./authReducer";
 
 
@@ -16,6 +24,7 @@ export type ActionType = ReturnType<typeof addPost>
     | ReturnType<typeof setSelectedPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingInProgress>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserData>
 
@@ -64,6 +73,7 @@ export type UsersPageDataType = {
     totalUserCount: number
     selectedPage: number
     isFetching: boolean
+    followingInProgress: boolean
 }
 
 export type SidebarDataType = {}

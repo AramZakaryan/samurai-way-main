@@ -72,5 +72,5 @@ export type UserProfileType = null | {
     }
 }
 
-export const setUserProfile = (userProfile: UserProfileType) =>
+export const setUserProfile = (userProfile: UserProfileType) => ///////////// setUserProfile ACTION CREATOR
     ({type: "SET_USER_PROFILE", userProfile}) as const

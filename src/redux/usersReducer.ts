@@ -8,6 +8,7 @@ const SET_NEW_USERS = "SET_NEW_USERS"
 const SET_SELECTED_PAGE = "SET_SELECTED_PAGE"
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+const TOGGLE_IS_FOLLOWING_IN_PROGRESS = "TOGGLE_IS_FOLLOWING_IN_PROGRESS"
 
 
 const initialSubState: UsersPageDataType = {
@@ -40,7 +41,8 @@ const initialSubState: UsersPageDataType = {
     pageSize: 4,
     totalUserCount: 0,
     selectedPage: 1,
-    isFetching: false
+    isFetching: false, // for showing Spinner
+    followingInProgress: false // for disactivating "Follow" button
 }
 
 
@@ -97,6 +99,10 @@ export const usersReducer = (subState: UsersPageDataType = initialSubState, acti
                 isFetching: action.isFetching
             }
         }
+        case TOGGLE_IS_FOLLOWING_IN_PROGRESS: {
+            return {...subState,
+            followingInProgress: action.followingInProgress}
+        }
         default: {
             return subState
         }
@@ -107,19 +113,41 @@ export const usersReducer = (subState: UsersPageDataType = initialSubState, acti
 
 // ACTION CREATORS   !!! without "AC"
 
+/** P.S.(Aram) setNewUsers ACTION CREATOR
+ */
 export const setNewUsers = (newUsers: any) => /////////////////////////any
     ({type: SET_NEW_USERS, newUsers}) as const
 
+/** P.S.(Aram) follow ACTION CREATOR
+ */
 export const follow = (userId: number) =>
     ({type: FOLLOW, userId}) as const
 
+/** P.S.(Aram) unfollow ACTION CREATOR
+ */
 export const unfollow = (userId: number) =>
     ({type: UNFOLLOW, userId}) as const
 
+/** P.S.(Aram) setSelectedPage ACTION CREATOR
+ */
 export const setSelectedPage = (selectedPageNumber: number) =>
     ({type: SET_SELECTED_PAGE, selectedPageNumber}) as const
 
+/** P.S.(Aram) setTotalUserCount ACTION CREATOR
+ */
 export const setTotalUserCount = (totalUserCount: number) =>
     ({type: SET_TOTAL_USER_COUNT, totalUserCount}) as const
+
+/** P.S.(Aram) toggleIsFetching ACTION CREATOR.
+ *  This is for showing Spinner.
+ */
 export const toggleIsFetching = (isFetching: boolean) =>
     ({type: TOGGLE_IS_FETCHING, isFetching}) as const
+
+// followingInProgress: false // for disactivating "Follow" button
+
+/** P.S.(Aram) toggleIsFollowingInProgress ACTION CREATOR.
+ *  This is for disactivating "Follow" button.
+ */
+export const toggleIsFollowingInProgress = (followingInProgress: boolean) =>
+    ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, followingInProgress}) as const

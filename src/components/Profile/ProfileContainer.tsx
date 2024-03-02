@@ -21,7 +21,7 @@ type ProfileClassContainerPropsType = {
         postTextAreaEnteringValue: string
     }
     setUserProfile: (userProfile: UserProfileType) => void
-} & RouteComponentProps<{ userId: string }>
+} & RouteComponentProps<{ userId: string }> //////////////////////////// !!!
 
 // type UserResponseFromApiType = {
 //     aboutMe: null | string
@@ -53,12 +53,16 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
     }
 
     componentDidMount() {
+
         let userId = +this.props.match.params.userId
+
         if (!userId) {
             userId = 30080 // for showing my user if no other user was selected
         }
+
         api.getUser(userId)
             .then(data => this.props.setUserProfile(data))
+
     }
 
     render() {

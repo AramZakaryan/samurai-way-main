@@ -22,28 +22,20 @@ type UsersFuncPresentType = {
         pageSize: number
         totalUserCount: number
         selectedPage: number
+        followingInProgress: boolean
     }
-    // setNewUsers: (newUsers: {
-    //     name: string
-    //     id: number
-    //     uniqueUrlName: string | null
-    //     photos: {
-    //         small: string | null
-    //         large: string | null
-    //     }
-    //     status: string
-    //     followed: boolean
-    // }[]) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
+    /** P.S.(Aram) function for activating / disactivating spinner
+     */
     setSelectedPage: (selectedPageNumber: number) => void
-    // setTotalUserCount: (totalUserCount: number) => void
-
+    /** P.S.(Aram) function for activating / disactivating button
+     */
+    toggleIsFollowingInProgress: (followingInProgress: boolean) => void
 }
 
 
-
-export function UsersPresent(props: UsersFuncPresentType) {
+export function UsersPresentational(props: UsersFuncPresentType) {
 
     let pageCount = Math.ceil(props.usersPageData.totalUserCount / props.usersPageData.pageSize)
     let pages = []
@@ -75,20 +67,26 @@ export function UsersPresent(props: UsersFuncPresentType) {
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.usersPageData.followingInProgress} // = true
+                                    onClick={() => {
+                                    props.toggleIsFollowingInProgress(true)
                                     api.unfollowUser(u.id)
                                         .then(res => {
                                             if (res.resultCode == 0) {
                                                 props.unfollow(u.id)
                                             }
+                                            props.toggleIsFollowingInProgress(false)
                                         })
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.usersPageData.followingInProgress} // = true
+                                    onClick={() => {
+                                    props.toggleIsFollowingInProgress(true)
                                     api.followUser(u.id)
                                         .then(res => {
                                             if (res.resultCode == 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleIsFollowingInProgress(false)
                                         })
                                 }}>Follow</button>}
                         </div>
@@ -98,10 +96,6 @@ export function UsersPresent(props: UsersFuncPresentType) {
                             <div> {u.name}</div>
                             <div>{u.status}</div>
                         </span>
-                        {/*<span>*/}
-                        {/*    <div>{u.location.city}</div>*/}
-                        {/*    <div>{u.location.country}</div>*/}
-                        {/*</span>*/}
                     </span>
                 </div>)}
         </div>
