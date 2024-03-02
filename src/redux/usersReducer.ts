@@ -126,13 +126,13 @@ export const setTotalUserCount = (totalUserCount: number) =>
 /** P.S.(Aram) toggleIsFetching ACTION CREATOR.
  *  This is for showing Spinner.
  */
-export const toggleIsFetchingAC = (isFetching: boolean) =>
+export const toggleIsFetching = (isFetching: boolean) =>
     ({type: TOGGLE_IS_FETCHING, isFetching}) as const
 
 /** P.S.(Aram) toggleIsFollowingInProgress ACTION CREATOR.
  *  This is for activating/disactivating "Follow/Unfollow" button.
  */
-export const toggleIsFollowingInProgressAC = (userId: number, followingInProgress: boolean) =>
+export const toggleIsFollowingInProgress = (userId: number, followingInProgress: boolean) =>
     ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, userId, followingInProgress}) as const
 
 
@@ -141,10 +141,10 @@ export const toggleIsFollowingInProgressAC = (userId: number, followingInProgres
 /** P.S.(Aram) getUsers THUNK CREATOR.
  */
 export const getUsers = (selectedPage: number, pageSize: number) => (dispatch: Dispatch) => {
-    dispatch(toggleIsFetchingAC(true))
+    dispatch(toggleIsFetching(true))
     userApi.getUsers(selectedPage, pageSize)
         .then(data => {
-            dispatch(toggleIsFetchingAC(false))
+            dispatch(toggleIsFetching(false))
             dispatch(getUsersAC(data.items))
             dispatch(setTotalUserCount(data.totalCount))
         })
@@ -153,13 +153,13 @@ export const getUsers = (selectedPage: number, pageSize: number) => (dispatch: D
 /** P.S.(Aram) unfollow THUNK CREATOR.
  */
 export const unfollow = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(toggleIsFollowingInProgressAC(userId, true))
+    dispatch(toggleIsFollowingInProgress(userId, true))
     userApi.unfollow(userId)
         .then(res => {
             if (res.resultCode == 0) {
                 dispatch(unfollowAC(userId))
             }
-            dispatch(toggleIsFollowingInProgressAC(userId, false))
+            dispatch(toggleIsFollowingInProgress(userId, false))
 
         })
 }
@@ -167,13 +167,13 @@ export const unfollow = (userId: number) => (dispatch: Dispatch) => {
 /** P.S.(Aram) follow THUNK CREATOR.
  */
 export const follow = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(toggleIsFollowingInProgressAC(userId, true))
+    dispatch(toggleIsFollowingInProgress(userId, true))
     userApi.follow(userId)
         .then(res => {
             if (res.resultCode == 0) {
                 dispatch(followAC(userId))
             }
-            dispatch(toggleIsFollowingInProgressAC(userId, false))
+            dispatch(toggleIsFollowingInProgress(userId, false))
         })
 }
 

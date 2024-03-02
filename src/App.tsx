@@ -13,6 +13,7 @@ import {DialogsConnectContainer} from "./components/Dialogs/DialogsConnectContai
 import {UsersConnectContainer} from "./components/Users/UsersContainer";
 import {ProfileClassContainer, ProfileConnectContainer} from "./components/Profile/ProfileContainer";
 import {HeaderClassContainer, HeaderConnectContainer} from "./components/Header/HeaderContainer";
+import {Login} from "./components/login/login";
 
 
 const App: React.FC = () => {
@@ -22,7 +23,7 @@ const App: React.FC = () => {
                 <HeaderConnectContainer/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}
+                    <Route path={"/login"} render={() => <Login/>}/>
                     <Route path={"/profile/:userId?"} render={() => <ProfileConnectContainer/>}/>
                     <Route path={"/dialogs"} render={() => <DialogsConnectContainer/>}/>
                     <Route path={"/news"} component={News}/>

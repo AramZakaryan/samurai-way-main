@@ -1,12 +1,12 @@
-import {addPostAC, setUserProfileAC, updatePostTextAreaValueAC} from "./profileReducer";
+import {addPost, setUserProfileAC, updatePostTextAreaValue} from "./profileReducer";
 import {addMessageAC, updateMessageTextareaValueAC} from "./dialogsReducer";
 import {
     followAC,
     getUsersAC,
     setSelectedPage,
     setTotalUserCount,
-    toggleIsFetchingAC,
-    toggleIsFollowingInProgressAC,
+    toggleIsFetching,
+    toggleIsFollowingInProgress,
     unfollowAC
 } from "./usersReducer";
 import {setUserDataAC} from "./authReducer";
@@ -21,8 +21,8 @@ export type AllActionsType = ProfileActionsType
     | AuthActionsType
 
 export type ProfileActionsType =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updatePostTextAreaValueAC>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof updatePostTextAreaValue>
     | ReturnType<typeof setUserProfileAC>
 
 export type UserActionsType = ReturnType<typeof getUsersAC>
@@ -30,8 +30,8 @@ export type UserActionsType = ReturnType<typeof getUsersAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setSelectedPage>
     | ReturnType<typeof setTotalUserCount>
-    | ReturnType<typeof toggleIsFetchingAC>
-    | ReturnType<typeof toggleIsFollowingInProgressAC>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingInProgress>
 
 
 export type DialogsActionsType = ReturnType<typeof addMessageAC>

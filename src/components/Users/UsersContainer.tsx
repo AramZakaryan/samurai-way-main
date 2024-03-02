@@ -4,7 +4,7 @@ import {
     follow,
     getUsers,
     setSelectedPage,
-    toggleIsFollowingInProgressAC, unfollow,
+    toggleIsFollowingInProgress, unfollow,
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import {UsersPresentational} from "./UsersPresentational";

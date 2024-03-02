@@ -48,12 +48,12 @@ export const profileReducer = (subState: ProfilePageDataType = initialSubState, 
 
 /** P.S.(Aram) addPost ACTION CREATOR
  */
-export const addPostAC = () =>
+export const addPost = () =>
     ({type: "ADD-POST"} as const)
 
 /** P.S.(Aram) updatePostTextAreaValue ACTION CREATOR
  */
-export const updatePostTextAreaValueAC = (enteringValue: string) =>
+export const updatePostTextAreaValue = (enteringValue: string) =>
     ({type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue} as const)
 
 /** P.S.(Aram) setUserProfile ACTION CREATOR
