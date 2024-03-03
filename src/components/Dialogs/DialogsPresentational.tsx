@@ -37,9 +37,9 @@ export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (
         props.textareaOnChangeHandler(ev.currentTarget.value)
     }
 
-    if (!props.isAuth) {
-        return <Redirect to={"/login"}/>
-    }
+    // if (!props.isAuth) {
+    //     return <Redirect to={"/login"}/>
+    // }
 
     return (<>
             <Sidebar/>

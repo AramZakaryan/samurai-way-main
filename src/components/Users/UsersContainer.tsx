@@ -10,7 +10,11 @@ import {connect} from "react-redux";
 import {UsersPresentational} from "./UsersPresentational";
 import {Preloader} from "../common/Preloader/Preloader";
 import {UsersPageDataType} from "../../redux/types";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {ProfileClassContainer} from "../Profile/ProfileContainer";
 
+
+////////// UsersClassContainer
 
 export type UsersClassContainerPropsType = {
     usersPageData: UsersPageDataType
@@ -19,7 +23,6 @@ export type UsersClassContainerPropsType = {
     setSelectedPage: (selectedPageNumber: number) => void
     getUsers: (selectedPage: number, pageSize: number) => void
 }
-
 
 export class UsersClassContainer extends React.Component<UsersClassContainerPropsType, any> {
     constructor(props: UsersClassContainerPropsType) {
@@ -50,6 +53,13 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
 }
 
 
+////////// UsersWithAuthRedirectComponent
+
+const UsersWithAuthRedirectComponent = withAuthRedirect(UsersClassContainer)
+
+
+////////// UsersConnectContainer
+
 type MapStateToPropsType = Pick<UsersClassContainerPropsType, "usersPageData">
 
 type MapDispatchToPropsType = Pick<UsersClassContainerPropsType,
@@ -59,13 +69,11 @@ type MapDispatchToPropsType = Pick<UsersClassContainerPropsType,
     | "getUsers"
 >
 
-
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
         usersPageData: state.usersPageData,
     }
 }
-
 
 const mapDispatchToProps: MapDispatchToPropsType = {
     follow,
@@ -74,7 +82,13 @@ const mapDispatchToProps: MapDispatchToPropsType = {
     getUsers
 }
 
-export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassContainer)
+export const UsersConnectContainer = connect(mapStateToProps, mapDispatchToProps)(UsersWithAuthRedirectComponent)
 
+
+// General Structure
+// UsersPresentational >>>
+//    UsersClassContainer >>>
+//       UsersWithAuthRedirectComponent >>>
+//          UsersConnectContainer
 
 

@@ -3,25 +3,24 @@ import {ProfilePresentational} from "./ProfilePresentational";
 import {connect} from "react-redux";
 import {stateReduxType} from "../../redux/storeRedux";
 import {setUserProfile} from "../../redux/profileReducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilePageDataType} from "../../redux/types";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+
+
+////////// ProfileClassContainer
 
 
 type ProfileClassContainerPropsType = {
     profilePageData: ProfilePageDataType
     isAuth: boolean
     setUserProfile: (userId: number) => void
-} & RouteComponentProps<{ userId: string }> //////////////////////////// !!!
-
-
-
-    type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" | "isAuth">
-
+} & RouteComponentProps<{ userId: string }> ////////// !!!
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
 
-        constructor(props: ProfileClassContainerPropsType) {
-                super(props);
+    constructor(props: ProfileClassContainerPropsType) {
+        super(props);
     }
 
     componentDidMount() {
@@ -46,22 +45,28 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 }
 
 
-const AuthRedirectHOC = (props:any) => {
-    if (!props.isAuth) {
-        return <Redirect to={"/login"}/>
-    }
-    return <ProfileClassContainer {...props}/>
-}
+
+////////// ProfileWithAuthRedirectComponent
+
+const ProfileWithAuthRedirectComponent = withAuthRedirect(ProfileClassContainer)
 
 
-let ProfileWithRouterComponent = withRouter<RouteComponentProps<{ userId: string }>, any>(AuthRedirectHOC)
 
+////////// ProfileWithRouterComponent
+
+let ProfileWithRouterComponent =
+    withRouter<RouteComponentProps<{ userId: string }>, any>(ProfileWithAuthRedirectComponent)
+
+
+////////// ProfileConnectContainer
+
+type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" >
 
 type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
+
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
         profilePageData: state.profilePageData,
-        isAuth: state.authPartData.authData.isAuth
     }
 
 }
@@ -71,3 +76,11 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 }
 
 export const ProfileConnectContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileWithRouterComponent)
+
+
+// General Structure
+// ProfilePresentational >>>
+//    ProfileConnectContainer >>>
+//       ProfileWithAuthRedirectComponent >>>
+//          ProfileWithRouterComponent >>>
+//             ProfileClassContainer
