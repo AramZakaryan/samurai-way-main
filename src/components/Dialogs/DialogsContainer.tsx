@@ -2,18 +2,10 @@ import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsRed
 import {DialogsPresentational, DialogsPresentationalPropsType} from "./DialogsPresentational";
 import {connect} from "react-redux";
 import {stateReduxType} from "../../redux/storeRedux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import React from "react";
 
-
-
-////////// DialogsWithAuthRedirectComponent
-
-const DialogsWithAuthRedirectComponent = withAuthRedirect(DialogsPresentational)
-
-
-
-////////// DialogsContainer
 
 type MapStateToPropsType = Pick<DialogsPresentationalPropsType, "dialogsPageData">
 
@@ -36,13 +28,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsWithAuthRedirectComponent)
+export const DialogsCompose =
+    compose<React.ComponentType>(
+        connect(mapStateToProps, mapDispatchToProps),
+        withAuthRedirect)
+    (DialogsPresentational)
 
-
-
-// General Structure
+/////////// General Structure
 // DialogsPresentational >>>
-//    DialogsWithAuthRedirectComponent >>>
-//       DialogsContainer
-
-
+//    DialogsCompose

@@ -17,8 +17,6 @@ const mapStateToProps = (state: stateReduxType): mapStateToPropsType => {
 }
 
 
-
-
 /** (Aram) Wrapper HOC which redirects to login page if the user is not authorised
  */
 export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
@@ -32,7 +30,8 @@ export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
         return <InitialComponent {...restProps as T} />;
     }
 
-    const ConnectedComponent = connect(mapStateToProps)(TransformerComponent)
+    const ConnectedComponent =
+        connect(mapStateToProps)(TransformerComponent)
 
     return ConnectedComponent
 
