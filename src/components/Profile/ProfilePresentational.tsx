@@ -5,9 +5,14 @@ import {Sidebar} from "../Sidebar/Sidebar";
 import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer";
 import {getUserApiType, ProfilePageDataType} from "../../redux/types";
 import {Redirect} from "react-router-dom";
+import {updateUserStatus} from "../../redux/profileReducer";
 
 type ProfilePresentationalPropsType = {
     userProfile: getUserApiType
+    status:null|string
+    updateUserStatus: (status: null | string)=>void
+    getUserStatus: (userId: number) => void
+
 }
 
 export const ProfilePresentational: React.FC<ProfilePresentationalPropsType> = (props) => {

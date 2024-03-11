@@ -1,5 +1,11 @@
 import axios from "axios";
-import {AuthApiType, FollowUnfollowApiType, getUserApiType, getUsersApiType} from "../redux/types";
+import {
+    AuthApiType,
+    FollowUnfollowApiType,
+    getUserApiType,
+    getUsersApiType,
+    getUserStatusApiType
+} from "../redux/types";
 
 
 const instance = axios.create({
@@ -16,9 +22,10 @@ export const userApi = {
             .then(response => response.data) // for sending to UI only "data"
     },
 
+    // Obsolete method
     getUser(userId: number) {
-        return instance.get<getUserApiType>(`profile/${userId}`)
-            .then(response => response.data) // for sending to UI only "data"
+        console.warn("P.S.(Aram) Obsolete method, please use 'profileApi.getUser'.")
+        return profileApi.getUser(userId)
 
     },
 
@@ -34,6 +41,23 @@ export const userApi = {
 
     },
 
+}
+
+
+export const profileApi = {
+    getUser(userId: number) {
+        return instance.get<getUserApiType>(`profile/${userId}`)
+            .then(response => response.data) // for sending to UI only "data"
+
+    },
+
+    getUserStatus(userId: number) {
+        return instance.get<null|string>(`profile/status/${userId}`)
+
+    },
+    updateMyStatus(status: null | string) {
+        return instance.put<getUserStatusApiType>("profile/status", {status})
+    }
 
 }
 

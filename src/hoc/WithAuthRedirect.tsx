@@ -17,7 +17,7 @@ const mapStateToProps = (state: stateReduxType): mapStateToPropsType => {
 }
 
 
-/** (Aram) Wrapper HOC which redirects to login page if the user is not authorised
+/** (Aram) Wrapper HOC which redirects to Login page if the user is not authorised
  */
 export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
 
@@ -25,7 +25,7 @@ export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
         const {isAuth, ...restProps} = props
         // console.log(props)
         if (!isAuth) {
-            return <Redirect to={"/login"}/>
+            return <Redirect to={"/Login"}/>
         }
         return <InitialComponent {...restProps as T} />;
     }
@@ -50,7 +50,7 @@ export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
 //     class ClassComponent extends React.Component<any> {
 //         render() {
 //             if (!this.props.isAuth) {
-//                 return <Redirect to={"/login"}/>
+//                 return <Redirect to={"/Login"}/>
 //             }
 //             return <InitialComponent {...this.props}/>;
 //         }

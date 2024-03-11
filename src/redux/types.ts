@@ -1,4 +1,4 @@
-import {addPost, setUserProfileAC, updatePostTextAreaValue} from "./profileReducer";
+import {addPost, setUserStatus, setUserProfileAC, updatePostTextAreaValue} from "./profileReducer";
 import {addMessageAC, updateMessageTextareaValueAC} from "./dialogsReducer";
 import {
     followAC,
@@ -24,6 +24,7 @@ export type ProfileActionsType =
     ReturnType<typeof addPost>
     | ReturnType<typeof updatePostTextAreaValue>
     | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setUserStatus>
 
 export type UserActionsType = ReturnType<typeof getUsersAC>
     | ReturnType<typeof followAC>
@@ -52,6 +53,7 @@ export type ProfilePageDataType = {
     } []
     userProfile: getUserApiType
     postTextAreaEnteringValue: string
+    status: null | string
 }
 
 export type DialogsPageDataType = {
@@ -140,6 +142,13 @@ export type AuthApiType = {
         login: string | null // = user name
         email: string | null
     }
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
+export type getUserStatusApiType = {
+    data: {}
     messages: string[]
     fieldsErrors: string[]
     resultCode: number

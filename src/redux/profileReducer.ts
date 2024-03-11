@@ -1,5 +1,5 @@
 import {AllActionsType, getUserApiType, ProfileActionsType, ProfilePageDataType} from "./types";
-import {userApi} from "../api/userApi";
+import {profileApi, userApi} from "../api/userApi";
 import {Dispatch} from "redux";
 
 
@@ -9,7 +9,8 @@ const initialSubState: ProfilePageDataType = {
         {id: 2, title: "It's my first post", likesCount: 23}
     ],
     userProfile: null,
-    postTextAreaEnteringValue: ""
+    postTextAreaEnteringValue: "",
+    status: null
 }
 
 
@@ -37,6 +38,11 @@ export const profileReducer = (subState: ProfilePageDataType = initialSubState, 
                 ...subState,
                 userProfile: action.userProfile
             }
+        case "GET_USER_STATUS":
+            return {
+                ...subState,
+                status: action.status
+            }
         default: {
             return subState
         }
@@ -44,7 +50,7 @@ export const profileReducer = (subState: ProfilePageDataType = initialSubState, 
 }
 
 
-// ACTION CREATORS
+////////// ACTION CREATORS
 
 /** P.S.(Aram) addPost ACTION CREATOR
  */
@@ -61,12 +67,35 @@ export const updatePostTextAreaValue = (enteringValue: string) =>
 export const setUserProfileAC = (userProfile: getUserApiType) =>
     ({type: "SET_USER_PROFILE", userProfile} as const)
 
+/** P.S.(Aram) getUserStatus ACTION CREATOR
+ */
+export const setUserStatus = (status: null | string) =>
+    ({type: "GET_USER_STATUS", status} as const)
 
-// THUNK CREATORS
+
+//////////// THUNK CREATORS
 
 /** P.S.(Aram) setUserProfile THUNK CREATOR
  */
-export const setUserProfile = (userId: number) => (dispatch:Dispatch) =>{
+export const setUserProfile = (userId: number) => (dispatch: Dispatch) => {
     userApi.getUser(userId)
         .then(data => dispatch(setUserProfileAC(data)))
+}
+
+/** P.S.(Aram) setUserStatus THUNK CREATOR
+ */
+export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
+    profileApi.getUserStatus(userId)
+        .then(data => dispatch(setUserStatus(data.data)))
+}
+
+
+export const updateUserStatus = (status: null | string) => (dispatch: Dispatch) => {
+    profileApi.updateMyStatus(status)
+        .then(data => {
+                if (data.data.resultCode === 0) {
+                    dispatch(setUserStatus(status))
+                }
+            }
+        )
 }

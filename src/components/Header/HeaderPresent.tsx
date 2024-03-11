@@ -16,7 +16,7 @@ export const HeaderPresent: React.FC<HeaderPresentPropsType> = (props) => {
             <div className={S.loginBlock}>
                 {isAuth
                     ? login
-                    : <NavLink to={"/login"}>
+                    : <NavLink to={"/Login"}>
                         login
                     </NavLink>}
             </div>

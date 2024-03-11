@@ -38,7 +38,7 @@ export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (
     }
 
     // if (!props.isAuth) {
-    //     return <Redirect to={"/login"}/>
+    //     return <Redirect to={"/Login"}/>
     // }
 
     return (<>

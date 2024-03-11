@@ -10,7 +10,7 @@ import {DialogsCompose} from "./components/Dialogs/DialogsContainer";
 import {UserCompose} from "./components/Users/UsersContainer";
 import { ProfileCompose} from "./components/Profile/ProfileContainer";
 import { HeaderConnectContainer} from "./components/Header/HeaderContainer";
-import {Login} from "./components/login/login";
+import {Login} from "./components/Login/Login";
 
 
 const App: React.FC = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import {ProfilePresentational} from "./ProfilePresentational";
 import {connect} from "react-redux";
 import {stateReduxType} from "../../redux/storeRedux";
-import {setUserProfile} from "../../redux/profileReducer";
+import {getUserStatus, setUserProfile, updateUserStatus} from "../../redux/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilePageDataType} from "../../redux/types";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
@@ -11,8 +11,11 @@ import {compose} from "redux";
 
 type ProfileClassContainerPropsType = {
     profilePageData: ProfilePageDataType
+    status: null | string
     isAuth: boolean
     setUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: null | string) => void
 } & RouteComponentProps<{ userId: string }> ////////// !!!
 
 export class ProfileClassContainer extends React.Component <ProfileClassContainerPropsType> {
@@ -30,13 +33,20 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
         }
 
         this.props.setUserProfile(userId)
+        this.props.getUserStatus(userId)
+
+        console.log(userId)
 
     }
 
-    render() {
 
+    render() {
         return (<>
-            <ProfilePresentational userProfile={this.props.profilePageData.userProfile}/>
+            <ProfilePresentational userProfile={this.props.profilePageData.userProfile}
+                                   status={this.props.profilePageData.status}
+                                   updateUserStatus={this.props.updateUserStatus}
+                                   getUserStatus={this.props.getUserStatus}
+            />
         </>)
     }
 
@@ -45,7 +55,11 @@ export class ProfileClassContainer extends React.Component <ProfileClassContaine
 
 type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData">
 
-type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType, "setUserProfile">
+type MapDispatchToPropsType = Pick<ProfileClassContainerPropsType,
+    "setUserProfile"
+    | "getUserStatus"
+    | "updateUserStatus"
+>
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
     return {
@@ -54,7 +68,9 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 }
 
 const mapDispatchToProps: MapDispatchToPropsType = {
-    setUserProfile
+    setUserProfile,
+    getUserStatus,
+    updateUserStatus
 }
 
 export const ProfileCompose =

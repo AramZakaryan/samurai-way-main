@@ -5,7 +5,10 @@ import {profileReducer} from "./profileReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
-import thunkMiddleware from "redux-thunk"; ///// by default ot was "thunk"
+import thunkMiddleware from "redux-thunk"; ///// by default it was "thunk"
+import {reducer as formReducer} from "redux-form"
+
+
 
 declare global {
     interface Window {
@@ -18,7 +21,8 @@ let rootReducer = combineReducers({
     dialogsPageData: dialogsReducer,
     sidebarData: sidebarReducer,
     usersPageData: usersReducer,
-    authPartData: authReducer
+    authPartData: authReducer,
+    form: formReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

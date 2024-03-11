@@ -6,7 +6,12 @@ import {getUserApiType, ProfilePageDataType} from "../../../redux/types";
 import {ProfileStatus} from "../ProfileStatus";
 
 
-type ProfileInfoType = { userProfile: getUserApiType }
+type ProfileInfoType = {
+    userProfile: getUserApiType
+    status: null | string
+    updateUserStatus: (status: null | string) => void
+}
+
 
 export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
@@ -25,8 +30,10 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                 <div>{props.userProfile.fullName}</div>
                 <div>{props.userProfile.aboutMe}</div>
                 <div><a href={""}>{props.userProfile.contacts.instagram}</a></div>
-                <div style={{marginTop:"40px"}}>
-                    <ProfileStatus status={"Hello my friends"}/>
+                <div style={{marginTop: "40px"}}>
+                    <ProfileStatus status={props.status}
+                    updateUserStatus={props.updateUserStatus}
+                    />
                 </div>
             </div>
         </>
