@@ -61,7 +61,8 @@ export const ProfileCompose =
     compose<React.ComponentType>(
         connect(mapStateToProps, mapDispatchToProps),
         withRouter,
-        withAuthRedirect)
+        // withAuthRedirect    // temporarily commented - will be fixed later
+    )
     (ProfileClassContainer)
 
 /////////// General Structure
