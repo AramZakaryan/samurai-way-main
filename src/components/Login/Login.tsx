@@ -6,13 +6,13 @@ const LoginForm = () => {
     return (
         <form>
             <div>
-                <Field component={"input"} placeholder={"login"}/>
+                <Field component={"input"} name={"login"} placeholder={"login"}/>
             </div>
             <div>
-                <Field component={"input"} placeholder={"password "}/>
+                <Field component={"input"} name={"password"} placeholder={"password "}/>
             </div>
             <div>
-                <Field component={"input"} type={"checkbox"}/>
+                <Field component={"input"} name={"rememberMe"} type={"checkbox"}/>
                 Remember Me
             </div>
             <div>
