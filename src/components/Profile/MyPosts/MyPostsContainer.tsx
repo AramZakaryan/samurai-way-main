@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 // import {addPostAC, updatePostTextAreaValueAC} from "../../../redux/profileReducer";
 // import {MyPosts} from "./MyPosts";
 // import {StoreContext} from "../../../redux/storeContext";

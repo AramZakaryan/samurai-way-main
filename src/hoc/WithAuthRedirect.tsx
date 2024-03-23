@@ -1,47 +1,41 @@
-import React from "react";
-import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
-import {stateReduxType} from "../redux/storeRedux";
-
+import React from "react"
+import { Redirect } from "react-router-dom"
+import { connect } from "react-redux"
+import { stateReduxType } from "../redux/storeRedux"
 
 type mapStateToPropsType = {
-    isAuth: boolean
+  isAuth: boolean
 }
 
 type lala = mapStateToPropsType
 
 const mapStateToProps = (state: stateReduxType): mapStateToPropsType => {
-    return {
-        isAuth: state.authPartData.authData.isAuth
-    }
+  return {
+    isAuth: state.authPartData.authData.isAuth,
+  }
 }
-
 
 /** (Aram) Wrapper HOC which redirects to Login page if the user is not authorised
  */
 export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
-
-    function TransformerComponent(props: mapStateToPropsType) {
-        const {isAuth, ...restProps} = props
-        // console.log(props)
-        if (!isAuth) {
-            return <Redirect to={"/Login"}/>
-        }
-        return <InitialComponent {...restProps as T} />;
+  function TransformerComponent(props: mapStateToPropsType) {
+    const { isAuth, ...restProps } = props
+    // console.log(props)
+    if (!isAuth) {
+      return <Redirect to={"/Login"} />
     }
+    return <InitialComponent {...(restProps as T)} />
+  }
 
-    const ConnectedComponent =
-        connect(mapStateToProps)(TransformerComponent)
+  const ConnectedComponent = connect(mapStateToProps)(TransformerComponent)
 
-    return ConnectedComponent
+  return ConnectedComponent
 
-    // Structure
-    // InitialComponent >>>
-    //    TransformerComponent >>>
-    //       ConnectedComponent
-
+  // Structure
+  // InitialComponent >>>
+  //    TransformerComponent >>>
+  //       ConnectedComponent
 }
-
 
 // // version with class component inside
 
@@ -73,7 +67,3 @@ export function withAuthRedirect<T>(InitialComponent: React.ComponentType<T>) {
 //     //       ConnectComponent
 //
 // }
-
-
-
-

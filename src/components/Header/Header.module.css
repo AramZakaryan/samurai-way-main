@@ -1,16 +1,15 @@
-
 .header {
-    grid-area: h;
-    background-color: lightsalmon;
+  grid-area: h;
+  background-color: lightsalmon;
 }
 
 .header img {
-    width: 60px;
-    height: 30px;
-    margin: 10px;
+  width: 60px;
+  height: 30px;
+  margin: 10px;
 }
 
 .loginBlock {
-    float: right;
-    margin: 15px;
+  float: right;
+  margin: 15px;
 }

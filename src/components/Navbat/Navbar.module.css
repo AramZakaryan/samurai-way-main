@@ -1,22 +1,21 @@
 .nav {
-    grid-area: n;
-    background-color: lightblue;
-    padding: 20px;
+  grid-area: n;
+  background-color: lightblue;
+  padding: 20px;
 }
 
 .item a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .item a.activeLink {
-    color: yellow;
-    font-weight: bold;
+  color: yellow;
+  font-weight: bold;
 }
 
 .avatarSmall {
-    width: 20px;
-    height: 20px;
-    border-radius: 25%;
-
+  width: 20px;
+  height: 20px;
+  border-radius: 25%;
 }

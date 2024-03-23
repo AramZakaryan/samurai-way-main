@@ -1,12 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from "./Music.module.css"
 
-
 export const Music = () => {
-
-    return (
-        <div>
-            coucou music
-        </div>
-    )
+  return <div>coucou music</div>
 }

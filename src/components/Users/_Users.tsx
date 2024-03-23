@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 // import S from "./Users.module.css"
 // import axios from "axios";
 // import noimage from "../../assets/images/noimage.png"

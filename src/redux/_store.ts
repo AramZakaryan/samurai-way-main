@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 // // TYPES
 //
@@ -96,5 +96,3 @@ import React from "react";
 //         store.subscriber(store.getState())
 //     }
 // }
-
-

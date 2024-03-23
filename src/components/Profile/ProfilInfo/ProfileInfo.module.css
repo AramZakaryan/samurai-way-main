@@ -1,12 +1,12 @@
 .imgLarge {
-    height: 150px;
-    width:100%;
+  height: 150px;
+  width: 100%;
 }
 .imgSmall {
-    height: 100px;
-    width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
-.descriptionBlock{
-    padding: 10px;
+.descriptionBlock {
+  padding: 10px;
 }

@@ -1,12 +1,12 @@
 .userPhoto {
-    width: 60px;
-    height: 60px;
-    border-radius: 40%;
-    border-radius: 30%;
+  width: 60px;
+  height: 60px;
+  border-radius: 40%;
+  border-radius: 30%;
 }
 
 .selectedPage {
-    font-weight: bold;
-    font-size: large;
-    color: blue;
+  font-weight: bold;
+  font-size: large;
+  color: blue;
 }

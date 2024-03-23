@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 // import {storeReduxType} from "./storeRedux";
 // import App from "../App";
 //

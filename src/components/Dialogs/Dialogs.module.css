@@ -1,16 +1,13 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 1.5fr 10fr;
-    padding: 10px;
-
+  display: grid;
+  grid-template-columns: 1.5fr 10fr;
+  padding: 10px;
 }
 
 .dialogsItems .dialog {
 }
 
 .dialogsItems .active {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
-
-
