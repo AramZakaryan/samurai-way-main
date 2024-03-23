@@ -3,7 +3,7 @@ import S from "./Dialogs.module.css"
 import { DialogItem } from "./DialogItem/DialogItem"
 import { Message } from "./Messages/Message"
 import { Sidebar } from "../Sidebar/Sidebar"
-import { DialogsPageDataType } from "../../redux/types"
+import { DialogsPageDataType } from "redux/types"
 import { Redirect } from "react-router-dom"
 
 export type DialogsPresentationalPropsType = {
@@ -25,23 +25,17 @@ export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (
   let newPostElement = React.createRef<HTMLTextAreaElement>()
 
   const addMessageHandler = () => {
-    // props.dispatch(addMessageAC())
     props.addMessage()
   }
 
   const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-    // props.dispatch(updateMessageTextareaValueAC(ev.currentTarget.value))
     props.textareaOnChangeHandler(ev.currentTarget.value)
   }
 
-  // if (!props.isAuth) {
-  //     return <Redirect to={"/Login"}/>
-  // }
 
   return (
     <>
       <Sidebar />
-      {/*<div>isAuth: {props.isAuth ? "Yes" : "No"}</div>*/}
       <div className={S.dialogs}>
         <div className={S.dialogsItems}>{dialogs}</div>
 
