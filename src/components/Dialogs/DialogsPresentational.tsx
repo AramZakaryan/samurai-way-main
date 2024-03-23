@@ -3,8 +3,8 @@ import S from "./Dialogs.module.css"
 import { DialogItem } from "./DialogItem/DialogItem"
 import { Message } from "./Messages/Message"
 import { Sidebar } from "../Sidebar/Sidebar"
-import { DialogsPageDataType } from "redux/types"
 import { Redirect } from "react-router-dom"
+import {DialogsPageDataType} from "../../redux/types";
 
 export type DialogsPresentationalPropsType = {
   dialogsPageData: DialogsPageDataType
