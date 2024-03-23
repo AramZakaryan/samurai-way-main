@@ -2,9 +2,9 @@ import { DialogsPresentational, DialogsPresentationalPropsType } from "./Dialogs
 import { connect } from "react-redux"
 import { compose, Dispatch } from "redux"
 import React from "react"
-import {stateReduxType} from "../../redux/storeRedux";
-import {addMessageAC, updateMessageTextareaValueAC} from "../../redux/dialogsReducer";
-import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import { stateReduxType } from "../../redux/storeRedux"
+import { addMessageAC, updateMessageTextareaValueAC } from "../../redux/dialogsReducer"
+import { withAuthRedirect } from "../../hoc/WithAuthRedirect"
 
 type MapStateToPropsType = Pick<DialogsPresentationalPropsType, "dialogsPageData">
 
