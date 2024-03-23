@@ -1,4 +1,4 @@
-import { AllActionsType, DialogsActionsType, DialogsPageDataType } from "./types"
+import { DialogsActionsType, DialogsPageDataType } from "./types"
 
 const initialSubState: DialogsPageDataType = {
   dialogsData: [
@@ -26,19 +26,11 @@ export const dialogsReducer = (
         messagesData: [
           ...subState.messagesData,
           {
-            // message to be added
             id: new Date().getTime(),
             title: action.newMessageBody,
-            // title: subState.messageTextareaEnteringValue,
           },
         ],
-        // messageTextareaEnteringValue: "",
       }
-    // case "UPDATE-MESSAGE-TEXTAREA-VALUE":
-    //   return {
-    //     ...subState,
-    //     messageTextareaEnteringValue: action.enteringValue,
-    //   }
     default: {
       return subState
     }
@@ -51,6 +43,3 @@ export const addMessageAC = (newMessageBody: string) => {
   debugger
   return { type: "ADD-MESSAGE", newMessageBody } as const
 }
-
-// export const updateMessageTextareaValueAC = (enteringValue: string) =>
-//   ({ type: "UPDATE-MESSAGE-TEXTAREA-VALUE", enteringValue: enteringValue }) as const

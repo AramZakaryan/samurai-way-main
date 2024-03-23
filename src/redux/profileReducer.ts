@@ -25,16 +25,10 @@ export const profileReducer = (
           {
             // post to be added
             id: new Date().getTime(),
-            title: subState.postTextAreaEnteringValue,
+            title: action.newPostBody,
             likesCount: 0,
           },
         ],
-        postTextAreaEnteringValue: "",
-      }
-    case "UPDATE-POST-TEXTAREA-VALUE":
-      return {
-        ...subState,
-        postTextAreaEnteringValue: action.enteringValue,
       }
     case "SET_USER_PROFILE":
       return {
@@ -56,12 +50,7 @@ export const profileReducer = (
 
 /** P.S.(Aram) addPost ACTION CREATOR
  */
-export const addPost = () => ({ type: "ADD-POST" }) as const
-
-/** P.S.(Aram) updatePostTextAreaValue ACTION CREATOR
- */
-export const updatePostTextAreaValue = (enteringValue: string) =>
-  ({ type: "UPDATE-POST-TEXTAREA-VALUE", enteringValue: enteringValue }) as const
+export const addPost = (newPostBody: string) => ({ type: "ADD-POST", newPostBody }) as const
 
 /** P.S.(Aram) setUserProfile ACTION CREATOR
  */

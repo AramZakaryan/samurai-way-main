@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React from "react"
 import S from "./Dialogs.module.css"
 import { DialogItem } from "./DialogItem/DialogItem"
 import { Message } from "./Messages/Message"
@@ -16,11 +16,8 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDatatype>> = (props) => {
       <div>
         <Field
           component={"textarea"}
-          // ref={newPostElement}
+          name={"newMessageBody"}
           placeholder={"Enter your message here!"}
-          // value={props.dialogsPageData.messageTextareaEnteringValue}
-          // onChange={textareaOnChangeHandler}
-          // onKeyDown={(ev) => ev.key === "Enter" && addMessageHandler()}
         />
       </div>
       <div>
@@ -30,13 +27,14 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDatatype>> = (props) => {
   )
 }
 
-const AddMessageReduxForm = reduxForm<FormDatatype>({ form: "addMessageForm" })(AddMessageForm)
+const AddMessageReduxForm = reduxForm<FormDatatype>({ form: "dialogsAddMessageForm" })(
+  AddMessageForm,
+)
 
 export type DialogsPresentationalPropsType = {
   dialogsPageData: DialogsPageDataType
   isAuth: boolean
   addMessage: (newMessageBody: string) => void
-  // textareaOnChangeHandler: (enteringValue: string) => void
 }
 
 export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (props) => {
@@ -48,16 +46,8 @@ export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (
     <Message key={msg.id} message={msg.title} />
   ))
 
-  let newPostElement = React.createRef<HTMLTextAreaElement>()
-
-  // const addMessageHandler = () => {
-  //   props.addMessage()
-  // }
-  //
-  // const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-  //   props.textareaOnChangeHandler(ev.currentTarget.value)
-  // }
   const addNewMessageHandler = (data: FormDatatype) => {
+    debugger
     props.addMessage(data.newMessageBody)
   }
 

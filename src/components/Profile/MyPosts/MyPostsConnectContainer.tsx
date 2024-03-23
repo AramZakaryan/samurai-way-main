@@ -1,13 +1,12 @@
-import React from "react"
-import { addPost, updatePostTextAreaValue } from "../../../redux/profileReducer"
+import { addPost } from "redux/profileReducer"
 import { MyPosts, MyPostsPropsType } from "./MyPosts"
 import { connect } from "react-redux"
-import { stateReduxType } from "../../../redux/storeRedux"
+import { stateReduxType } from "redux/storeRedux"
 import { Dispatch } from "redux"
 
 type MapStateToPropsType = Pick<MyPostsPropsType, "profilePageData">
 
-type MapDispatchToPropsType = Pick<MyPostsPropsType, "addPost" | "textareaOnChange">
+type MapDispatchToPropsType = Pick<MyPostsPropsType, "addPost">
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
   return {
@@ -15,14 +14,10 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
   }
 }
 
-// const mapDispatchToProps = (dispatch: dispatchReduxType): MapDispatchToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   return {
-    textareaOnChange: (enteringValue: string) => {
-      dispatch(updatePostTextAreaValue(enteringValue))
-    },
-    addPost: () => {
-      dispatch(addPost())
+    addPost: (newPostBody: string) => {
+      dispatch(addPost(newPostBody))
     },
   }
 }

@@ -3,9 +3,7 @@ import classes from "./Profile.module.css"
 import { ProfileInfo } from "./ProfilInfo/ProfileInfo"
 import { Sidebar } from "../Sidebar/Sidebar"
 import { MyPostsConnectContainer } from "./MyPosts/MyPostsConnectContainer"
-import { getUserApiType, ProfilePageDataType } from "../../redux/types"
-import { Redirect } from "react-router-dom"
-import { updateUserStatus } from "../../redux/profileReducer"
+import { getUserApiType } from "redux/types"
 
 type ProfilePresentationalPropsType = {
   userProfile: getUserApiType

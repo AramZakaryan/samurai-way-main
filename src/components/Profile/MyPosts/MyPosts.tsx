@@ -1,18 +1,26 @@
 import React, { ChangeEvent } from "react"
 import S from "./MyPosts.module.css"
 import { Post } from "./Posts/Posts"
+import { Field, InjectedFormProps, reduxForm } from "redux-form"
 
-// type MyPostsPropsType = {
-//     profilePageData: {
-//         postsData: {
-//             id: number
-//             title: string
-//             likesCount: number
-//         }[]
-//         postTextAreaEnteringValue: string
-//     }
-//     dispatch: dispatchType
-// }
+type FormDataType = {
+  newPostBody: string
+}
+
+const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component={"textarea"} name={"newPostBody"} placeholder={"Type your post here!"} />
+      </div>
+      <div>
+        <button type={"submit"}>Add Post</button>
+      </div>
+    </form>
+  )
+}
+
+const AddPostReduxForm = reduxForm<FormDataType>({ form: "profileAddMessageForm" })(AddPostForm)
 
 export type MyPostsPropsType = {
   profilePageData: {
@@ -21,10 +29,8 @@ export type MyPostsPropsType = {
       title: string
       likesCount: number
     }[]
-    postTextAreaEnteringValue: string
   }
-  textareaOnChange: (enteringValue: string) => void
-  addPost: () => void
+  addPost: (newPostBody: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -32,35 +38,15 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     <Post key={pst.id} message={pst.title} likesCount={pst.likesCount} />
   ))
 
-  let newPostElementRef = React.createRef<HTMLTextAreaElement>()
-
-  const addPostHandler = () => {
-    if (newPostElementRef.current) {
-      props.addPost()
-    }
-  }
-
-  const textareaOnChangeHandler = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-    props.textareaOnChange(ev.currentTarget.value)
+  const addNewPostHandler = (data: FormDataType) => {
+    props.addPost(data.newPostBody)
   }
 
   return (
     <div className={S.PostsBlock}>
       <h3>My Posts</h3>
       <div>
-        <div>
-          <textarea
-            ref={newPostElementRef}
-            placeholder={"Type your post here!"}
-            value={props.profilePageData.postTextAreaEnteringValue}
-            onChange={textareaOnChangeHandler}
-            onKeyDown={(ev) => ev.key === "Enter" && addPostHandler()}
-          />
-        </div>
-        <div>
-          <button onClick={addPostHandler}>Add Post</button>
-          {/*<button>Remove</button>*/}
-        </div>
+        <AddPostReduxForm onSubmit={addNewPostHandler} />
       </div>
       <div className={S.posts}>{posts}</div>
     </div>

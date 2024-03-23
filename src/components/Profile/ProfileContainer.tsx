@@ -1,11 +1,10 @@
 import React from "react"
 import { ProfilePresentational } from "./ProfilePresentational"
 import { connect } from "react-redux"
-import { stateReduxType } from "../../redux/storeRedux"
-import { getUserStatus, setUserProfile, updateUserStatus } from "../../redux/profileReducer"
+import { stateReduxType } from "redux/storeRedux"
+import { getUserStatus, setUserProfile, updateUserStatus } from "redux/profileReducer"
 import { RouteComponentProps, withRouter } from "react-router-dom"
-import { ProfilePageDataType } from "../../redux/types"
-import { withAuthRedirect } from "../../hoc/WithAuthRedirect"
+import { ProfilePageDataType } from "redux/types"
 import { compose } from "redux"
 
 type ProfileClassContainerPropsType = {
@@ -71,7 +70,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 export const ProfileCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  // withAuthRedirect    // temporarily commented - will be fixed later
+  // withAuthRedirect, // temporarily commented - will be fixed later
 )(ProfileClassContainer)
 
 /////////// General Structure
