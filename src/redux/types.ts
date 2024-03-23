@@ -1,5 +1,8 @@
 import { addPost, setUserStatus, setUserProfileAC, updatePostTextAreaValue } from "./profileReducer"
-import { addMessageAC, updateMessageTextareaValueAC } from "./dialogsReducer"
+import {
+  addMessageAC,
+  // , updateMessageTextareaValueAC
+} from "./dialogsReducer"
 import {
   followAC,
   getUsersAC,
@@ -35,9 +38,8 @@ export type UserActionsType =
   | ReturnType<typeof toggleIsFetching>
   | ReturnType<typeof toggleIsFollowingInProgress>
 
-export type DialogsActionsType =
-  | ReturnType<typeof addMessageAC>
-  | ReturnType<typeof updateMessageTextareaValueAC>
+export type DialogsActionsType = ReturnType<typeof addMessageAC>
+// | ReturnType<typeof updateMessageTextareaValueAC>
 
 export type SidebarActionsType = any
 

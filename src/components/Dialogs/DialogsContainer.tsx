@@ -3,14 +3,18 @@ import { connect } from "react-redux"
 import { compose, Dispatch } from "redux"
 import React from "react"
 import { stateReduxType } from "redux/storeRedux"
-import { addMessageAC, updateMessageTextareaValueAC } from "../../redux/dialogsReducer"
-import { withAuthRedirect } from "../../hoc/WithAuthRedirect"
+import {
+  addMessageAC,
+  // , updateMessageTextareaValueAC
+} from "redux/dialogsReducer"
+import { withAuthRedirect } from "hoc/WithAuthRedirect"
 
 type MapStateToPropsType = Pick<DialogsPresentationalPropsType, "dialogsPageData">
 
 type MapDispatchToPropsType = Pick<
   DialogsPresentationalPropsType,
-  "addMessage" | "textareaOnChangeHandler"
+  "addMessage"
+  // | "textareaOnChangeHandler"
 >
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
@@ -21,12 +25,12 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   return {
-    addMessage: () => {
-      dispatch(addMessageAC())
+    addMessage: (newMessageBody: string) => {
+      dispatch(addMessageAC(newMessageBody))
     },
-    textareaOnChangeHandler: (enteringValue: string) => {
-      dispatch(updateMessageTextareaValueAC(enteringValue))
-    },
+    // textareaOnChangeHandler: (enteringValue: string) => {
+    //   dispatch(updateMessageTextareaValueAC(enteringValue))
+    // },
   }
 }
 

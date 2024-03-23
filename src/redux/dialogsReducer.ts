@@ -28,16 +28,17 @@ export const dialogsReducer = (
           {
             // message to be added
             id: new Date().getTime(),
-            title: subState.messageTextareaEnteringValue,
+            title: action.newMessageBody,
+            // title: subState.messageTextareaEnteringValue,
           },
         ],
-        messageTextareaEnteringValue: "",
+        // messageTextareaEnteringValue: "",
       }
-    case "UPDATE-MESSAGE-TEXTAREA-VALUE":
-      return {
-        ...subState,
-        messageTextareaEnteringValue: action.enteringValue,
-      }
+    // case "UPDATE-MESSAGE-TEXTAREA-VALUE":
+    //   return {
+    //     ...subState,
+    //     messageTextareaEnteringValue: action.enteringValue,
+    //   }
     default: {
       return subState
     }
@@ -46,7 +47,10 @@ export const dialogsReducer = (
 
 // ACTION CREATORS
 
-export const addMessageAC = () => ({ type: "ADD-MESSAGE" }) as const
+export const addMessageAC = (newMessageBody: string) => {
+  debugger
+  return { type: "ADD-MESSAGE", newMessageBody } as const
+}
 
-export const updateMessageTextareaValueAC = (enteringValue: string) =>
-  ({ type: "UPDATE-MESSAGE-TEXTAREA-VALUE", enteringValue: enteringValue }) as const
+// export const updateMessageTextareaValueAC = (enteringValue: string) =>
+//   ({ type: "UPDATE-MESSAGE-TEXTAREA-VALUE", enteringValue: enteringValue }) as const
