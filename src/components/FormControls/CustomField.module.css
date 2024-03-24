@@ -6,3 +6,9 @@
 .formControl.formError span{
   color: red;
 }
+
+.formSummaryError {
+  font-weight: bold;
+  color: maroon;
+  /*border: 3px solid maroon ;*/
+}

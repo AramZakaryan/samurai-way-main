@@ -4,6 +4,7 @@ import { CustomInput } from "components/FormControls/CustomFields"
 import { validateMaxLength, validateRequiredField } from "utils/validators/validators"
 import { AuthPartDataType } from "redux/types"
 import { Redirect } from "react-router-dom"
+import S from "./../FormControls/CustomField.module.css"
 
 type FormDataType = {
   email: string
@@ -37,6 +38,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         <Field component={CustomInput} name={"rememberMe"} type={"checkbox"} />
         Remember Me
       </div>
+      <div className={props.error && S.formSummaryError}>{props.error}</div>
       <div>
         <button type={"submit"}>Submit</button>
       </div>
@@ -44,7 +46,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   )
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType>({ form: "loginForm" })(LoginForm)
 
 export type LoginPresentationalPropsType = {
   authPartData: AuthPartDataType

@@ -4,12 +4,13 @@ import { connect } from "react-redux"
 import { stateReduxType } from "redux/storeRedux"
 import { getUserStatus, setUserProfile, updateUserStatus } from "redux/profileReducer"
 import { RouteComponentProps, withRouter } from "react-router-dom"
-import { ProfilePageDataType } from "redux/types"
+import { AuthPartDataType, ProfilePageDataType } from "redux/types"
 import { compose } from "redux"
 import { withAuthRedirect } from "hoc/WithAuthRedirect"
 
 type ProfileClassContainerPropsType = {
   profilePageData: ProfilePageDataType
+  authPartData: AuthPartDataType
   status: null | string
   isAuth: boolean
   setUserProfile: (userId: number) => void
@@ -26,7 +27,7 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
     let userId = +this.props.match.params.userId
 
     if (!userId) {
-      userId = 30080 // for showing my user if no other user was selected
+      userId = this.props.authPartData.authData.userId as number
     }
 
     this.props.setUserProfile(userId)
@@ -47,7 +48,7 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
   }
 }
 
-type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData">
+type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData" | "authPartData">
 
 type MapDispatchToPropsType = Pick<
   ProfileClassContainerPropsType,
@@ -57,6 +58,7 @@ type MapDispatchToPropsType = Pick<
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
   return {
     profilePageData: state.profilePageData,
+    authPartData: state.authPartData,
   }
 }
 

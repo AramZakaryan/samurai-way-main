@@ -1,6 +1,7 @@
 import { AuthActionsType, AuthApiType, AuthPartDataType } from "./types"
 import { authApi } from "api/Api"
-import { Dispatch } from "redux"
+import { AnyAction, Dispatch } from "redux"
+import { stopSubmit } from "redux-form"
 
 // ACTION NAMES
 
@@ -70,11 +71,13 @@ export const setUserData = () => (dispatch: Dispatch) => {
 export const login =
   (email: string, password: string, rememberMe: boolean = false) =>
   (dispatch: Dispatch<any>) => {
-    /////////// any
     authApi.login(email, password, rememberMe).then((data) => {
       if (data.resultCode === 0) {
         // checking: 0 means I'm login
         dispatch(setUserData())
+      } else {
+        const errorMsg = data.messages.length ? data.messages[0] : "Some Error occurred."
+        dispatch(stopSubmit("loginForm", { _error: errorMsg }))
       }
     })
   }
@@ -82,7 +85,6 @@ export const login =
 /** P.S.(Aram) logout THUNK CREATOR
  */
 export const logout = () => (dispatch: Dispatch) => {
-  /////////// any
   authApi.logout().then((data) => {
     if (data.resultCode === 0) {
       // checking: 0 means I'm login
