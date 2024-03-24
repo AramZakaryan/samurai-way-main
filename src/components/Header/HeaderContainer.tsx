@@ -17,7 +17,7 @@ export class HeaderClassContainer extends React.Component<HeaderClassContainerPr
   }
 
   componentDidMount() {
-    this.props.setUserData()
+    // this.props.setUserData()
   }
 
   render() {

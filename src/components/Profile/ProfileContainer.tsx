@@ -24,6 +24,17 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
   }
 
   componentDidMount() {
+    //   let userId = +this.props.match.params.userId
+    //
+    //   if (!userId) {
+    //     userId = this.props.authPartData.authData.userId as number
+    //   }
+    //
+    //   this.props.setUserProfile(userId)
+    //   this.props.getUserStatus(userId)
+  }
+
+  render() {
     let userId = +this.props.match.params.userId
 
     if (!userId) {
@@ -32,9 +43,6 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
 
     this.props.setUserProfile(userId)
     this.props.getUserStatus(userId)
-  }
-
-  render() {
     return (
       <>
         <ProfilePresentational

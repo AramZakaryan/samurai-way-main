@@ -1,6 +1,6 @@
 import React from "react"
 // import {storeReduxType} from "./storeRedux";
-// import App from "../App";
+// import AppConnect from "../AppConnect";
 //
 // type ProviderPropsType = {
 //     store: storeReduxType
