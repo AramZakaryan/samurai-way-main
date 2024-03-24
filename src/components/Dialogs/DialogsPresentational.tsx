@@ -5,19 +5,24 @@ import { Message } from "./Messages/Message"
 import { Sidebar } from "../Sidebar/Sidebar"
 import { DialogsPageDataType } from "redux/types"
 import { Field, InjectedFormProps, reduxForm } from "redux-form"
+import { validateMaxLength, validateRequiredField } from "utils/validators/validators"
+import { CustomTextarea } from "components/FormControls/CustomFields"
 
 type FormDatatype = {
   newMessageBody: string
 }
+
+const validateMaxLength10 = validateMaxLength(10)
 
 const AddMessageForm: React.FC<InjectedFormProps<FormDatatype>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          component={"textarea"}
+          component={CustomTextarea}
           name={"newMessageBody"}
           placeholder={"Enter your message here!"}
+          validate={[validateRequiredField, validateMaxLength10]}
         />
       </div>
       <div>
@@ -47,7 +52,6 @@ export const DialogsPresentational: React.FC<DialogsPresentationalPropsType> = (
   ))
 
   const addNewMessageHandler = (data: FormDatatype) => {
-    debugger
     props.addMessage(data.newMessageBody)
   }
 

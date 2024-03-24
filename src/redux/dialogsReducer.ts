@@ -40,6 +40,5 @@ export const dialogsReducer = (
 // ACTION CREATORS
 
 export const addMessageAC = (newMessageBody: string) => {
-  debugger
   return { type: "ADD-MESSAGE", newMessageBody } as const
 }

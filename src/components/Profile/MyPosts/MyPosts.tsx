@@ -2,16 +2,25 @@ import React, { ChangeEvent } from "react"
 import S from "./MyPosts.module.css"
 import { Post } from "./Posts/Posts"
 import { Field, InjectedFormProps, reduxForm } from "redux-form"
+import { validateMaxLength, validateRequiredField } from "utils/validators/validators"
+import { CustomTextarea } from "components/FormControls/CustomFields"
 
 type FormDataType = {
   newPostBody: string
 }
 
+const validateMaxLength10 = validateMaxLength(10)
+
 const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={"textarea"} name={"newPostBody"} placeholder={"Type your post here!"} />
+        <Field
+          component={CustomTextarea}
+          name={"newPostBody"}
+          placeholder={"Type your post here!"}
+          validate={[validateRequiredField, validateMaxLength10]}
+        />
       </div>
       <div>
         <button type={"submit"}>Add Post</button>
