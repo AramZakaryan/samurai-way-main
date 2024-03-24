@@ -5,7 +5,9 @@ import {
   getUserApiType,
   getUsersApiType,
   getUserStatusApiType,
-} from "../redux/types"
+  LoginApiType,
+  LogoutApiType,
+} from "redux/types"
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -13,7 +15,7 @@ const instance = axios.create({
   headers: { "API-KEY": "3485684c-f79f-42a9-a6c9-e22cde9c6d79" },
 })
 
-export const userApi = {
+export const api = {
   getUsers(selectedPage: number, pageSize: number) {
     return instance
       .get<getUsersApiType>(`users/?page=${selectedPage}&count=${pageSize}`)
@@ -22,7 +24,7 @@ export const userApi = {
 
   // Obsolete method
   getUser(userId: number) {
-    console.warn("P.S.(Aram) Obsolete method, please use 'profileApi.getUser'.")
+    // console.warn("P.S.(Aram) Obsolete method, please use 'profileApi.getUser'.")
     return profileApi.getUser(userId)
   },
 
@@ -43,7 +45,6 @@ export const profileApi = {
   getUser(userId: number) {
     return instance.get<getUserApiType>(`profile/${userId}`).then((response) => response.data) // for sending to UI only "data"
   },
-
   getUserStatus(userId: number) {
     return instance.get<null | string>(`profile/status/${userId}`)
   },
@@ -55,5 +56,13 @@ export const profileApi = {
 export const authApi = {
   auth() {
     return instance.get<AuthApiType>("auth/me").then((response) => response.data) // for sending to UI only "data"
+  },
+  login(email: string, password: string, rememberMe: boolean = false) {
+    return instance
+      .post<LoginApiType>("auth/login", { email, password, rememberMe })
+      .then((response) => response.data) // for sending to UI only "data"
+  },
+  logout() {
+    return instance.delete<LogoutApiType>("auth/login").then((response) => response.data) // for sending to UI only "data"
   },
 }

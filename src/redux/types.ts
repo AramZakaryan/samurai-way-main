@@ -149,3 +149,19 @@ export type getUserStatusApiType = {
   fieldsErrors: string[]
   resultCode: number
 }
+
+export type LoginApiType = {
+  data: {
+    userId: number | null
+  }
+  messages: string[]
+  fieldsErrors: string[]
+  resultCode: number
+}
+
+export type LogoutApiType = {
+  data: {}
+  messages: string[]
+  fieldsErrors: string[]
+  resultCode: number
+}

@@ -2,14 +2,16 @@ import React from "react"
 import { Field, InjectedFormProps, reduxForm } from "redux-form"
 import { CustomInput } from "components/FormControls/CustomFields"
 import { validateMaxLength, validateRequiredField } from "utils/validators/validators"
+import { AuthPartDataType } from "redux/types"
+import { Redirect } from "react-router-dom"
 
 type FormDataType = {
-  login: string
+  email: string
   password: string
   rememberMe: boolean
 }
 
-const validateMaxLength10 = validateMaxLength(10)
+const validateMaxLength50 = validateMaxLength(50)
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
@@ -17,17 +19,18 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
       <div>
         <Field
           component={CustomInput}
-          name={"login"}
-          placeholder={"login"}
-          validate={[validateRequiredField, validateMaxLength10]}
+          name={"email"}
+          placeholder={"email"}
+          validate={[validateRequiredField, validateMaxLength50]}
         />
       </div>
       <div>
         <Field
+          // type={"password"}
           component={CustomInput}
           name={"password"}
           placeholder={"password "}
-          validate={[validateRequiredField, validateMaxLength10]}
+          validate={[validateRequiredField, validateMaxLength50]}
         />
       </div>
       <div>
@@ -42,10 +45,22 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 
 const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm)
-export const Login = () => {
+
+export type LoginPresentationalPropsType = {
+  authPartData: AuthPartDataType
+  login: (email: string, password: string, rememberMe: boolean) => void
+  logout: () => void
+}
+
+export const LoginPresentational: React.FC<LoginPresentationalPropsType> = (props) => {
   const onSubmitHandler = (data: FormDataType) => {
-    console.log(data)
+    props.login(data.email, data.password, data.rememberMe)
   }
+
+  if (props.authPartData.authData.isAuth) {
+    return <Redirect to={"/profile"} />
+  }
+
   return (
     <>
       <div>coucou Login</div>

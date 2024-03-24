@@ -1,13 +1,14 @@
 import React from "react"
-import { HeaderPresent } from "./HeaderPresent"
+import { HeaderPresentational } from "components/Header/HeaderPresentational"
 import { connect } from "react-redux"
-import { stateReduxType } from "../../redux/storeRedux"
-import { AuthPartDataType } from "../../redux/types"
-import { setUserData } from "../../redux/authReducer"
+import { stateReduxType } from "redux/storeRedux"
+import { AuthPartDataType } from "redux/types"
+import { logout, setUserData } from "redux/authReducer"
 
 type HeaderClassContainerPropsType = {
   authPartData: AuthPartDataType
   setUserData: () => void
+  logout: () => void
 }
 
 export class HeaderClassContainer extends React.Component<HeaderClassContainerPropsType, any> {
@@ -17,22 +18,16 @@ export class HeaderClassContainer extends React.Component<HeaderClassContainerPr
 
   componentDidMount() {
     this.props.setUserData()
-    // api.auth()
-    //     .then(data => {
-    //         data.resultCode === 0 // checking: 0 means user exists
-    //         &&
-    //         this.props.setUserData(data.data)
-    //     })
   }
 
   render() {
-    return <HeaderPresent {...this.props} />
+    return <HeaderPresentational {...this.props} />
   }
 }
 
 type MapStateToPropsType = Pick<HeaderClassContainerPropsType, "authPartData">
 
-type MapDispatchToPropsType = Pick<HeaderClassContainerPropsType, "setUserData">
+type MapDispatchToPropsType = Pick<HeaderClassContainerPropsType, "setUserData" | "logout">
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => ({
   authPartData: state.authPartData,
@@ -40,6 +35,7 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => ({
 
 const mapDispatchToProps: MapDispatchToPropsType = {
   setUserData,
+  logout,
 }
 
 export const HeaderConnectContainer = connect(

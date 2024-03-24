@@ -1,5 +1,5 @@
 import { AllActionsType, getUserApiType, ProfileActionsType, ProfilePageDataType } from "./types"
-import { profileApi, userApi } from "../api/userApi"
+import { profileApi, api } from "api/Api"
 import { Dispatch } from "redux"
 
 const initialSubState: ProfilePageDataType = {
@@ -67,7 +67,7 @@ export const setUserStatus = (status: null | string) =>
 /** P.S.(Aram) setUserProfile THUNK CREATOR
  */
 export const setUserProfile = (userId: number) => (dispatch: Dispatch) => {
-  userApi.getUser(userId).then((data) => dispatch(setUserProfileAC(data)))
+  api.getUser(userId).then((data) => dispatch(setUserProfileAC(data)))
 }
 
 /** P.S.(Aram) setUserStatus THUNK CREATOR

@@ -1,5 +1,5 @@
 import { AllActionsType, getUsersApiType, UserActionsType, UsersPageDataType } from "./types"
-import { userApi } from "../api/userApi"
+import { api } from "api/Api"
 import { Dispatch } from "redux"
 
 // ACTION NAMES
@@ -133,7 +133,7 @@ export const toggleIsFollowingInProgress = (userId: number, followingInProgress:
  */
 export const getUsers = (selectedPage: number, pageSize: number) => (dispatch: Dispatch) => {
   dispatch(toggleIsFetching(true))
-  userApi.getUsers(selectedPage, pageSize).then((data) => {
+  api.getUsers(selectedPage, pageSize).then((data) => {
     dispatch(toggleIsFetching(false))
     dispatch(getUsersAC(data.items))
     dispatch(setTotalUserCount(data.totalCount))
@@ -144,7 +144,7 @@ export const getUsers = (selectedPage: number, pageSize: number) => (dispatch: D
  */
 export const unfollow = (userId: number) => (dispatch: Dispatch) => {
   dispatch(toggleIsFollowingInProgress(userId, true))
-  userApi.unfollow(userId).then((res) => {
+  api.unfollow(userId).then((res) => {
     if (res.resultCode == 0) {
       dispatch(unfollowAC(userId))
     }
@@ -156,7 +156,7 @@ export const unfollow = (userId: number) => (dispatch: Dispatch) => {
  */
 export const follow = (userId: number) => (dispatch: Dispatch) => {
   dispatch(toggleIsFollowingInProgress(userId, true))
-  userApi.follow(userId).then((res) => {
+  api.follow(userId).then((res) => {
     if (res.resultCode == 0) {
       dispatch(followAC(userId))
     }

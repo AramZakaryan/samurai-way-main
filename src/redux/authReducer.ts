@@ -1,11 +1,5 @@
-import {
-  AllActionsType,
-  AuthActionsType,
-  AuthApiType,
-  AuthPartDataType,
-  UsersPageDataType,
-} from "./types"
-import { userApi, authApi } from "../api/userApi"
+import { AuthActionsType, AuthApiType, AuthPartDataType } from "./types"
+import { authApi } from "api/Api"
 import { Dispatch } from "redux"
 
 // ACTION NAMES
@@ -33,10 +27,11 @@ export const authReducer = (
   switch (action.type) {
     case SET_USER_DATA: {
       // Transformation of "id" to "userId"
-      const { id: userId, login, email } = action.authDataFromApi
+      const { id: userId, login, email } = action.payload.authDataFromApi
+      const isAuth = action.payload.isAuth
       return {
         ...subState,
-        authData: { userId, login, email, isAuth: true },
+        authData: { userId, login, email, isAuth },
       }
     }
 
@@ -50,8 +45,14 @@ export const authReducer = (
 
 /** P.S.(Aram) setUserData ACTION CREATOR
  */
-export const setUserDataAC = (authDataFromApi: AuthApiType["data"]) =>
-  ({ type: SET_USER_DATA, authDataFromApi }) as const
+export const setUserDataAC = (authDataFromApi: AuthApiType["data"], isAuth: boolean) =>
+  ({
+    type: SET_USER_DATA,
+    payload: {
+      authDataFromApi,
+      isAuth,
+    },
+  }) as const
 
 // THUNK CREATORS
 
@@ -60,6 +61,32 @@ export const setUserDataAC = (authDataFromApi: AuthApiType["data"]) =>
 export const setUserData = () => (dispatch: Dispatch) => {
   authApi.auth().then((data) => {
     data.resultCode === 0 && // checking: 0 means user exists
-      dispatch(setUserDataAC(data.data))
+      dispatch(setUserDataAC(data.data, true))
+  })
+}
+
+/** P.S.(Aram) login THUNK CREATOR
+ */
+export const login =
+  (email: string, password: string, rememberMe: boolean = false) =>
+  (dispatch: Dispatch<any>) => {
+    /////////// any
+    authApi.login(email, password, rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        // checking: 0 means I'm login
+        dispatch(setUserData())
+      }
+    })
+  }
+
+/** P.S.(Aram) logout THUNK CREATOR
+ */
+export const logout = () => (dispatch: Dispatch) => {
+  /////////// any
+  authApi.logout().then((data) => {
+    if (data.resultCode === 0) {
+      // checking: 0 means I'm login
+      dispatch(setUserDataAC({ id: null, login: null, email: null }, false))
+    }
   })
 }

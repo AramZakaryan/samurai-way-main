@@ -6,6 +6,7 @@ import { getUserStatus, setUserProfile, updateUserStatus } from "redux/profileRe
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { ProfilePageDataType } from "redux/types"
 import { compose } from "redux"
+import { withAuthRedirect } from "hoc/WithAuthRedirect"
 
 type ProfileClassContainerPropsType = {
   profilePageData: ProfilePageDataType
@@ -30,8 +31,6 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
 
     this.props.setUserProfile(userId)
     this.props.getUserStatus(userId)
-
-    console.log(userId)
   }
 
   render() {
@@ -70,7 +69,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 export const ProfileCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  // withAuthRedirect, // temporarily commented - will be fixed later
+  withAuthRedirect,
 )(ProfileClassContainer)
 
 /////////// General Structure
