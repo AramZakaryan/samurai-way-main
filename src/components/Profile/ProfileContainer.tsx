@@ -69,7 +69,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 export const ProfileCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  withAuthRedirect,
+  // withAuthRedirect, // temporary commented
 )(ProfileClassContainer)
 
 /////////// General Structure
