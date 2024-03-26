@@ -10,6 +10,7 @@ import {
   unfollowAC,
 } from "./usersReducer"
 import { setUserDataAC } from "./authReducer"
+import { initializedSuccessfullyAC } from "redux/appReducer"
 
 // ACTION TYPES
 
@@ -19,6 +20,7 @@ export type AllActionsType =
   | UserActionsType
   | SidebarActionsType
   | AuthActionsType
+  | AppActionsType
 
 export type ProfileActionsType =
   | ReturnType<typeof addPost>
@@ -39,6 +41,8 @@ export type DialogsActionsType = ReturnType<typeof addMessageAC>
 export type SidebarActionsType = any
 
 export type AuthActionsType = ReturnType<typeof setUserDataAC>
+
+export type AppActionsType = ReturnType<typeof initializedSuccessfullyAC>
 
 // STATE ELEMENTS TYPES
 

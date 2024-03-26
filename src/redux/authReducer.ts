@@ -1,7 +1,8 @@
 import { AuthActionsType, AuthApiType, AuthPartDataType } from "./types"
 import { authApi } from "api/Api"
-import { AnyAction, Dispatch } from "redux"
+import { Dispatch } from "redux"
 import { stopSubmit } from "redux-form"
+import { AppThunkActionType } from "redux/storeRedux"
 
 // ACTION NAMES
 
@@ -60,17 +61,19 @@ export const setUserDataAC = (authDataFromApi: AuthApiType["data"], isAuth: bool
 /** P.S.(Aram) setUserData THUNK CREATOR
  */
 export const setUserData = () => (dispatch: Dispatch) => {
-  authApi.auth().then((data) => {
+  return authApi.auth().then((data) => {
     data.resultCode === 0 && // checking: 0 means user exists
       dispatch(setUserDataAC(data.data, true))
   })
 }
 
+export type setUserDataThunkType = ReturnType<typeof setUserData>
+
 /** P.S.(Aram) login THUNK CREATOR
  */
 export const login =
-  (email: string, password: string, rememberMe: boolean = false) =>
-  (dispatch: Dispatch<any>) => {
+  (email: string, password: string, rememberMe: boolean = false): AppThunkActionType =>
+  (dispatch) => {
     authApi.login(email, password, rememberMe).then((data) => {
       if (data.resultCode === 0) {
         // checking: 0 means I'm login

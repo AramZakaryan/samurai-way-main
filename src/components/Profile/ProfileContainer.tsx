@@ -24,25 +24,20 @@ export class ProfileClassContainer extends React.Component<ProfileClassContainer
   }
 
   componentDidMount() {
-    //   let userId = +this.props.match.params.userId
-    //
-    //   if (!userId) {
-    //     userId = this.props.authPartData.authData.userId as number
-    //   }
-    //
-    //   this.props.setUserProfile(userId)
-    //   this.props.getUserStatus(userId)
-  }
-
-  render() {
     let userId = +this.props.match.params.userId
 
     if (!userId) {
       userId = this.props.authPartData.authData.userId as number
     }
 
+    if (!userId) {
+      this.props.history.push("/login")
+    }
+
     this.props.setUserProfile(userId)
     this.props.getUserStatus(userId)
+  }
+  render() {
     return (
       <>
         <ProfilePresentational
@@ -79,7 +74,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 export const ProfileCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  // withAuthRedirect, // temporary commented
+  // withAuthRedirect, // temporary commented and redirect organised by "history.push"
 )(ProfileClassContainer)
 
 /////////// General Structure

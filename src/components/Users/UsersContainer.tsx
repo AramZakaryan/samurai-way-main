@@ -1,18 +1,11 @@
 import React from "react"
-import { stateReduxType } from "../../redux/storeRedux"
-import {
-  follow,
-  getUsers,
-  setSelectedPage,
-  toggleIsFollowingInProgress,
-  unfollow,
-} from "../../redux/usersReducer"
+import { stateReduxType } from "redux/storeRedux"
+import { follow, getUsers, setSelectedPage, unfollow } from "redux/usersReducer"
 import { connect } from "react-redux"
 import { UsersPresentational } from "./UsersPresentational"
 import { Preloader } from "../common/Preloader/Preloader"
-import { UsersPageDataType } from "../../redux/types"
-import { withAuthRedirect } from "../../hoc/WithAuthRedirect"
-import { ProfileClassContainer } from "../Profile/ProfileContainer"
+import { UsersPageDataType } from "redux/types"
+import { withAuthRedirect } from "hoc/WithAuthRedirect"
 import { compose } from "redux"
 
 ////////// UsersClassContainer
@@ -79,7 +72,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
 
 export const UserCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
-  withAuthRedirect,
+  // withAuthRedirect, // temporarily commented
 )(UsersClassContainer)
 
 ////////// General Structure

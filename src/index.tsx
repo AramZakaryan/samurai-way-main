@@ -2,14 +2,17 @@ import React from "react"
 import ReactDOM from "react-dom"
 import App from "App"
 import "./redux/storeRedux"
-import { storeRedux, storeReduxType } from "redux/storeRedux"
+import { storeRedux } from "redux/storeRedux"
 import "./forDel"
 import { Provider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
 
 // export const rerenderEntireThree = (store: storeReduxType) => {
 ReactDOM.render(
   <Provider store={storeRedux}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root"),
 )
