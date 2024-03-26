@@ -90,7 +90,7 @@ export const usersReducer = (
   }
 }
 
-// ACTION CREATORS
+////////// ACTION CREATORS
 
 /** P.S.(Aram) getUsers ACTION CREATOR
  */
@@ -127,13 +127,15 @@ export const toggleIsFetching = (isFetching: boolean) =>
 export const toggleIsFollowingInProgress = (userId: number, followingInProgress: boolean) =>
   ({ type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, userId, followingInProgress }) as const
 
-// THUNK CREATORS
+/////////// THUNK CREATORS
 
 /** P.S.(Aram) getUsers THUNK CREATOR.
+ * @param page P.S.(Aram) Number of selected page
+ * @param pageSize P.S.(Aram) Number of users on one page
  */
-export const getUsers = (selectedPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
   dispatch(toggleIsFetching(true))
-  api.getUsers(selectedPage, pageSize).then((data) => {
+  api.getUsers(page, pageSize).then((data) => {
     dispatch(toggleIsFetching(false))
     dispatch(getUsersAC(data.items))
     dispatch(setTotalUserCount(data.totalCount))

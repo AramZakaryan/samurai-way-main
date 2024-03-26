@@ -7,6 +7,7 @@ import { Preloader } from "../common/Preloader/Preloader"
 import { UsersPageDataType } from "redux/types"
 import { withAuthRedirect } from "hoc/WithAuthRedirect"
 import { compose } from "redux"
+import { selectUsersPageData } from "redux/selectors"
 
 ////////// UsersClassContainer
 
@@ -50,7 +51,7 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
   }
 }
 
-type MapStateToPropsType = Pick<UsersClassContainerPropsType, "usersPageData">
+export type MapStateToPropsType = Pick<UsersClassContainerPropsType, "usersPageData">
 
 type MapDispatchToPropsType = Pick<
   UsersClassContainerPropsType,
@@ -59,7 +60,7 @@ type MapDispatchToPropsType = Pick<
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
   return {
-    usersPageData: state.usersPageData,
+    usersPageData: selectUsersPageData(state),
   }
 }
 
