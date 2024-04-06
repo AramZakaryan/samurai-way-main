@@ -6,6 +6,11 @@ type ProfileStatusPropsType = {
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+  state = {
+    editMode: false,
+    value: this.props.status,
+  }
+
   componentDidUpdate(
     prevProps: Readonly<ProfileStatusPropsType>,
     prevState: Readonly<typeof this.state>,
@@ -15,11 +20,6 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         status: this.props.status,
       })
     }
-  }
-
-  state = {
-    editMode: false,
-    value: this.props.status,
   }
 
   activateEditModeHandler = () => {
@@ -37,7 +37,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     this.props.updateUserStatus(this.state.value)
   }
 
-  inputOnChangeHangler = (ev: React.FocusEvent<HTMLInputElement>) => {
+  inputOnChangeHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       value: ev.currentTarget.value,
     })
@@ -59,7 +59,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
               value={this.state.value?.toString()}
               onBlur={this.deactivateEditModeHandler}
               autoFocus={true}
-              onChange={this.inputOnChangeHangler}
+              onChange={this.inputOnChangeHandler}
             />
           </div>
         )}

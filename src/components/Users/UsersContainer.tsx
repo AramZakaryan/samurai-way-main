@@ -51,6 +51,7 @@ export class UsersClassContainer extends React.Component<UsersClassContainerProp
   }
 }
 
+// export type MapStateToPropsType = any
 export type MapStateToPropsType = Pick<UsersClassContainerPropsType, "usersPageData">
 
 type MapDispatchToPropsType = Pick<
@@ -61,6 +62,7 @@ type MapDispatchToPropsType = Pick<
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
   return {
     usersPageData: selectUsersPageData(state),
+    // filteredUsers: selectFilteredUsers(state),
   }
 }
 

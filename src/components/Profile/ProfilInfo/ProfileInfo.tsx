@@ -2,8 +2,9 @@ import React from "react"
 import S from "./ProfileInfo.module.css"
 import classes from "../Profile.module.css"
 import { Preloader } from "../../common/Preloader/Preloader"
-import { getUserApiType, ProfilePageDataType } from "../../../redux/types"
+import { getUserApiType, ProfilePageDataType } from "redux/types"
 import { ProfileStatus } from "../ProfileStatus"
+import { ProfileStatusWithUseState } from "components/Profile/ProfileStatusWithUseState"
 
 type ProfileInfoType = {
   userProfile: getUserApiType
@@ -30,7 +31,11 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
           <a href={""}>{props.userProfile.contacts.instagram}</a>
         </div>
         <div style={{ marginTop: "40px" }}>
-          <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
+          {/*<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />*/}
+          <ProfileStatusWithUseState
+            status={props.status}
+            updateUserStatus={props.updateUserStatus}
+          />
         </div>
       </div>
     </>

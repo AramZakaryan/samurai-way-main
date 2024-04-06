@@ -18,10 +18,14 @@ type ProfileClassContainerPropsType = {
   updateUserStatus: (status: null | string) => void
 } & RouteComponentProps<{ userId: string }> ////////// !!!
 
-export class ProfileClassContainer extends React.Component<ProfileClassContainerPropsType> {
+export class ProfileClassContainer extends React.PureComponent<ProfileClassContainerPropsType> {
   constructor(props: ProfileClassContainerPropsType) {
     super(props)
   }
+
+  // shouldComponentUpdate(nextProps: any, nextState: any) {
+  //   return nextProps != this.props || nextState != this.state
+  // }
 
   componentDidMount() {
     let userId = +this.props.match.params.userId
