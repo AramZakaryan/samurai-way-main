@@ -30,6 +30,11 @@ export const profileReducer = (
           },
         ],
       }
+    case "DELETE-POST":
+      return {
+        ...subState,
+        postsData: subState.postsData.filter((p) => p.id !== action.postId),
+      }
     case "SET_USER_PROFILE":
       return {
         ...subState,
@@ -48,30 +53,28 @@ export const profileReducer = (
 
 ////////// ACTION CREATORS
 
-/** P.S.(Aram) addPost ACTION CREATOR
- */
+/** P.S.(Aram) addPost ACTION CREATOR */
 export const addPost = (newPostBody: string) => ({ type: "ADD-POST", newPostBody }) as const
 
-/** P.S.(Aram) setUserProfile ACTION CREATOR
- */
+/** P.S.(Aram) addPost ACTION CREATOR */
+export const deletePost = (postId: number) => ({ type: "DELETE-POST", postId }) as const
+
+/** P.S.(Aram) setUserProfile ACTION CREATOR */
 export const setUserProfileAC = (userProfile: getUserApiType) =>
   ({ type: "SET_USER_PROFILE", userProfile }) as const
 
-/** P.S.(Aram) getUserStatus ACTION CREATOR
- */
+/** P.S.(Aram) getUserStatus ACTION CREATOR */
 export const setUserStatus = (status: null | string) =>
   ({ type: "GET_USER_STATUS", status }) as const
 
 //////////// THUNK CREATORS
 
-/** P.S.(Aram) setUserProfile THUNK CREATOR
- */
+/** P.S.(Aram) setUserProfile THUNK CREATOR */
 export const setUserProfile = (userId: number) => (dispatch: Dispatch) => {
   api.getUser(userId).then((data) => dispatch(setUserProfileAC(data)))
 }
 
-/** P.S.(Aram) setUserStatus THUNK CREATOR
- */
+/** P.S.(Aram) setUserStatus THUNK CREATOR */
 export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
   profileApi.getUserStatus(userId).then((data) => dispatch(setUserStatus(data.data)))
 }

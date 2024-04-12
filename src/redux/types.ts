@@ -1,4 +1,4 @@
-import { addPost, setUserProfileAC, setUserStatus } from "./profileReducer"
+import { addPost, deletePost, setUserProfileAC, setUserStatus } from "./profileReducer"
 import { addMessageAC } from "./dialogsReducer"
 import {
   followAC,
@@ -24,6 +24,7 @@ export type AllActionsType =
 
 export type ProfileActionsType =
   | ReturnType<typeof addPost>
+  | ReturnType<typeof deletePost>
   | ReturnType<typeof setUserProfileAC>
   | ReturnType<typeof setUserStatus>
 
