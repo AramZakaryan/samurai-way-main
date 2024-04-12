@@ -14,9 +14,9 @@ type FormDataType = {
 
 const validateMaxLength50 = validateMaxLength(50)
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSubmit, error }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field
           component={CustomInput}
@@ -38,7 +38,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         <Field component={CustomInput} name={"rememberMe"} type={"checkbox"} />
         Remember Me
       </div>
-      <div className={props.error && S.formSummaryError}>{props.error}</div>
+      <div className={error && S.formSummaryError}>{error}</div>
       <div>
         <button type={"submit"}>Submit</button>
       </div>
@@ -54,12 +54,15 @@ export type LoginPresentationalPropsType = {
   logout: () => void
 }
 
-export const LoginPresentational: React.FC<LoginPresentationalPropsType> = (props) => {
+export const LoginPresentational: React.FC<LoginPresentationalPropsType> = ({
+  login,
+  authPartData,
+}) => {
   const onSubmitHandler = (data: FormDataType) => {
-    props.login(data.email, data.password, data.rememberMe)
+    login(data.email, data.password, data.rememberMe)
   }
 
-  if (props.authPartData.authData.isAuth) {
+  if (authPartData.authData.isAuth) {
     return <Redirect to={"/profile"} />
   }
 

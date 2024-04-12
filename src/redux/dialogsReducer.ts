@@ -20,7 +20,7 @@ export const dialogsReducer = (
   action: DialogsActionsType,
 ): DialogsPageDataType => {
   switch (action.type) {
-    case "ADD-MESSAGE":
+    case "dialogs/ADD-MESSAGE":
       return {
         ...subState,
         messagesData: [
@@ -40,5 +40,5 @@ export const dialogsReducer = (
 // ACTION CREATORS
 
 export const addMessageAC = (newMessageBody: string) => {
-  return { type: "ADD-MESSAGE", newMessageBody } as const
+  return { type: "dialogs/ADD-MESSAGE", newMessageBody } as const
 }

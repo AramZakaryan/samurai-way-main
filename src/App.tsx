@@ -1,7 +1,7 @@
 import React from "react"
 import "./App.css"
 
-import { BrowserRouter, Route, RouteComponentProps, withRouter } from "react-router-dom"
+import { Route, RouteComponentProps, withRouter } from "react-router-dom"
 import { HeaderConnectContainer } from "components/Header/HeaderContainer"
 import { Navbar } from "components/Navbat/Navbar"
 import { DialogsCompose } from "components/Dialogs/DialogsContainer"

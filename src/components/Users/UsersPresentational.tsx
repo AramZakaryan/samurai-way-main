@@ -2,7 +2,8 @@ import S from "./Users.module.css"
 import nomiage from "../../assets/images/noimage.png"
 import React from "react"
 import { NavLink } from "react-router-dom"
-import { UsersPageDataType } from "../../redux/types"
+import { UsersPageDataType } from "redux/types"
+import { Paginator } from "components/common/Paginator/Paginator"
 
 type UsersFuncPresentType = {
   usersPageData: UsersPageDataType
@@ -11,31 +12,23 @@ type UsersFuncPresentType = {
   setSelectedPage: (selectedPageNumber: number) => void
 }
 
-export function UsersPresentational(props: UsersFuncPresentType) {
-  let pageCount = Math.ceil(props.usersPageData.totalUserCount / props.usersPageData.pageSize)
-  let pages = []
-  for (let i = 1; i <= Math.min(pageCount, 10); i++) {
-    pages.push(i)
-  }
-
+export const UsersPresentational: React.FC<UsersFuncPresentType> = ({
+  usersPageData,
+  follow,
+  unfollow,
+  setSelectedPage,
+}) => {
   return (
     <div>
       <div>coucou users</div>
-      <div>
-        {pages.map((p) => (
-          <span
-            key={p}
-            className={props.usersPageData.selectedPage === p ? S.selectedPage : ""}
-            onClick={() => props.setSelectedPage(p)}
-          >
-            {" "}
-            {p}{" "}
-          </span>
-        ))}
-        {pageCount > 10 && <span> ... {pageCount} </span>}
-      </div>
+      <Paginator
+        totalUserCount={usersPageData.totalUserCount}
+        pageSize={usersPageData.pageSize}
+        selectedPage={usersPageData.selectedPage}
+        setSelectedPage={setSelectedPage}
+      />
 
-      {props.usersPageData.usersData.map((u) => (
+      {usersPageData.usersData.map((u) => (
         <div key={u.id}>
           <span>
             <div>
@@ -46,18 +39,18 @@ export function UsersPresentational(props: UsersFuncPresentType) {
             <div>
               {u.followed ? (
                 <button
-                  disabled={props.usersPageData.allFollowingInProgress.some((el) => el === u.id)} // = true
+                  disabled={usersPageData.allFollowingInProgress.some((el) => el === u.id)} // = true
                   onClick={() => {
-                    props.unfollow(u.id)
+                    unfollow(u.id)
                   }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
-                  disabled={props.usersPageData.allFollowingInProgress.some((el) => el === u.id)} // = true
+                  disabled={usersPageData.allFollowingInProgress.some((el) => el === u.id)} // = true
                   onClick={() => {
-                    props.follow(u.id)
+                    follow(u.id)
                   }}
                 >
                   Follow

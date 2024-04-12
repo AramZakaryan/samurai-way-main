@@ -2,8 +2,9 @@ import React from "react"
 import S from "./CustomField.module.css"
 
 export const CustomTextarea: React.FC<any> = ({ input, meta, ...restProps }) => {
-  let errorMsg: string = meta.error
-  let fieldTouched: boolean = meta.touched
+  let { error: errorMsg, touched: fieldTouched }: { error: string; touched: boolean } = meta
+  // let errorMsg: string = meta.error
+  // let fieldTouched: boolean = meta.touched
   return (
     <div className={`${S.formControl} ${fieldTouched && errorMsg && S.formError}`}>
       <div>
@@ -15,8 +16,9 @@ export const CustomTextarea: React.FC<any> = ({ input, meta, ...restProps }) => 
 }
 
 export const CustomInput: React.FC<any> = ({ input, meta, ...restProps }) => {
-  let errorMsg: string = meta.error
-  let fieldTouched: boolean = meta.touched
+  let { error: errorMsg, touched: fieldTouched }: { error: string; touched: boolean } = meta
+  // let errorMsg: string = meta.error
+  // let fieldTouched: boolean = meta.touched
   return (
     <div className={`${S.formControl} ${fieldTouched && errorMsg && S.formError}`}>
       <div>
