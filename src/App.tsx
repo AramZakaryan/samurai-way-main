@@ -1,7 +1,7 @@
 import React from "react"
 import "./App.css"
 
-import { Route, RouteComponentProps, withRouter } from "react-router-dom"
+import { BrowserRouter, Route, RouteComponentProps, withRouter } from "react-router-dom"
 import { HeaderConnectContainer } from "components/Header/HeaderContainer"
 import { Navbar } from "components/Navbat/Navbar"
 import { DialogsCompose } from "components/Dialogs/DialogsContainer"
@@ -12,9 +12,9 @@ import { Settings } from "components/Settings/Settings"
 import { Friends } from "components/Friends/Friends"
 import { UserCompose } from "components/Users/UsersContainer"
 import { LoginCompose } from "components/Login/LoginContainer"
-import { connect } from "react-redux"
+import { connect, Provider } from "react-redux"
 import { initializeApp } from "redux/appReducer"
-import { stateReduxType } from "redux/storeRedux"
+import { stateReduxType, storeReduxType } from "redux/storeRedux"
 import { Preloader } from "components/common/Preloader/Preloader"
 import { compose } from "redux"
 
@@ -56,7 +56,18 @@ const mapStateToProps = (state: stateReduxType): mapStateToPropsType => ({
   initialized: state.app.initialized,
 })
 
-export default compose<React.ComponentType>(
+const AppCompose = compose<React.ComponentType>(
   connect(mapStateToProps, { initializeApp }),
   withRouter,
 )(App)
+
+/** ZA: App decorated by Provider and BrowserRouter*/
+export const AppDecorated: React.FC<{ store: storeReduxType }> = ({ store }) => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppCompose />
+      </BrowserRouter>
+    </Provider>
+  )
+}

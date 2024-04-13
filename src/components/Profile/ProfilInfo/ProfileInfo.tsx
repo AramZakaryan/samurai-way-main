@@ -1,9 +1,7 @@
 import React from "react"
 import S from "./ProfileInfo.module.css"
-import classes from "../Profile.module.css"
 import { Preloader } from "../../common/Preloader/Preloader"
-import { getUserApiType, ProfilePageDataType } from "redux/types"
-import { ProfileStatus } from "../ProfileStatus"
+import { getUserApiType } from "redux/types"
 import { ProfileStatusWithUseState } from "components/Profile/ProfileStatusWithUseState"
 
 type ProfileInfoType = {

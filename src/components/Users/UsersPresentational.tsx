@@ -22,7 +22,7 @@ export const UsersPresentational: React.FC<UsersFuncPresentType> = ({
     <div>
       <div>coucou users</div>
       <Paginator
-        totalUserCount={usersPageData.totalUserCount}
+        totalItemsCount={usersPageData.totalUserCount}
         pageSize={usersPageData.pageSize}
         selectedPage={usersPageData.selectedPage}
         setSelectedPage={setSelectedPage}

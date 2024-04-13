@@ -28,12 +28,10 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     })
   }
 
-  // deactivateEditModeHandler = (ev: React.FocusEvent<HTMLInputElement>) => {
   deactivateEditModeHandler = (ev: React.FocusEvent<HTMLInputElement>) => {
     this.setState({
       editMode: false,
     })
-    // this.props.updateUserStatus(ev.currentTarget.value)
     this.props.updateUserStatus(this.state.value)
   }
 
@@ -54,7 +52,6 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
           </div>
         ) : (
           <div>
-            {/*<input value={this.state.value?.toString()}*/}
             <input
               value={this.state.value?.toString()}
               onBlur={this.deactivateEditModeHandler}
