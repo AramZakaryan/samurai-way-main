@@ -1,22 +1,29 @@
-import React from "react"
+import React, { Suspense } from "react"
 import "./App.css"
 
 import { BrowserRouter, Route, RouteComponentProps, withRouter } from "react-router-dom"
 import { HeaderConnectContainer } from "components/Header/HeaderContainer"
 import { Navbar } from "components/Navbat/Navbar"
-import { DialogsCompose } from "components/Dialogs/DialogsContainer"
 import { ProfileCompose } from "components/Profile/ProfileContainer"
 import { News } from "components/News/News"
 import { Music } from "components/Music/Music"
 import { Settings } from "components/Settings/Settings"
 import { Friends } from "components/Friends/Friends"
-import { UserCompose } from "components/Users/UsersContainer"
 import { LoginCompose } from "components/Login/LoginContainer"
 import { connect, Provider } from "react-redux"
 import { initializeApp } from "redux/appReducer"
 import { stateReduxType, storeReduxType } from "redux/storeRedux"
 import { Preloader } from "components/common/Preloader/Preloader"
 import { compose } from "redux"
+import { withSuspense } from "hoc/withSuspence"
+// import DialogsCompose from "components/Dialogs/DialogsContainer"
+// import { UserCompose } from "components/Users/UsersContainer"
+
+const DialogsCompose = React.lazy(() => import("components/Dialogs/DialogsContainer"))
+
+const UserCompose = React.lazy(() =>
+  import("components/Users/UsersContainer").then(({ UserCompose }) => ({ default: UserCompose })),
+)
 
 type AppPropsType = {
   initializeApp: () => void
@@ -37,13 +44,24 @@ class App extends React.Component<AppPropsType> {
         <HeaderConnectContainer />
         <Navbar />
         <div className={"app-wrapper-content"}>
-          <Route path={"/profile/:userId?"} render={() => <ProfileCompose />} />
-          <Route path={"/dialogs"} render={() => <DialogsCompose />} />
+          <Route
+            path={"/dialogs"}
+            render={
+              () =>
+                // <Suspense fallback={<div>Messages loading in the process...</div>}>
+                withSuspense(DialogsCompose)
+              // </Suspense>
+            }
+          />
           <Route path={"/news"} component={News} />
+          <Route path={"/profile/:userId?"} render={() => <ProfileCompose />} />
           <Route path={"/music"} component={Music} />
           <Route path={"/settings"} component={Settings} />
           <Route path={"/friends"} component={Friends} />
-          <Route path={"/users"} render={() => <UserCompose />} />
+          {/*<Suspense fallback={<div>Users loading in the process...</div>}>*/}
+          <Route path={"/users"} render={() => withSuspense(UserCompose)} />
+          {/*</Suspense>*/}
+
           <Route path={"/login"} render={() => <LoginCompose />} />
         </div>
       </div>

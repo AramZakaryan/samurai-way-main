@@ -24,10 +24,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   }
 }
 
-export const DialogsCompose = compose<React.ComponentType>(
+const DialogsCompose = compose<React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withAuthRedirect,
 )(DialogsPresentational)
+
+export default DialogsCompose
 
 /////////// General Structure
 // DialogsPresentational >>>
