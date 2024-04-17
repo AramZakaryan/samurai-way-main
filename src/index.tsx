@@ -5,12 +5,4 @@ import "./redux/storeRedux"
 import { storeRedux } from "redux/storeRedux"
 import "./forDel"
 
-ReactDOM.render(
-  <AppDecorated store={storeRedux} />,
-  // <Provider store={storeRedux}>
-  //   <BrowserRouter>
-  //     <App />
-  //   </BrowserRouter>
-  // </Provider>
-  document.getElementById("root"),
-)
+ReactDOM.render(<AppDecorated store={storeRedux} />, document.getElementById("root"))

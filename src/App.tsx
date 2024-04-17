@@ -16,6 +16,7 @@ import { stateReduxType, storeReduxType } from "redux/storeRedux"
 import { Preloader } from "components/common/Preloader/Preloader"
 import { compose } from "redux"
 import { withSuspense } from "hoc/withSuspence"
+import * as process from "process"
 // import DialogsCompose from "components/Dialogs/DialogsContainer"
 // import { UserCompose } from "components/Users/UsersContainer"
 
@@ -44,24 +45,13 @@ class App extends React.Component<AppPropsType> {
         <HeaderConnectContainer />
         <Navbar />
         <div className={"app-wrapper-content"}>
-          <Route
-            path={"/dialogs"}
-            render={
-              () =>
-                // <Suspense fallback={<div>Messages loading in the process...</div>}>
-                withSuspense(DialogsCompose)
-              // </Suspense>
-            }
-          />
+          <Route path={"/dialogs"} render={() => withSuspense(DialogsCompose)} />
           <Route path={"/news"} component={News} />
           <Route path={"/profile/:userId?"} render={() => <ProfileCompose />} />
           <Route path={"/music"} component={Music} />
           <Route path={"/settings"} component={Settings} />
           <Route path={"/friends"} component={Friends} />
-          {/*<Suspense fallback={<div>Users loading in the process...</div>}>*/}
           <Route path={"/users"} render={() => withSuspense(UserCompose)} />
-          {/*</Suspense>*/}
-
           <Route path={"/login"} render={() => <LoginCompose />} />
         </div>
       </div>
@@ -83,7 +73,7 @@ const AppCompose = compose<React.ComponentType>(
 export const AppDecorated: React.FC<{ store: storeReduxType }> = ({ store }) => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <AppCompose />
       </BrowserRouter>
     </Provider>
