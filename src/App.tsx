@@ -1,7 +1,7 @@
 import React, { Suspense } from "react"
 import "./App.css"
 
-import { BrowserRouter, Route, RouteComponentProps, withRouter } from "react-router-dom"
+import { BrowserRouter, HashRouter, Route, RouteComponentProps, withRouter } from "react-router-dom"
 import { HeaderConnectContainer } from "components/Header/HeaderContainer"
 import { Navbar } from "components/Navbat/Navbar"
 import { ProfileCompose } from "components/Profile/ProfileContainer"
@@ -45,6 +45,7 @@ class App extends React.Component<AppPropsType> {
         <HeaderConnectContainer />
         <Navbar />
         <div className={"app-wrapper-content"}>
+          {/*<Route path="/" />*/}
           <Route path={"/dialogs"} render={() => withSuspense(DialogsCompose)} />
           <Route path={"/news"} component={News} />
           <Route path={"/profile/:userId?"} render={() => <ProfileCompose />} />
@@ -73,9 +74,11 @@ const AppCompose = compose<React.ComponentType>(
 export const AppDecorated: React.FC<{ store: storeReduxType }> = ({ store }) => {
   return (
     <Provider store={store}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      {/*<HashRouter basename={"/app"}>*/}
+      <BrowserRouter>
         <AppCompose />
       </BrowserRouter>
+      {/*</HashRouter>*/}
     </Provider>
   )
 }
