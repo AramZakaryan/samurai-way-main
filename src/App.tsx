@@ -74,8 +74,7 @@ const AppCompose = compose<React.ComponentType>(
 export const AppDecorated: React.FC<{ store: storeReduxType }> = ({ store }) => {
   return (
     <Provider store={store}>
-      <HashRouter basename={"/app"}>
-      {/*<HashRouter>*/}
+      <HashRouter>
       {/*<BrowserRouter>*/}
         <AppCompose />
       {/*</BrowserRouter>*/}
