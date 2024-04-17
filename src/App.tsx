@@ -48,7 +48,6 @@ class App extends React.Component<AppPropsType> {
           {/*<Route path="/" />*/}
           <Route path={"/dialogs"} render={() => withSuspense(DialogsCompose)} />
           <Route path={"/news"} component={News} />
-          <Route path={"/profile"} render={() => <ProfileCompose />} />
           <Route path={"/profile/:userId?"} render={() => <ProfileCompose />} />
           <Route path={"/music"} component={Music} />
           <Route path={"/settings"} component={Settings} />
@@ -75,12 +74,12 @@ const AppCompose = compose<React.ComponentType>(
 export const AppDecorated: React.FC<{ store: storeReduxType }> = ({ store }) => {
   return (
     <Provider store={store}>
-      {/*<HashRouter basename={"/app"}>*/}
+      <HashRouter basename={"/app"}>
       {/*<HashRouter>*/}
-      <BrowserRouter>
+      {/*<BrowserRouter>*/}
         <AppCompose />
-      </BrowserRouter>
-      {/*</HashRouter>*/}
+      {/*</BrowserRouter>*/}
+      </HashRouter>
     </Provider>
   )
 }
