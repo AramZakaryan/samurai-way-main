@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ChangeEvent} from "react"
 import S from "./ProfileInfo.module.css"
 import { Preloader } from "../../common/Preloader/Preloader"
 import { getUserApiType } from "redux/types"
@@ -6,6 +6,7 @@ import { ProfileStatusWithUseState } from "components/Profile/ProfileStatusWithU
 import noimage from "../../../assets/images/noimage.png"
 
 type ProfileInfoType = {
+  isOwner:boolean
   userProfile: getUserApiType
   status: null | string
   updateUserStatus: (status: null | string) => void
@@ -16,14 +17,16 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     return <Preloader />
   }
 
+  const imageUploadHandler = (e:ChangeEvent<HTMLInputElement>)=>{
+   if( e.currentTarget.files?.length){
+   }
+  }
+
   return (
     <>
-      {/*<div>*/}
-      {/*    <img className={S.imgLarge}*/}
-      {/*         src={"https://www.mickeyshannon.com/photos/zoom/yosemite-sunset-panorama.jpg"}/>*/}
-      {/*</div>*/}
       <div className={S.descriptionBlock}>
-        <img className={S.imgLarge} src={props.userProfile.photos.large || noimage} />
+        <img className={S.imgLarge} src={props.userProfile.photos.large  ||noimage} />
+        <div><input className={S.upload} type={"file"} onChange={imageUploadHandler}/></div>
         <div>{props.userProfile.fullName}</div>
         <div>{props.userProfile.aboutMe}</div>
         <div>

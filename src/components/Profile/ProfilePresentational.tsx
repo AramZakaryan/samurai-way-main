@@ -6,6 +6,7 @@ import { MyPostsConnectContainer } from "./MyPosts/MyPostsConnectContainer"
 import { getUserApiType } from "redux/types"
 
 type ProfilePresentationalPropsType = {
+    isOwner:boolean
   userProfile: getUserApiType
   status: null | string
   updateUserStatus: (status: null | string) => void
