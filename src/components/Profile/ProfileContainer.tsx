@@ -23,31 +23,24 @@ export class ProfileClassContainer extends React.PureComponent<ProfileClassConta
     super(props)
   }
 
- refreshProfile () {
-
-   let userId = +this.props.match.params.userId
-
-   if (!userId) {
-     userId = this.props.authPartData.authData.userId as number
-   }
-
-   if (!userId) {
-     this.props.history.push("/login")
-   }
-
-   this.props.setUserProfile(userId)
-   this.props.getUserStatus(userId)
-
- }
+  // shouldComponentUpdate(nextProps: any, nextState: any) {
+  //   return nextProps != this.props || nextState != this.state
+  // }
 
   componentDidMount() {
-    this.refreshProfile()
-  }
+    let userId = +this.props.match.params.userId
 
-  componentDidUpdate(prevProps: Readonly<ProfileClassContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    this.refreshProfile()
-  }
+    if (!userId) {
+      userId = this.props.authPartData.authData.userId as number
+    }
 
+    if (!userId) {
+      this.props.history.push("/login")
+    }
+
+    this.props.setUserProfile(userId)
+    this.props.getUserStatus(userId)
+  }
   render() {
     return (
       <>
