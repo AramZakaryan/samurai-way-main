@@ -3,6 +3,7 @@ import S from "./ProfileInfo.module.css"
 import { Preloader } from "../../common/Preloader/Preloader"
 import { getUserApiType } from "redux/types"
 import { ProfileStatusWithUseState } from "components/Profile/ProfileStatusWithUseState"
+import noimage from "../../../assets/images/noimage.png"
 
 type ProfileInfoType = {
   userProfile: getUserApiType
@@ -22,7 +23,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
       {/*         src={"https://www.mickeyshannon.com/photos/zoom/yosemite-sunset-panorama.jpg"}/>*/}
       {/*</div>*/}
       <div className={S.descriptionBlock}>
-        <img className={S.imgSmall} src={props.userProfile.photos.large || undefined} />
+        <img className={S.imgLarge} src={props.userProfile.photos.large || noimage} />
         <div>{props.userProfile.fullName}</div>
         <div>{props.userProfile.aboutMe}</div>
         <div>
