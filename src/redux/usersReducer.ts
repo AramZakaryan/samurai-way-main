@@ -1,4 +1,4 @@
-import { AllActionsType, getUsersApiType, UserActionsType, UsersPageDataType } from "./types"
+import { AllActionsType, GetUsersApiType, UserActionsType, UsersPageDataType } from "./types"
 import { api } from "api/Api"
 import { Dispatch } from "redux"
 
@@ -79,7 +79,7 @@ export const usersReducer = (
 ////////// ACTION CREATORS
 
 /** P.S.(Aram) getUsers ACTION CREATOR */
-export const getUsersAC = (newUsers: getUsersApiType["items"]) =>
+export const getUsersAC = (newUsers: GetUsersApiType["items"]) =>
   ({ type: GET_USERS, newUsers }) as const
 
 /** P.S.(Aram) follow ACTION CREATOR */

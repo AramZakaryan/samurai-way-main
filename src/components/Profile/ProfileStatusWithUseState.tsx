@@ -27,24 +27,25 @@ export const ProfileStatusWithUseState: React.FC<ProfileStatusPropsType> = (prop
   }
 
   return (
-    <div>
-      {!editMode ? (
-        <div>
+      <div>
+        <b>status: </b>
+        {!editMode ? (
+            // <div>
           <span onDoubleClick={activateEditModeHandler}>
             {props.status || "There is no status"}
           </span>
-        </div>
-      ) : (
-        <div>
-          {/*<input value={this.state.value?.toString()}*/}
-          <input
-            value={status?.toString()}
-            onBlur={deactivateEditModeHandler}
-            autoFocus={true}
-            onChange={inputOnChangeHandler}
-          />
-        </div>
-      )}
-    </div>
+            // </div>
+        ) : (
+            // <div>
+            //   <input value={this.state.value?.toString()}
+              <input
+                  value={status?.toString()}
+                  onBlur={deactivateEditModeHandler}
+                  autoFocus={true}
+                  onChange={inputOnChangeHandler}
+              />
+            // </div>
+        )}
+      </div>
   )
 }

@@ -2,7 +2,7 @@ import React from "react"
 import {ProfilePresentational} from "./ProfilePresentational"
 import {connect} from "react-redux"
 import {stateReduxType} from "redux/storeRedux"
-import {getUserStatus, setUserProfile, updateUserStatus} from "redux/profileReducer"
+import {getUserStatus, setUserProfile, updateUserPhoto, updateUserStatus} from "redux/profileReducer"
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AuthPartDataType, ProfilePageDataType} from "redux/types"
 import {compose} from "redux"
@@ -16,6 +16,7 @@ type ProfileClassContainerPropsType = {
     setUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: null | string) => void
+    updateUserPhoto: (image: File )=>void
 } & RouteComponentProps<{ userId: string }> ////////// !!!
 
 export class ProfileClassContainer extends React.PureComponent<ProfileClassContainerPropsType> {
@@ -59,6 +60,7 @@ export class ProfileClassContainer extends React.PureComponent<ProfileClassConta
                     userProfile={this.props.profilePageData.userProfile}
                     status={this.props.profilePageData.status}
                     updateUserStatus={this.props.updateUserStatus}
+                    updateUserPhoto={this.props.updateUserPhoto}
                     getUserStatus={this.props.getUserStatus}
                 />
             </>
@@ -70,7 +72,7 @@ type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData
 
 type MapDispatchToPropsType = Pick<
     ProfileClassContainerPropsType,
-    "setUserProfile" | "getUserStatus" | "updateUserStatus"
+    "setUserProfile" | "getUserStatus" | "updateUserStatus" | "updateUserPhoto"
 >
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
@@ -84,6 +86,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
     setUserProfile,
     getUserStatus,
     updateUserStatus,
+    updateUserPhoto
 }
 
 export const ProfileCompose = compose<React.ComponentType>(

@@ -1,8 +1,7 @@
-import { create } from "react-test-renderer"
-import { ProfileStatusWithUseState } from "./ProfileStatusWithUseState"
-import { updateUserStatus } from "redux/profileReducer"
+import {create} from "react-test-renderer"
+import {ProfileStatusWithUseState} from "../../ProfileStatusWithUseState"
+import {updateUserStatus} from "redux/profileReducer"
 import React from "react"
-import { ProfileStatus } from "components/Profile/ProfileStatus"
 
 // : (status: null | string) => void
 

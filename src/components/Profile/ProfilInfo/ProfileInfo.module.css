@@ -1,16 +1,21 @@
 .imgLarge {
-  height: 200px;
-  width: 200px;
+    height: 200px;
+    width: 200px;
 }
+
 .imgSmall {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
 
 .descriptionBlock {
-  padding: 10px;
+    padding: 10px;
 }
 
 .upload {
-  margin: 20px 0;
+    margin: 20px 0;
+}
+
+.profileStatusContainer {
+    margin-top: 20px
 }
