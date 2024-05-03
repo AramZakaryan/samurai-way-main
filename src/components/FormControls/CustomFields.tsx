@@ -28,3 +28,17 @@ export const CustomInput: React.FC<any> = ({ input, meta, ...restProps }) => {
     </div>
   )
 }
+
+export const CustomCheckbox: React.FC<any> = ({ input, meta, ...restProps }) => {
+    let { error: errorMsg, touched: fieldTouched }: { error: string; touched: boolean } = meta
+    // let errorMsg: string = meta.error
+    // let fieldTouched: boolean = meta.touched
+    return (
+        <div className={`${S.formControl} ${fieldTouched && errorMsg && S.formError}`}>
+            <div>
+                <input type={"checkbox"} {...input} {...restProps} />
+            </div>
+            <span>{fieldTouched && errorMsg}</span>
+        </div>
+    )
+}
