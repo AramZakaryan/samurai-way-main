@@ -8,7 +8,7 @@ import React from "react"
 describe("ProfileStatusWithUseState component tests", () => {
   test("lala", () => {
     const component = create(
-      <ProfileStatusWithUseState status={"some status"} updateUserStatus={updateUserStatus} />,
+      <ProfileStatusWithUseState status={"some status"} updateUserStatus={updateUserStatus} isOwner={true}/>,
     )
     const instance = component.getInstance()
   })

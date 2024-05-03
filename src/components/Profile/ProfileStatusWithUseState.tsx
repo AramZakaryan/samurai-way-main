@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 type ProfileStatusPropsType = {
+  isOwner: boolean
   status: null | string
   updateUserStatus: (status: null | string) => void
 }
@@ -14,7 +15,7 @@ export const ProfileStatusWithUseState: React.FC<ProfileStatusPropsType> = (prop
   }, [props.status])
 
   const activateEditModeHandler = () => {
-    setEditMode(true)
+    props.isOwner && setEditMode(true)
   }
 
   const deactivateEditModeHandler = (ev: React.FocusEvent<HTMLInputElement>) => {

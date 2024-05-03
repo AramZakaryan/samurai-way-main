@@ -1,24 +1,24 @@
 import React from "react";
 import S from "./ProfileDataReduxForm.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {CustomInput, CustomCheckbox} from "../../../FormControls/CustomFields";
+import {CustomInput, CustomCheckbox, CustomTextarea} from "../../../FormControls/CustomFields";
 import {validateMaxLength, validateRequiredField} from "../../../../utils/validators/validators";
 import {GetUserApiType} from "../../../../redux/types";
 
-type Props =  GetUserApiType
+type Props =  Omit<GetUserApiType, "userId" | "photos">
 
 
 const validateMaxLength50 = validateMaxLength(50)
 
-const ProfileDataForm = (props: InjectedFormProps<Props>) => {
+const ProfileDataForm = ({handleSubmit, initialValues}: InjectedFormProps<Props>) => {
 
-    return (<form>
+    return (<form onSubmit={handleSubmit}>
         <div>
             <Field
                 component={CustomInput}
                 name={"aboutMe"}
                 placeholder={"aboutMe8"}
-                validate={[validateRequiredField, validateMaxLength50]}
+                // validate={[validateRequiredField, validateMaxLength50]}
             />
         </div>
         <div>
@@ -31,10 +31,10 @@ const ProfileDataForm = (props: InjectedFormProps<Props>) => {
         </div>
         <div>
             <Field
-                component={CustomInput}
+                component={CustomTextarea}
                 name={"lookingForAJobDescription"}
                 placeholder={"lookingForAJobDescription"}
-                validate={[validateRequiredField, validateMaxLength50]}
+                // validate={[validateRequiredField, validateMaxLength50]}
             />
         </div>
         <div>
@@ -47,12 +47,12 @@ const ProfileDataForm = (props: InjectedFormProps<Props>) => {
         </div>
         <b>contacts: </b>
         <div className={S.contacts}>
-            {props.initialValues.contacts && Object.entries(props.initialValues.contacts).map(([k, v]) =>
-                <Field
+            {initialValues.contacts && Object.entries(initialValues.contacts).map(([k, v]) =>
+                <Field key={k}
                 component={CustomInput}
-                name={k}
+                name={`contacts.${k}`}
                 placeholder={k}
-                validate={[validateRequiredField, validateMaxLength50]}
+                // validate={[validateRequiredField, validateMaxLength50]}
             />)}
         </div>
         <button type={"submit"}>Submit</button>

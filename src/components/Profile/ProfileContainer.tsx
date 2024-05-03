@@ -2,7 +2,7 @@ import React from "react"
 import {ProfilePresentational} from "./ProfilePresentational"
 import {connect} from "react-redux"
 import {stateReduxType} from "redux/storeRedux"
-import {getUserStatus, setUserProfile, updateUserPhoto, updateUserStatus} from "redux/profileReducer"
+import {getUserStatus, updateUserProfile, setUserProfile, updateUserPhoto, updateUserStatus} from "redux/profileReducer"
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AuthPartDataType, ProfilePageDataType} from "redux/types"
 import {compose} from "redux"
@@ -17,6 +17,7 @@ type ProfileClassContainerPropsType = {
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: null | string) => void
     updateUserPhoto: (image: File )=>void
+    updateUserProfile: (formData: any)=>void
 } & RouteComponentProps<{ userId: string }> ////////// !!!
 
 export class ProfileClassContainer extends React.PureComponent<ProfileClassContainerPropsType> {
@@ -50,7 +51,9 @@ export class ProfileClassContainer extends React.PureComponent<ProfileClassConta
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
+
     }
+
 
     render() {
         return (
@@ -62,6 +65,7 @@ export class ProfileClassContainer extends React.PureComponent<ProfileClassConta
                     updateUserStatus={this.props.updateUserStatus}
                     updateUserPhoto={this.props.updateUserPhoto}
                     getUserStatus={this.props.getUserStatus}
+                    updateUserProfile={this.props.updateUserProfile}
                 />
             </>
         )
@@ -72,7 +76,7 @@ type MapStateToPropsType = Pick<ProfileClassContainerPropsType, "profilePageData
 
 type MapDispatchToPropsType = Pick<
     ProfileClassContainerPropsType,
-    "setUserProfile" | "getUserStatus" | "updateUserStatus" | "updateUserPhoto"
+    "setUserProfile" | "getUserStatus" | "updateUserStatus" | "updateUserPhoto" | "updateUserProfile"
 >
 
 const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
@@ -86,7 +90,8 @@ const mapDispatchToProps: MapDispatchToPropsType = {
     setUserProfile,
     getUserStatus,
     updateUserStatus,
-    updateUserPhoto
+    updateUserPhoto,
+    updateUserProfile
 }
 
 export const ProfileCompose = compose<React.ComponentType>(
@@ -95,7 +100,3 @@ export const ProfileCompose = compose<React.ComponentType>(
     // withAuthRedirect, // temporary commented and redirect organised by "history.push"
 )(ProfileClassContainer)
 
-/////////// General Structure
-// ProfilePresentational >>>
-//    ProfileClassContainer
-//       ProfileCompose

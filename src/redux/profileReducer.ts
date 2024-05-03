@@ -1,6 +1,7 @@
 import {AllActionsType, GetUserApiType, ProfileActionsType, ProfilePageDataType} from "./types"
 import {profileApi, api} from "api/Api"
 import {Dispatch} from "redux"
+import {login} from "./authReducer";
 
 const initialSubState: ProfilePageDataType = {
     postsData: [
@@ -46,7 +47,6 @@ export const profileReducer = (
                 status: action.status,
             }
         case "profile/UPDATE_USER_PHOTO":
-            console.log(action.image)
             return {
                 ...subState,
                 userProfile: subState.userProfile && {
@@ -57,6 +57,15 @@ export const profileReducer = (
                     }
                 }
             }
+        case "profile/UPDATE_USER_PROFILE":
+            return {
+                ...subState,
+                userProfile: subState.userProfile && {
+                    ...subState.userProfile,
+                    ...action.formData
+                }
+            }
+
         default: {
             return subState
         }
@@ -83,6 +92,10 @@ export const setUserStatus = (status: null | string) =>
 export const updateUserPhotoAC = (imageUrl: string | null) =>
     ({type: "profile/UPDATE_USER_PHOTO", image: imageUrl}) as const
 
+/** P.S.(Aram) updateUserProfile ACTION CREATOR */
+export const updateUserProfileAC = (formData: any) =>
+    ({type: "profile/UPDATE_USER_PROFILE", formData}) as const
+
 
 //////////// THUNK CREATORS
 
@@ -98,6 +111,7 @@ export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
     return dispatch(setUserStatus(response.data))
 }
 
+/** P.S.(Aram) updateUserStatus THUNK CREATOR */
 export const updateUserStatus = (status: null | string) => async (dispatch: Dispatch) => {
     const data = await profileApi.updateMyStatus(status)
     if (data.resultCode === 0) {
@@ -105,6 +119,7 @@ export const updateUserStatus = (status: null | string) => async (dispatch: Disp
     }
 }
 
+/** P.S.(Aram) updateUserPhoto THUNK CREATOR */
 export const updateUserPhoto = (imageFile: File) => async (dispatch: Dispatch) => {
     const {resultCode, data: {photos: {large}}} = await profileApi.updateMyPhoto(imageFile)
     if (resultCode === 0) {
@@ -115,3 +130,15 @@ export const updateUserPhoto = (imageFile: File) => async (dispatch: Dispatch) =
     //     dispatch(updateUserPhotoAC(data.data.photos.large))
     // }
 }
+
+/** P.S.(Aram) saveProfile THUNK CREATOR */
+export const updateUserProfile = (formData: any) => async (dispatch: Dispatch) => {
+    const {resultCode} = await profileApi.updateMyProfile(formData)
+    if (resultCode === 0) {
+        dispatch(updateUserProfileAC(formData))
+    }
+}
+
+// export const saveProfile = (formData: any) => {
+//     console.log(formData)
+// }

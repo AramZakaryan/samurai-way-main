@@ -33,10 +33,12 @@ export const CustomCheckbox: React.FC<any> = ({ input, meta, ...restProps }) => 
     let { error: errorMsg, touched: fieldTouched }: { error: string; touched: boolean } = meta
     // let errorMsg: string = meta.error
     // let fieldTouched: boolean = meta.touched
+
+    console.log(input)
     return (
         <div className={`${S.formControl} ${fieldTouched && errorMsg && S.formError}`}>
             <div>
-                <input type={"checkbox"} {...input} {...restProps} />
+                <input type={"checkbox"} {...input} {...restProps} checked={input.value}/>
             </div>
             <span>{fieldTouched && errorMsg}</span>
         </div>

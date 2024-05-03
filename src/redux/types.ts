@@ -1,4 +1,11 @@
-import {addPost, deletePost, setUserProfileAC, setUserStatus, updateUserPhotoAC} from "./profileReducer"
+import {
+    addPost,
+    deletePost,
+    setUserProfileAC,
+    setUserStatus,
+    updateUserPhotoAC,
+    updateUserProfileAC
+} from "./profileReducer"
 import {addMessageAC} from "./dialogsReducer"
 import {
     followAC,
@@ -28,6 +35,7 @@ export type ProfileActionsType =
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof updateUserPhotoAC>
+    | ReturnType<typeof updateUserProfileAC>
 
 export type UserActionsType =
     | ReturnType<typeof getUsersAC>
@@ -104,7 +112,7 @@ export type GetUsersApiType = {
     error: null | string
 }
 
-export type GetUserApiType =  {
+export type GetUserApiType = {
     aboutMe: string
     contacts: {
         facebook: string | null
@@ -126,61 +134,44 @@ export type GetUserApiType =  {
     }
 }
 
-export type FollowUnfollowApiType = {
-    data: {
-        userId: number | null
-        login: string | null // = user name
-        email: string | null
-        isAuth: boolean
+export type ApiType<D = {}> = {
+    data: D
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
+export type FollowUnfollowApiType = ApiType<{
+    userId: number | null
+    login: string | null // = user name
+    email: string | null
+    isAuth: boolean
+}>
+
+export type AuthApiType = ApiType<{
+    id: number | null // !!! fromApi: "id"; in the state: "userId"
+    login: string | null // = user name
+    email: string | null
+}>
+
+export type GetUserStatusApiType = ApiType<{
+    id: number | null // !!! fromApi: "id"; in the state: "userId"
+    login: string | null // = user name
+    email: string | null
+}>
+
+export type UpdateMyPhotoApiType = ApiType<{
+    photos: {
+        small: string | null
+        large: string | null
     }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
+}>
 
-export type AuthApiType = {
-    data: {
-        id: number | null // !!! fromApi: "id"; in the state: "userId"
-        login: string | null // = user name
-        email: string | null
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
+export type LoginApiType = ApiType<{
+    userId: number | null
+}>
 
-export type GetUserStatusApiType = {
-    data: {}
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
+export type LogoutApiType = ApiType
 
-export type UpdateMyPhotoApiType = {
-    data: {
-        photos: {
-            small: string | null
-            large: string | null
-        }
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
-
-export type LoginApiType = {
-    data: {
-        userId: number | null
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
-
-export type LogoutApiType = {
-    data: {}
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
+export type UpdateMyProfileType = ApiType
 

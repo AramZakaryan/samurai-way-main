@@ -6,7 +6,7 @@ import {
     GetUsersApiType,
     GetUserStatusApiType,
     LoginApiType,
-    LogoutApiType, UpdateMyPhotoApiType,
+    LogoutApiType, UpdateMyPhotoApiType, UpdateMyProfileType,
 } from "redux/types"
 
 const instance = axios.create({
@@ -60,6 +60,9 @@ export const profileApi = {
             }
         })
             .then((response) => response.data) // for sending to UI only "data"
+    },
+    updateMyProfile (formData:any) {
+        return instance.put<UpdateMyProfileType>("profile", formData).then((response) => response.data) // for sending to UI only "data"
     }
 }
 
