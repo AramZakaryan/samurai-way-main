@@ -136,15 +136,16 @@ export const updateUserPhoto = (imageFile: File) => async (dispatch: Dispatch) =
 export const updateUserProfile = (formData: any) => async (dispatch: Dispatch) => {
     const {resultCode,messages} = await profileApi.updateMyProfile(formData)
     if (resultCode === 0) {
-        dispatch(updateUserProfileAC(formData))
+         dispatch(updateUserProfileAC(formData))
     }
     else {
         const errorMsg = messages.length ? messages[0] : "Undefined Error Occurred."
-        dispatch(stopSubmit("profileDataForm", {_error: errorMsg}))
-        // dispatch(stopSubmit("profileDataForm", {_error: errorMsg}))
+          dispatch(stopSubmit("profileDataForm", {_error: errorMsg}))
     }
+    return resultCode
 }
 
 // export const saveProfile = (formData: any) => {
 //     console.log(formData)
 // }
+

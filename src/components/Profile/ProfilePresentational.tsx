@@ -4,6 +4,7 @@ import {ProfileInfo} from "./ProfilInfo/ProfileInfo"
 import {Sidebar} from "../Sidebar/Sidebar"
 import {MyPostsConnectContainer} from "./MyPosts/MyPostsConnectContainer"
 import {GetUserApiType} from "redux/types"
+import {Dispatch} from "redux";
 
 type ProfilePresentationalPropsType = {
     isOwner: boolean
@@ -12,7 +13,7 @@ type ProfilePresentationalPropsType = {
     updateUserStatus: (status: null | string) => void
     getUserStatus: (userId: number) => void
     updateUserPhoto: (image: File) => void
-    updateUserProfile: (formData: any)=>void
+    updateUserProfile: (formData: any)=>Promise<number>
 }
 
 

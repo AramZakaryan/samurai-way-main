@@ -5,7 +5,7 @@ import {stateReduxType} from "redux/storeRedux"
 import {getUserStatus, updateUserProfile, setUserProfile, updateUserPhoto, updateUserStatus} from "redux/profileReducer"
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AuthPartDataType, ProfilePageDataType} from "redux/types"
-import {compose} from "redux"
+import {compose, Dispatch} from "redux"
 import {withAuthRedirect} from "hoc/WithAuthRedirect"
 
 type ProfileClassContainerPropsType = {
@@ -17,7 +17,7 @@ type ProfileClassContainerPropsType = {
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: null | string) => void
     updateUserPhoto: (image: File )=>void
-    updateUserProfile: (formData: any)=>void
+    updateUserProfile: (formData: any)=>any
 } & RouteComponentProps<{ userId: string }> ////////// !!!
 
 export class ProfileClassContainer extends React.PureComponent<ProfileClassContainerPropsType> {
@@ -91,7 +91,7 @@ const mapDispatchToProps: MapDispatchToPropsType = {
     getUserStatus,
     updateUserStatus,
     updateUserPhoto,
-    updateUserProfile
+    updateUserProfile:updateUserProfile
 }
 
 export const ProfileCompose = compose<React.ComponentType>(

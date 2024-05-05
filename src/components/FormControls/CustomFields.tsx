@@ -34,7 +34,6 @@ export const CustomCheckbox: React.FC<any> = ({ input, meta, ...restProps }) => 
     // let errorMsg: string = meta.error
     // let fieldTouched: boolean = meta.touched
 
-    console.log(input)
     return (
         <div className={`${S.formControl} ${fieldTouched && errorMsg && S.formError}`}>
             <div>

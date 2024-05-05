@@ -6,6 +6,7 @@ import {ProfileStatusWithUseState} from "components/Profile/ProfileStatusWithUse
 import noimage from "../../../assets/images/noimage.png"
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataReduxForm} from "./ProfileDataReduxForm/ProfileDataReduxForm";
+import {Dispatch} from "redux";
 
 type ProfileInfoType = {
     isOwner: boolean
@@ -13,7 +14,7 @@ type ProfileInfoType = {
     status: null | string
     updateUserStatus: (status: null | string) => void
     updateUserPhoto: (image: File) => void
-    updateUserProfile: (formData: any) => void
+    updateUserProfile: (formData: any)=>Promise<number>
 
 }
 
@@ -31,10 +32,9 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
         }
     }
 
-    const onSubmit = (formData: any) => {
-        props.updateUserProfile(formData)
-        // setEditMode(false)
-        // console.log(formData)
+    const onSubmit = async (formData: any) => {
+        const resultCode = await props.updateUserProfile(formData)
+        resultCode === 0 && setEditMode(false)
     }
 
     const {photos, userId, ...initialValues} = props.userProfile
@@ -46,7 +46,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                 <img className={S.imgLarge} src={props.userProfile.photos.large || noimage} alt={"profile photo"}/>
                 <div><input className={S.upload} type={"file"} onInput={imageUploadHandler}/></div>
                 {props.isOwner && editMode ?
-                    <ProfileDataReduxForm initialValues={initialValues} onSubmit={onSubmit} />
+                    <ProfileDataReduxForm initialValues={initialValues} onSubmit={onSubmit}/>
                     : (<><ProfileData {...props.userProfile}/>
                         {props.isOwner && <button onClick={() => setEditMode(true)}>Edit the Profile</button>}
                     </>)
