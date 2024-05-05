@@ -2,6 +2,7 @@ import {AllActionsType, GetUserApiType, ProfileActionsType, ProfilePageDataType}
 import {profileApi, api} from "api/Api"
 import {Dispatch} from "redux"
 import {login} from "./authReducer";
+import {stopSubmit} from "redux-form";
 
 const initialSubState: ProfilePageDataType = {
     postsData: [
@@ -133,9 +134,14 @@ export const updateUserPhoto = (imageFile: File) => async (dispatch: Dispatch) =
 
 /** P.S.(Aram) saveProfile THUNK CREATOR */
 export const updateUserProfile = (formData: any) => async (dispatch: Dispatch) => {
-    const {resultCode} = await profileApi.updateMyProfile(formData)
+    const {resultCode,messages} = await profileApi.updateMyProfile(formData)
     if (resultCode === 0) {
         dispatch(updateUserProfileAC(formData))
+    }
+    else {
+        const errorMsg = messages.length ? messages[0] : "Undefined Error Occurred."
+        dispatch(stopSubmit("profileDataForm", {_error: errorMsg}))
+        // dispatch(stopSubmit("profileDataForm", {_error: errorMsg}))
     }
 }
 

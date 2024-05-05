@@ -4,3 +4,9 @@
 .contacts{
     margin: 0 20px;
 }
+
+.formSummaryError {
+    font-weight: bold;
+    color: maroon;
+    /*border: 3px solid maroon ;*/
+}

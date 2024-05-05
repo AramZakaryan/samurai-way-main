@@ -10,7 +10,7 @@ type Props =  Omit<GetUserApiType, "userId" | "photos">
 
 const validateMaxLength50 = validateMaxLength(50)
 
-const ProfileDataForm = ({handleSubmit, initialValues}: InjectedFormProps<Props>) => {
+const ProfileDataForm = ({handleSubmit, initialValues, error}: InjectedFormProps<Props>) => {
 
     return (<form onSubmit={handleSubmit}>
         <div>
@@ -49,12 +49,13 @@ const ProfileDataForm = ({handleSubmit, initialValues}: InjectedFormProps<Props>
         <div className={S.contacts}>
             {initialValues.contacts && Object.entries(initialValues.contacts).map(([k, v]) =>
                 <Field key={k}
-                component={CustomInput}
-                name={`contacts.${k}`}
-                placeholder={k}
-                // validate={[validateRequiredField, validateMaxLength50]}
-            />)}
+                       component={CustomInput}
+                       name={`contacts.${k}`}
+                       placeholder={k}
+                    // validate={[validateRequiredField, validateMaxLength50]}
+                />)}
         </div>
+        <div className={error && S.formSummaryError}>{error}</div>
         <button type={"submit"}>Submit</button>
     </form>)
 }

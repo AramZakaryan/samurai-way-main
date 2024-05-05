@@ -33,7 +33,8 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
     const onSubmit = (formData: any) => {
         props.updateUserProfile(formData)
-        setEditMode(false)
+        // setEditMode(false)
+        // console.log(formData)
     }
 
     const {photos, userId, ...initialValues} = props.userProfile
@@ -45,7 +46,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                 <img className={S.imgLarge} src={props.userProfile.photos.large || noimage} alt={"profile photo"}/>
                 <div><input className={S.upload} type={"file"} onInput={imageUploadHandler}/></div>
                 {props.isOwner && editMode ?
-                    <ProfileDataReduxForm initialValues={initialValues} onSubmit={onSubmit}/>
+                    <ProfileDataReduxForm initialValues={initialValues} onSubmit={onSubmit} />
                     : (<><ProfileData {...props.userProfile}/>
                         {props.isOwner && <button onClick={() => setEditMode(true)}>Edit the Profile</button>}
                     </>)
