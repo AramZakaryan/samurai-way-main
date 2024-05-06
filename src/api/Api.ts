@@ -67,12 +67,16 @@ export const profileApi = {
 }
 
 export const authApi = {
+    getCaptcha(){
+        return instance.get<{url: string}>("/security/get-captcha-url").then((response) => response.data) // for sending to UI only "data"
+    },
+
     auth() {
         return instance.get<AuthApiType>("auth/me").then((response) => response.data) // for sending to UI only "data"
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
+    login(email: string, password: string, rememberMe: boolean = false, captcha?: string) {
         return instance
-            .post<LoginApiType>("auth/login", {email, password, rememberMe})
+            .post<LoginApiType>("auth/login", {email, password, rememberMe, captcha})
             .then((response) => response.data) // for sending to UI only "data"
     },
     logout() {

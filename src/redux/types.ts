@@ -16,7 +16,7 @@ import {
     toggleIsFollowingInProgress,
     unfollowAC,
 } from "./usersReducer"
-import {setUserDataAC} from "./authReducer"
+import {getCaptchaAC, setUserDataAC} from "./authReducer"
 import {initializedSuccessfullyAC} from "redux/appReducer"
 
 // ACTION TYPES
@@ -50,7 +50,9 @@ export type DialogsActionsType = ReturnType<typeof addMessageAC>
 
 export type SidebarActionsType = any
 
-export type AuthActionsType = ReturnType<typeof setUserDataAC>
+export type AuthActionsType =
+    ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof getCaptchaAC>
 
 export type AppActionsType = ReturnType<typeof initializedSuccessfullyAC>
 
@@ -91,7 +93,13 @@ export type UsersPageDataType = {
 export type SidebarDataType = {}
 
 export type AuthPartDataType = {
-    authData: FollowUnfollowApiType["data"]
+    authData: {
+        userId: number | null
+        login: string | null // = user name
+        email: string | null
+        isAuth: boolean
+        captcha: string | null
+    }
 }
 
 // API TYPES (TYPES OF RESPONSES FROM SERVER)
