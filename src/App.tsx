@@ -32,8 +32,19 @@ type AppPropsType = {
 } & RouteComponentProps
 
 class App extends React.Component<AppPropsType> {
+
+  handleAllRejections = (ev:PromiseRejectionEvent) =>{
+    console.error(ev)
+}
+
+
   componentDidMount() {
     this.props.initializeApp()
+    window.addEventListener("unhandledrejection", this.handleAllRejections)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.handleAllRejections)
   }
 
   render() {

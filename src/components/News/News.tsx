@@ -1,6 +1,7 @@
 import React from "react"
-import classes from "./News.module.css"
+import S from "./News.module.css"
+import cn from "classnames";
 
 export const News = () => {
-  return <div>coucou news</div>
+  return <div className={cn(S.class1,S.class2)}>coucou news</div>
 }

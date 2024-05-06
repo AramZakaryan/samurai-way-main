@@ -1,6 +1,7 @@
 import S from "./Paginator.module.css"
 import React, { useEffect, useState } from "react"
 
+
 type PaginatorType = {
   totalItemsCount: number
   pageSize: number
