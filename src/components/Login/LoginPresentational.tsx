@@ -13,12 +13,14 @@ type FormDataType = {
     captcha?: string
 }
 
-type AdditionalProps = {}
+type AdditionalProps = {
+    captchaURL: string | null
+}
 
 
 const validateMaxLength50 = validateMaxLength(50)
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType,AdditionalProps> & AdditionalProps> = ({handleSubmit, error, captchaURL}) => {
 
     return (
         <form onSubmit={handleSubmit}>
@@ -35,7 +37,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                     // type={"password"}
                     component={CustomInput}
                     name={"password"}
-                    placeholder={"password "}
+                    placeholder={"password"}
                     validate={[validateRequiredField, validateMaxLength50]}
                 />
 
@@ -46,6 +48,19 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                        type={"checkbox"}/>
                 Remember Me
             </div>
+
+            {captchaURL &&
+                <div>
+                    <Field
+                        // type={"password"}
+                        component={CustomInput}
+                        name={"captcha"}
+                        placeholder={"captcha"}
+                        // validate={[validateRequiredField, validateMaxLength50]}
+                    />
+
+                <div><img src={captchaURL} alt={"captcha"}/></div>
+                </div>}
             <div className={error && S.formSummaryError}>{error}</div>
             <div>
                 <button type={"submit"}>Submit</button>
@@ -54,11 +69,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
     )
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({form: "loginForm"})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, AdditionalProps>({form: "loginForm"})(LoginForm)
 
 export type LoginPresentationalPropsType = {
     authPartData: AuthPartDataType
-    login: (email: string, password: string, rememberMe: boolean, captcha?:string) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha?: string) => void
     logout: () => void
 }
 
@@ -67,10 +82,10 @@ export const LoginPresentational: React.FC<LoginPresentationalPropsType> = ({
                                                                                 authPartData,
                                                                             }) => {
 
-    const[captcha, setCaptcha]=useState("")
+    const [captcha, setCaptcha] = useState("")
 
     const onSubmitHandler = (data: FormDataType) => {
-        login(data.email, data.password, data.rememberMe, captcha)
+        login(data.email, data.password, data.rememberMe, data.captcha)
     }
 
     if (authPartData.authData.isAuth) {
@@ -83,13 +98,8 @@ export const LoginPresentational: React.FC<LoginPresentationalPropsType> = ({
             <div>coucou Login</div>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmitHandler}
-                            initialValues={{captcha: authPartData.authData.captcha || undefined}}/>
-            {authPartData.authData.captcha &&
-                <div>
-                    <input value={captcha} onChange={e=>setCaptcha(e.currentTarget.value)}/>
-                    <div><img src={authPartData.authData.captcha} alt={"captcha"}/></div>
-                </div>
-            }
+                            captchaURL={authPartData.authData.captcha}
+            />
         </>
     )
 }
