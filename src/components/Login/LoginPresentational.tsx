@@ -20,7 +20,11 @@ type AdditionalProps = {
 
 const validateMaxLength50 = validateMaxLength(50)
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType,AdditionalProps> & AdditionalProps> = ({handleSubmit, error, captchaURL}) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType, AdditionalProps> & AdditionalProps> = ({
+                                                                                                     handleSubmit,
+                                                                                                     error,
+                                                                                                     captchaURL
+                                                                                                 }) => {
 
     return (
         <form onSubmit={handleSubmit}>
@@ -59,7 +63,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType,AdditionalProps> & Addi
                         // validate={[validateRequiredField, validateMaxLength50]}
                     />
 
-                <div><img src={captchaURL} alt={"captcha"}/></div>
+                    <div><img src={captchaURL} alt={"captcha"}/></div>
                 </div>}
             <div className={error && S.formSummaryError}>{error}</div>
             <div>
@@ -102,4 +106,15 @@ export const LoginPresentational: React.FC<LoginPresentationalPropsType> = ({
             />
         </>
     )
+}
+
+
+type CoderType = {
+    techs: string[],
+    country: string
+}
+
+type DesignerType = {
+    highEducation: boolean,
+    experience: number
 }

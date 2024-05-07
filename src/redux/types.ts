@@ -8,13 +8,7 @@ import {
 } from "./profileReducer"
 import {addMessageAC} from "./dialogsReducer"
 import {
-    followAC,
-    getUsersAC,
-    setSelectedPage,
-    setTotalUserCount,
-    toggleIsFetching,
-    toggleIsFollowingInProgress,
-    unfollowAC,
+    userActions, UserActionsType,
 } from "./usersReducer"
 import {getCaptchaAC, setUserDataAC} from "./authReducer"
 import {initializedSuccessfullyAC} from "redux/appReducer"
@@ -25,6 +19,7 @@ export type AllActionsType =
     | ProfileActionsType
     | DialogsActionsType
     | UserActionsType
+    // | UserActionsType
     | SidebarActionsType
     | AuthActionsType
     | AppActionsType
@@ -37,14 +32,16 @@ export type ProfileActionsType =
     | ReturnType<typeof updateUserPhotoAC>
     | ReturnType<typeof updateUserProfileAC>
 
-export type UserActionsType =
-    | ReturnType<typeof getUsersAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setSelectedPage>
-    | ReturnType<typeof setTotalUserCount>
-    | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof toggleIsFollowingInProgress>
+// export type UserActionsType =
+//     | ReturnType<typeof userActions.getUsersAC>
+//     | ReturnType<typeof userActions.followAC>
+//     | ReturnType<typeof userActions.unfollowAC>
+//     | ReturnType<typeof userActions.setSelectedPage>
+//     | ReturnType<typeof userActions.setTotalUserCount>
+//     | ReturnType<typeof userActions.toggleIsFetching>
+//     | ReturnType<typeof userActions.toggleIsFollowingInProgress>
+//
+
 
 export type DialogsActionsType = ReturnType<typeof addMessageAC>
 

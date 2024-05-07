@@ -1,6 +1,6 @@
 import React from "react"
 import { stateReduxType } from "redux/storeRedux"
-import { follow, getUsers, setSelectedPage, unfollow } from "redux/usersReducer"
+import { follow, getUsers, userActions, unfollow } from "redux/usersReducer"
 import { connect } from "react-redux"
 import { UsersPresentational } from "./UsersPresentational"
 import { Preloader } from "../common/Preloader/Preloader"
@@ -69,7 +69,7 @@ const mapStateToProps = (state: stateReduxType): MapStateToPropsType => {
 const mapDispatchToProps: MapDispatchToPropsType = {
   follow,
   unfollow,
-  setSelectedPage,
+  setSelectedPage:userActions.setSelectedPage,
   getUsers,
 }
 
